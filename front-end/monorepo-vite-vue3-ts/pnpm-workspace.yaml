@@ -1,0 +1,3 @@
+packages:
+  - 'small-tail-common/*'
+  - 'small-tail-admin'
