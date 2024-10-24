@@ -1,0 +1,15 @@
+{
+  "name": "@st-common/core",
+  "version": "1.0.0",
+  "publishConfig": {
+    "access": "public"
+  },
+  "description": "小尾巴通用核心库，在该库中，对 JavaScript 基础类型、函数、数组等进行了封装，并提供了一些常用的工具函数。",
+  "main": "index",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "ST",
+  "license": "ISC"
+}

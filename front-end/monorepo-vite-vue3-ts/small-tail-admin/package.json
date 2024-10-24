@@ -10,10 +10,18 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@st-common/ui-styles": "workspace:^",
+    "@st-common/ui-vue3": "workspace:^",
     "vue": "^3.5.10"
   },
   "devDependencies": {
+    "@types/node": "^22.7.9",
+    "@unocss/preset-uno": "^0.63.6",
     "@vitejs/plugin-vue": "^5.1.4",
+    "naive-ui": "^2.40.1",
+    "unocss": "^0.63.6",
+    "unplugin-auto-import": "^0.18.3",
+    "unplugin-vue-components": "^0.27.4",
     "vue-tsc": "^2.1.6"
   }
 }

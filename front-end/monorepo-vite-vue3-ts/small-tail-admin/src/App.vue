@@ -1,10 +1,10 @@
 <script setup lang="ts">
-
+import Login from "@/pages/login/login.vue"
 </script>
 
 <template>
-  <div class="app">
-    Small Tail Admin
+  <div class="app page page-bg">
+    <login />
   </div>
 </template>
 

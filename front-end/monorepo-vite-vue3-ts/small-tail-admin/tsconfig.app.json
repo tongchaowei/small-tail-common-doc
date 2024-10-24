@@ -1,5 +1,17 @@
 {
   "extends": "../tsconfig.app.json",
+  "compilerOptions": {
+    // 解析非相对模块名的基准目录，从当前 tsconfig.json 文件所在的目录开始查找
+    // 由于 tsconfig.json 文件在项目根目录中，所以从项目根目录开始查找
+    "baseUrl": ".",
+    // 配置模块名基于 baseUrl 配置的基准目录的路径映射
+    "paths": {
+      // 配置项目根目录下 src 目录的别名为 @
+      "@/*": [
+        "src/*"
+      ]
+    }
+  },
   "include": [
     "src/**/*.ts",
     "src/**/*.tsx",
