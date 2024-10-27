@@ -12,9 +12,13 @@
   "dependencies": {
     "@st-common/ui-styles": "workspace:^",
     "@st-common/ui-vue3": "workspace:^",
-    "vue": "^3.5.10"
+    "@vueuse/core": "^11.1.0",
+    "vue": "^3.5.10",
+    "vue-router": "^4.4.5"
   },
   "devDependencies": {
+    "@iconify-icons/tabler": "^1.2.95",
+    "@iconify/vue": "^4.1.2",
     "@types/node": "^22.7.9",
     "@unocss/preset-uno": "^0.63.6",
     "@vitejs/plugin-vue": "^5.1.4",

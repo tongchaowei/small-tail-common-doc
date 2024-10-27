@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import {StLoginPage1} from '@st-common/ui-vue3'
-import LoginFormByPwd from '@/pages/login/components/login-form-by-pwd.vue'
-import LoginFormByEmail from '@/pages/login/components/login-form-by-email.vue'
-import LoginFormToggle from "@/pages/login/components/login-form-toggle.vue"
+import LoginFormByPwd from "@/pages/login/components/login-form-by-pwd.vue" // 用户名密码登录表单
+import LoginFormByEmail from "@/pages/login/components/login-form-by-email.vue" // 邮箱登录表单
+import LoginFormToggle from "@/pages/login/components/login-form-toggle.vue" // 登录表单切换组件
 import {ref} from 'vue'
 
 // 是否切换表单
@@ -10,25 +10,19 @@ const isToggleForm = ref(false)
 /**
  * 切换表单
  */
-const toggleForm = () => isToggleForm.value =!isToggleForm.value
+const toggleForm = () => isToggleForm.value = !isToggleForm.value
 </script>
 
 <template>
   <div class="login-page">
     <st-login-page1
       v-model="isToggleForm"
-      circle-mask-color="#36AD6A"
+      circle-mask-color="#18A058"
       :panel-img-src="[
         '/images/login/panel-1.svg',
-        '/images/login/panel-2.svg',
+        '/images/login/panel-2.svg'
       ]"
     >
-      <template #form-1>
-        <LoginFormByPwd/>
-      </template>
-      <template #form-2>
-        <LoginFormByEmail/>
-      </template>
       <template #panel-1-top>
         <LoginFormToggle
           title="使用邮箱登录"
@@ -37,6 +31,9 @@ const toggleForm = () => isToggleForm.value =!isToggleForm.value
           :toggle-handler="toggleForm"
         />
       </template>
+      <template #form-1>
+        <LoginFormByPwd/>
+      </template>
       <template #panel-2-top>
         <LoginFormToggle
           title="无法邮箱登录"
@@ -44,6 +41,9 @@ const toggleForm = () => isToggleForm.value =!isToggleForm.value
           toggle-btn-text="用户名密码登录"
           :toggle-handler="toggleForm"
         />
+      </template>
+      <template #form-2>
+        <LoginFormByEmail/>
       </template>
     </st-login-page1>
   </div>

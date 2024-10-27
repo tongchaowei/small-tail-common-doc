@@ -7,9 +7,24 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    BtnGroup: typeof import('./src/components/btn-group/btn-group.vue')['default']
+    CollapsePopoverBtn: typeof import('./src/components/collapse-popover-btn/collapse-popover-btn.vue')['default']
+    Components: typeof import('./src/components/table-template/components.vue')['default']
     NButton: typeof import('naive-ui')['NButton']
+    NDataTable: typeof import('naive-ui')['NDataTable']
     NForm: typeof import('naive-ui')['NForm']
     NFormItem: typeof import('naive-ui')['NFormItem']
     NInput: typeof import('naive-ui')['NInput']
+    NLayout: typeof import('naive-ui')['NLayout']
+    NLayoutContent: typeof import('naive-ui')['NLayoutContent']
+    NLayoutFooter: typeof import('naive-ui')['NLayoutFooter']
+    NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
+    NLayoutSider: typeof import('naive-ui')['NLayoutSider']
+    NMenu: typeof import('naive-ui')['NMenu']
+    NPopover: typeof import('naive-ui')['NPopover']
+    RouterLink: typeof import('vue-router')['RouterLink']
+    RouterView: typeof import('vue-router')['RouterView']
+    TableTemplate: typeof import('./src/components/table-template/table-template.vue')['default']
+    TableTemplateOperator: typeof import('./src/components/table-template/components/table-template-operator.vue')['default']
   }
 }

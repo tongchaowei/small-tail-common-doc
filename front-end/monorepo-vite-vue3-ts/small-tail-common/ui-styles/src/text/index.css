@@ -3,3 +3,12 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+.text-line-clamp {
+  /* 将盒子设置为弹性收缩盒子 */
+  display: -webkit-box;
+  /* 设置伸缩盒子对象的子元素的排列方式 */
+  -webkit-box-orient: vertical;
+  /* 溢出隐藏 */
+  overflow: hidden;
+}

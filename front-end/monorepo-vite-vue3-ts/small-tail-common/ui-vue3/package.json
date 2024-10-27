@@ -15,9 +15,12 @@
   "dependencies": {
     "@st-common/core": "workspace:^",
     "@st-common/ui-utils": "workspace:^",
+    "@vueuse/core": "^11.1.0",
     "vue": "^3.5.10"
   },
   "devDependencies": {
+    "@iconify-icons/tabler": "^1.2.95",
+    "@iconify/vue": "^4.1.2",
     "@vitejs/plugin-vue": "^5.1.4",
     "sass-embedded": "^1.80.3",
     "vue-tsc": "^2.1.6"

@@ -14,7 +14,7 @@ defineOptions({
  */
 withDefaults(
   defineProps<{
-    // 页面最小高度
+    // 页面最小高度(屏幕的宽度小于 875px 时起作用)
     pageMinHeight?: number | string;
     // 圆形遮罩的直径
     circleMaskDiameter?: number | string;

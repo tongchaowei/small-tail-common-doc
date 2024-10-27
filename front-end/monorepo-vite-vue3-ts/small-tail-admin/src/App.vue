@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import Login from "@/pages/login/login.vue"
+import Index from "@/pages/index/index.vue"
 </script>
 
 <template>
   <div class="app page page-bg">
-    <login />
+    <Index />
   </div>
 </template>
 
