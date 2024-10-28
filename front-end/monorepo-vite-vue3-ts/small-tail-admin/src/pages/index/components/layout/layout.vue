@@ -6,7 +6,7 @@
   <div class="layout">
     <n-layout has-sider>
       <n-layout-sider
-        content-class="h-screen max-h-screen"
+        content-class="relative h-screen max-h-screen"
         width="240px"
         bordered
         show-trigger="bar"

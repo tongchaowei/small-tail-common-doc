@@ -19,6 +19,18 @@ defineOptions({
   name: 'StReactCollapse',
 })
 
+/**
+ * 组件参数
+ */
+withDefaults(
+  defineProps<{
+    dropdownZIndex?: number
+  }>(),
+  {
+    dropdownZIndex: 1
+  }
+)
+
 // 当前组件根元素的引用对象
 const stReactCollapseRef = ref<HTMLDivElement>()
 // 当前组件根元素的父元素的引用对象
@@ -90,7 +102,7 @@ watch(
       <slot name="default" :isCollapse="isCollapse"></slot>
     </div>
     <div v-show="isDropdown" class="st-react-collapse__dropdown">
-      <st-popover is-vertical>
+      <st-popover is-vertical :sub-cont-z-index="dropdownZIndex">
         <template #default>
           <div class="st-react-collapse__dropdown-icon">
             <slot name="dropdown-icon">

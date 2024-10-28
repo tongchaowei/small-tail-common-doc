@@ -161,6 +161,15 @@ const isOverflowBottomBasePosVer = () => {
   return scHeight > window.innerHeight - props.y - height
 }
 /**
+ * 更新组件子内容区域相对于组件的相对位置
+ *
+ * @param toPosition 组件子内容区域相对于组件的相对位置，更新到的新位置
+ */
+const subContPosTo = (toPosition: StPopoverSubContPosEnum) => {
+  subContPos.value = toPosition
+  subContPosition.value = toPosition
+}
+/**
  * 基于组件左上角距离浏览器网页页面视口的位置，根据组件子内容区域当前相对于组件的相对位置，
  * 响应式更新组件子内容区域相对于组件的相对位置的处理函数
  *
@@ -172,8 +181,7 @@ const subContPosToBasePosHandler = (
   toPosition: StPopoverSubContPosEnum
 ) => {
   if (judgeHandler()) { // 要进行响应式更新组件子内容区域相对于组件的相对位置
-    subContPos.value = toPosition
-    subContPosition.value = toPosition
+    subContPosTo(toPosition)
   }
 }
 /**
@@ -216,9 +224,10 @@ const subContPosToBasePos = {
     subContPosToBasePosHandler(isOverflowLeftBasePosVer, StPopoverSubContPosEnum.BL)
   }
 }
-
-// 监听，实现响应式更新组件子内容区域当前相对于组件的相对位置
-watchEffect(() => {
+/**
+ * 基于组件的位置实现响应式更新组件子内容区域当前相对于组件的相对位置
+ */
+const updateSubContPosBaseOnPosition = () => {
   // 基于组件的位置实现响应式更新组件子内容区域当前相对于组件的相对位置
   if (props.baseOnPosition) {
     for (let key in StPopoverSubContPosEnum) {
@@ -229,6 +238,10 @@ watchEffect(() => {
       }
     }
   }
+}
+// 监听，实现响应式更新组件子内容区域当前相对于组件的相对位置
+watchEffect(() => {
+  updateSubContPosBaseOnPosition()
 })
 
 /**
@@ -243,6 +256,8 @@ const isClick = () => {
  * @param e 事件对象
  */
 const showSubContent = (e: Event) => {
+  // 基于组件的位置实现响应式更新组件子内容区域当前相对于组件的相对位置
+  updateSubContPosBaseOnPosition()
   // click 方式触发组件子内容区域的显示与隐藏
   // 由于在移动端只有点击等相关事件，pointerdown 事件在 PC 端和移动端的事件对象都为
   // PointerEvent，所以采用如下写法，不管组件子内容区域的显示是 hover 还是 click

@@ -4,7 +4,7 @@ import Index from "@/pages/index/index.vue"
 
 <template>
   <div class="app page page-bg">
-    <Index />
+    <Index/>
   </div>
 </template>
 

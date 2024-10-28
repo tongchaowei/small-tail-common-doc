@@ -3,13 +3,13 @@ import {
   StReactCollapse, // 响应式折叠收缩内容组件
   StIconIconify, // 基于 Iconify 提供的 Vue 图标组件封装的图标组件
 } from '@st-common/ui-vue3'
-import CollapsePopoverBtn from "@/components/collapse-popover-btn/collapse-popover-btn.vue" // 基于 Navie 的按钮组件和 Popover 组件封装的折叠气泡按钮组件
+// 基于 Navie 的按钮组件和 Popover 组件封装的折叠气泡按钮组件
+import CollapsePopoverBtn from "@/components/collapse-popover-btn/collapse-popover-btn.vue"
 // Iconify 图标库中 Tabler Icons 图标集图标
 import Plus from '@iconify-icons/tabler/plus'
 import Trash from '@iconify-icons/tabler/trash'
 import Refresh from '@iconify-icons/tabler/refresh'
-import Settings from '@iconify-icons/tabler/settings'
-import ArrowsMaximize from '@iconify-icons/tabler/arrows-maximize'
+import ColumnsSettingBtn from "@/components/table-template/components/columns-setting-btn.vue"
 
 /**
  * 组件配置选项
@@ -49,26 +49,11 @@ defineOptions({
             <st-icon-iconify :icon="Refresh"/>
           </template>
         </CollapsePopoverBtn>
-        <CollapsePopoverBtn
-          is-collapse
-          btn-text="列设置"
-        >
-          <template #icon>
-            <st-icon-iconify :icon="Settings"/>
-          </template>
-        </CollapsePopoverBtn>
-        <CollapsePopoverBtn
-          is-collapse
-          btn-text="全屏"
-        >
-          <template #icon>
-            <st-icon-iconify :icon="ArrowsMaximize"/>
-          </template>
-        </CollapsePopoverBtn>
+        <ColumnsSettingBtn :is-collapse="isCollapse"/>
       </div>
     </template>
     <template #dropdown-content>
-      <div class="table-template__table-container__operator__dropdown-content p-2 box-bg box-shadow flex-col-center-stretch gap-2">
+      <div class="table-template__table-container__operator__dropdown-content p-3 box-bg rounded-lg box-shadow flex-col-center-stretch gap-2">
         <n-button type="primary" ghost size="small">
           <template #icon>
             <st-icon-iconify :icon="Plus"/>
@@ -81,6 +66,7 @@ defineOptions({
           </template>
           批量删除
         </n-button>
+        <ColumnsSettingBtn :is-dropdown-vertical="false"/>
       </div>
     </template>
   </st-react-collapse>

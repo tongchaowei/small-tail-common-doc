@@ -23,12 +23,18 @@ importers:
       '@st-common/ui-vue3':
         specifier: workspace:^
         version: link:../small-tail-common/ui-vue3
+      '@visulima/deep-clone':
+        specifier: ^2.1.6
+        version: 2.1.6
       '@vueuse/core':
         specifier: ^11.1.0
         version: 11.1.0(vue@3.5.12(typescript@5.6.3))
       vue:
         specifier: ^3.5.10
         version: 3.5.12(typescript@5.6.3)
+      vue-draggable-plus:
+        specifier: ^0.5.4
+        version: 0.5.4(@types/sortablejs@1.15.8)
       vue-router:
         specifier: ^4.4.5
         version: 4.4.5(vue@3.5.12(typescript@5.6.3))
@@ -582,6 +588,9 @@ packages:
   '@types/node@22.7.9':
     resolution: {integrity: sha512-jrTfRC7FM6nChvU7X2KqcrgquofrWLFDeYC1hKfwNWomVvrn7JIksqf344WN2X/y8xrgqBd2dJATZV4GbatBfg==}
 
+  '@types/sortablejs@1.15.8':
+    resolution: {integrity: sha512-b79830lW+RZfwaztgs1aVPgbasJ8e7AXtZYHTELNXZPsERt4ymJdjV4OccDbHQAvHrCcFpbF78jkm0R6h/pZVg==}
+
   '@types/web-bluetooth@0.0.20':
     resolution: {integrity: sha512-g9gZnnXVq7gM7v3tJCWV/qw7w+KeOlSHAhgF9RytFyifW6AF61hdT2ucrYhPq9hLs5JIryeupHV3qGk95dH9ow==}
 
@@ -664,6 +673,11 @@ packages:
     resolution: {integrity: sha512-gxK3gtvYQH5S/qtuvsY4M0S+KJPZnYrOQI/Gopufx+b2qgmwZ/TSAe66gWeKYfe3DfQsmA3PPh/GXpkK+/FnHg==}
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0
+
+  '@visulima/deep-clone@2.1.6':
+    resolution: {integrity: sha512-NHshGmK7LkyPTH6LEMiL3al3KVGTpB30PMgPgIRc1xIX6PF8KgqFdZQYQBhkWCwEBAufruMc/PkjcYjP7/HenQ==}
+    engines: {node: '>=18.* <=22.*'}
+    os: [darwin, linux, win32]
 
   '@vitejs/plugin-vue@5.1.4':
     resolution: {integrity: sha512-N2XSI2n3sQqp5w7Y/AN/L2XDjBIRGqXko+eDp42sydYSBeJuSm5a1sLf8zakmo8u7tA8NmBgoDLA1HeOESjp9A==}
@@ -1362,6 +1376,15 @@ packages:
       '@vue/composition-api':
         optional: true
 
+  vue-draggable-plus@0.5.4:
+    resolution: {integrity: sha512-7YXbRu6HFL5c0ELP07nNZPGyXmvD8o7Ny7Dj53l9u0sBTjVmHkgr3+/aXgUO1w2bIwE8f6GhaVmLxd7nhqQ0wg==}
+    peerDependencies:
+      '@types/sortablejs': ^1.15.0
+      '@vue/composition-api': '*'
+    peerDependenciesMeta:
+      '@vue/composition-api':
+        optional: true
+
   vue-flow-layout@0.0.5:
     resolution: {integrity: sha512-lZlqQ/Se1trGMtBMneZDWaiQiQBuxU8ivZ+KpJMem5zKROFpzuPq9KqyWABbSYbxq0qhqZs1I4DBwrY041rtOA==}
 
@@ -1698,6 +1721,8 @@ snapshots:
     dependencies:
       undici-types: 6.19.8
 
+  '@types/sortablejs@1.15.8': {}
+
   '@types/web-bluetooth@0.0.20': {}
 
   '@unocss/astro@0.63.6(rollup@4.24.0)(typescript@5.6.3)(vite@5.4.9(@types/node@22.7.9)(sass-embedded@1.80.3))':
@@ -1850,6 +1875,8 @@ snapshots:
       - rollup
       - supports-color
       - typescript
+
+  '@visulima/deep-clone@2.1.6': {}
 
   '@vitejs/plugin-vue@5.1.4(vite@5.4.9(@types/node@22.7.9)(sass-embedded@1.80.3))(vue@3.5.12(typescript@5.6.3))':
     dependencies:
@@ -2592,6 +2619,10 @@ snapshots:
   vue-demi@0.14.10(vue@3.5.12(typescript@5.6.3)):
     dependencies:
       vue: 3.5.12(typescript@5.6.3)
+
+  vue-draggable-plus@0.5.4(@types/sortablejs@1.15.8):
+    dependencies:
+      '@types/sortablejs': 1.15.8
 
   vue-flow-layout@0.0.5(typescript@5.6.3):
     dependencies:

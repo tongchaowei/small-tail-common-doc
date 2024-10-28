@@ -3,7 +3,7 @@ import menuOptions from "@/pages/index/components/menu/menu-options.ts"
 </script>
 
 <template>
-  <div class="menu h-screen box-bg">
+  <div class="menu relative h-screen box-bg">
     <n-menu
       :collapsed-width="64"
       :collapsed-icon-size="22"

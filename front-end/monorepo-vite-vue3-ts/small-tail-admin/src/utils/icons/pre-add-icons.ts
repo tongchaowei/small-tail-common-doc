@@ -11,14 +11,14 @@ import Plus from '@iconify-icons/tabler/plus'
 import Trash from '@iconify-icons/tabler/trash'
 import Refresh from '@iconify-icons/tabler/refresh'
 import Settings from '@iconify-icons/tabler/settings'
-import ArrowsMaximize from '@iconify-icons/tabler/arrows-maximize'
+import ArrowsMoveVertical from '@iconify-icons/tabler/arrows-move-vertical'
 
 const Tabler = 'tabler:'
 addIcon(Tabler + 'plus', Plus)
 addIcon(Tabler + 'trash', Trash)
 addIcon(Tabler + 'refresh', Refresh)
 addIcon(Tabler + 'settings', Settings)
-addIcon(Tabler + 'arrows-maximize', ArrowsMaximize)
+addIcon(Tabler + 'arrows-move-vertical', ArrowsMoveVertical)
 // ------------------------------------------------------------------------------------------------------- tabler ------
 
 // ************************************************************************************************* Iconify Icon ******
