@@ -17,7 +17,7 @@
         <n-layout-header>
 
         </n-layout-header>
-        <n-layout-content content-class="p-2">
+        <n-layout-content content-class="p-3">
           <slot name="content"></slot>
         </n-layout-content>
         <n-layout-footer>

@@ -23,12 +23,12 @@ importers:
       '@st-common/ui-vue3':
         specifier: workspace:^
         version: link:../small-tail-common/ui-vue3
-      '@visulima/deep-clone':
-        specifier: ^2.1.6
-        version: 2.1.6
       '@vueuse/core':
         specifier: ^11.1.0
         version: 11.1.0(vue@3.5.12(typescript@5.6.3))
+      klona:
+        specifier: ^2.0.6
+        version: 2.0.6
       vue:
         specifier: ^3.5.10
         version: 3.5.12(typescript@5.6.3)
@@ -39,6 +39,9 @@ importers:
         specifier: ^4.4.5
         version: 4.4.5(vue@3.5.12(typescript@5.6.3))
     devDependencies:
+      '@iconify-icons/material-symbols':
+        specifier: ^1.2.58
+        version: 1.2.58
       '@iconify-icons/tabler':
         specifier: ^1.2.95
         version: 1.2.95
@@ -434,6 +437,9 @@ packages:
     cpu: [x64]
     os: [win32]
 
+  '@iconify-icons/material-symbols@1.2.58':
+    resolution: {integrity: sha512-v0ZfPXlmDcDPCejxhg5h2eHCEHClrpn+i44Ev766vkzPIEFRdgT+YK942KzyqBpH0RhKJfel4OZdL1DY1oa5Qg==}
+
   '@iconify-icons/tabler@1.2.95':
     resolution: {integrity: sha512-d7bcyNs/AHWcdTwN+2/yohPeU0Kg5jvzt9JiLFnTnx9HYc54q2cU08rSEF0rIVHB5PEP9M8dTN/ZFxquAFCamw==}
 
@@ -673,11 +679,6 @@ packages:
     resolution: {integrity: sha512-gxK3gtvYQH5S/qtuvsY4M0S+KJPZnYrOQI/Gopufx+b2qgmwZ/TSAe66gWeKYfe3DfQsmA3PPh/GXpkK+/FnHg==}
     peerDependencies:
       vite: ^2.9.0 || ^3.0.0-0 || ^4.0.0 || ^5.0.0-0
-
-  '@visulima/deep-clone@2.1.6':
-    resolution: {integrity: sha512-NHshGmK7LkyPTH6LEMiL3al3KVGTpB30PMgPgIRc1xIX6PF8KgqFdZQYQBhkWCwEBAufruMc/PkjcYjP7/HenQ==}
-    engines: {node: '>=18.* <=22.*'}
-    os: [darwin, linux, win32]
 
   '@vitejs/plugin-vue@5.1.4':
     resolution: {integrity: sha512-N2XSI2n3sQqp5w7Y/AN/L2XDjBIRGqXko+eDp42sydYSBeJuSm5a1sLf8zakmo8u7tA8NmBgoDLA1HeOESjp9A==}
@@ -954,6 +955,10 @@ packages:
 
   js-tokens@9.0.0:
     resolution: {integrity: sha512-WriZw1luRMlmV3LGJaR6QOJjWwgLUTf89OwT2lUOyjX2dJGBwgmIkbcz+7WFZjrZM635JOIR517++e/67CP9dQ==}
+
+  klona@2.0.6:
+    resolution: {integrity: sha512-dhG34DXATL5hSxJbIexCft8FChFXtmskoZYnoPWjXQuebWYCNkVeV3KkGegCK9CP1oswI/vQibS2GY7Em/sJJA==}
+    engines: {node: '>= 8'}
 
   kolorist@1.8.0:
     resolution: {integrity: sha512-Y+60/zizpJ3HRH8DCss+q95yr6145JXZo46OTpFvDZWLfRCE4qChOyk1b26nMaNpfHHgxagk9dXT5OP0Tfe+dQ==}
@@ -1595,6 +1600,10 @@ snapshots:
   '@esbuild/win32-x64@0.23.1':
     optional: true
 
+  '@iconify-icons/material-symbols@1.2.58':
+    dependencies:
+      '@iconify/types': 2.0.0
+
   '@iconify-icons/tabler@1.2.95':
     dependencies:
       '@iconify/types': 2.0.0
@@ -1875,8 +1884,6 @@ snapshots:
       - rollup
       - supports-color
       - typescript
-
-  '@visulima/deep-clone@2.1.6': {}
 
   '@vitejs/plugin-vue@5.1.4(vite@5.4.9(@types/node@22.7.9)(sass-embedded@1.80.3))(vue@3.5.12(typescript@5.6.3))':
     dependencies:
@@ -2209,6 +2216,8 @@ snapshots:
   jiti@2.0.0-beta.3: {}
 
   js-tokens@9.0.0: {}
+
+  klona@2.0.6: {}
 
   kolorist@1.8.0: {}
 

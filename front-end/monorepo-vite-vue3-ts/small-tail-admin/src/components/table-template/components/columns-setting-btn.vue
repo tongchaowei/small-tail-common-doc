@@ -12,7 +12,6 @@ import type {DataTableColumns} from '@/components/table-template/types/table'
 import {VueDraggable} from 'vue-draggable-plus'
 import ArrowsMoveVertical from '@iconify-icons/tabler/arrows-move-vertical'
 import {useElementBounding} from '@vueuse/core'
-import {deepClone} from "@visulima/deep-clone"
 
 /**
  * 组件参数
@@ -20,9 +19,9 @@ import {deepClone} from "@visulima/deep-clone"
 withDefaults(
   defineProps<{
     // 按钮是否折叠收缩展示
-    isCollapse: boolean;
+    isCollapse?: boolean;
     // 下拉菜单是否垂直方向上展示
-    isDropdownVertical: boolean;
+    isDropdownVertical?: boolean;
   }>(),
   {
     isCollapse: false,
@@ -42,8 +41,6 @@ const updateColumnsSettingBtnBounding = () => {
   y.value = columnsSettingBtnBounding.y.value
 }
 
-// 表格的列配置的原始数据
-const columnsOrigin = inject('columnsOrigin') as DataTableColumns
 // 表格的列配置
 const columns = inject('columns') as Ref<DataTableColumns>
 // 需要展示的表格列
@@ -93,16 +90,19 @@ const updateColumnsShowedAllHandler = (checked: boolean) => {
 }
 
 /**
- * 根据表格的列配置的原始数据，重置表格的列配置的处理函数
+ * 重置表格列的排序
  */
 const resetColumnsShowedHandler = () => {
-  columns.value = deepClone(columnsOrigin) as DataTableColumns
+  columns.value = columns.value.sort((a, b) => (a.sort as number) - (b.sort as number))
+  columns.value.forEach((column) => {
+    column.checked = true
+  })
 }
 </script>
 
 <template>
   <div ref="columnsSettingBtnRef" class="columns-setting-btn">
-    <st-popover :is-vertical="isDropdownVertical" base-on-position :x="x" :y="y">
+    <st-popover :is-vertical="isDropdownVertical" base-on-position :x="x" :y="y" :sub-cont-z-index="4">
       <template #default>
         <div class="columns-setting-btn__btn">
           <CollapsePopoverBtn block :is-collapse="isCollapse" btn-text="列设置">

@@ -1,6 +1,7 @@
 {
   "extends": "../tsconfig.app.json",
   "compilerOptions": {
+    "noImplicitAny": false,
     // 解析非相对模块名的基准目录，从当前 tsconfig.json 文件所在的目录开始查找
     // 由于 tsconfig.json 文件在项目根目录中，所以从项目根目录开始查找
     "baseUrl": ".",

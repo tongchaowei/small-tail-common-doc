@@ -12,6 +12,9 @@ import Trash from '@iconify-icons/tabler/trash'
 import Refresh from '@iconify-icons/tabler/refresh'
 import Settings from '@iconify-icons/tabler/settings'
 import ArrowsMoveVertical from '@iconify-icons/tabler/arrows-move-vertical'
+import Edit from '@iconify-icons/tabler/edit'
+import Search from '@iconify-icons/tabler/search'
+import Reload from '@iconify-icons/tabler/reload'
 
 const Tabler = 'tabler:'
 addIcon(Tabler + 'plus', Plus)
@@ -19,6 +22,15 @@ addIcon(Tabler + 'trash', Trash)
 addIcon(Tabler + 'refresh', Refresh)
 addIcon(Tabler + 'settings', Settings)
 addIcon(Tabler + 'arrows-move-vertical', ArrowsMoveVertical)
+addIcon(Tabler + 'edit', Edit)
+addIcon(Tabler + 'search', Search)
+addIcon(Tabler + 'reload', Reload)
 // ------------------------------------------------------------------------------------------------------- tabler ------
 
+// --------------------------------------------------------------------------------------------- material-symbols ------
+import Close from '@iconify-icons/material-symbols/close'
+
+const MaterialSymbols = 'material-symbols:'
+addIcon(MaterialSymbols + 'close', Close)
+// --------------------------------------------------------------------------------------------- material-symbols ------
 // ************************************************************************************************* Iconify Icon ******

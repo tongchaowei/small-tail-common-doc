@@ -7,9 +7,11 @@ import {
 import CollapsePopoverBtn from "@/components/collapse-popover-btn/collapse-popover-btn.vue"
 // Iconify 图标库中 Tabler Icons 图标集图标
 import Plus from '@iconify-icons/tabler/plus'
-import Trash from '@iconify-icons/tabler/trash'
 import Refresh from '@iconify-icons/tabler/refresh'
+import EditorBtn from "@/components/table-template/components/editor-btn.vue"
+import BatchDelBtn from "@/components/table-template/components/batch-del-btn.vue"
 import ColumnsSettingBtn from "@/components/table-template/components/columns-setting-btn.vue"
+import {VNodeChild} from "vue"
 
 /**
  * 组件配置选项
@@ -17,33 +19,90 @@ import ColumnsSettingBtn from "@/components/table-template/components/columns-se
 defineOptions({
   name: 'TableTemplateOperator',
 })
+
+/**
+ * 组件参数
+ */
+withDefaults(
+  defineProps<{
+    // 新增编辑器标题
+    addEditorTitle?: string | (() => VNodeChild);
+    // 批量删除按钮是否禁用
+    batchDelDisabled?: boolean;
+  }>(),
+  {
+    addEditorTitle: '新增',
+    batchDelDisabled: false,
+  }
+)
+
+/**
+ * 组件自定义事件
+ */
+const emits = defineEmits<{
+  /**
+   * 新增对话框关闭时触发
+   *
+   * @param {"add-dialog-close"} e
+   */
+  (e: 'add-dialog-close'): void;
+  /**
+   * 新增对话框点击取消按钮时触发
+   *
+   * @param {"add-negative-click"} e
+   * @param {MouseEvent | TouchEvent} ev
+   */
+  (e: 'add-negative-click', ev: MouseEvent | TouchEvent): void;
+  /**
+   * 新增对话框点击确认按钮时触发
+   *
+   * @param {"add-positive-click"} e
+   * @param {MouseEvent | TouchEvent} ev
+   */
+  (e: 'add-positive-click', ev: MouseEvent | TouchEvent): void;
+  /**
+   * 批量删除事件
+   *
+   * @param {"batchDel"} e 事件名称
+   */
+  (e: 'batchDel'): void;
+  /**
+   * 刷新事件
+   *
+   * @param {"refresh"} e 事件名称
+   */
+  (e: 'refresh'): void;
+}>()
 </script>
 
 <template>
   <st-react-collapse>
     <template v-slot="{isCollapse}">
       <div class="table-template__table-container__operator flex-center gap-2">
-        <CollapsePopoverBtn
+        <EditorBtn
           :is-collapse="isCollapse"
-          type="primary"
           btn-text="新增"
+          :editor-title="addEditorTitle"
+          @dialog-close="() => emits('add-dialog-close')"
+          @negative-click="(ev) => emits('add-negative-click', ev)"
+          @positive-click="(ev) => emits('add-positive-click', ev)"
         >
           <template #icon>
             <st-icon-iconify :icon="Plus"/>
           </template>
-        </CollapsePopoverBtn>
-        <CollapsePopoverBtn
-          :is-collapse="isCollapse"
-          type="error"
-          btn-text="批量删除"
-        >
-          <template #icon>
-            <st-icon-iconify :icon="Trash"/>
+          <template #editor>
+            <slot name="add-editor"></slot>
           </template>
-        </CollapsePopoverBtn>
+        </EditorBtn>
+        <BatchDelBtn
+          :disabled="batchDelDisabled"
+          :is-collapse="isCollapse"
+          @positive-click="() => emits('batchDel')"
+        />
         <CollapsePopoverBtn
           :is-collapse="isCollapse"
           btn-text="刷新"
+          @click="() => emits('refresh')"
         >
           <template #icon>
             <st-icon-iconify :icon="Refresh"/>
@@ -53,19 +112,24 @@ defineOptions({
       </div>
     </template>
     <template #dropdown-content>
-      <div class="table-template__table-container__operator__dropdown-content p-3 box-bg rounded-lg box-shadow flex-col-center-stretch gap-2">
-        <n-button type="primary" ghost size="small">
+      <div
+        class="table-template__table-container__operator__dropdown-content p-3 box-bg rounded-lg box-shadow flex-col-center-stretch gap-2"
+      >
+        <EditorBtn
+          btn-text="新增"
+          :editor-title="addEditorTitle"
+        >
           <template #icon>
             <st-icon-iconify :icon="Plus"/>
           </template>
-          新增
-        </n-button>
-        <n-button type="error" ghost size="small">
-          <template #icon>
-            <st-icon-iconify :icon="Trash"/>
+          <template #editor>
+            <slot name="add-editor"></slot>
           </template>
-          批量删除
-        </n-button>
+        </EditorBtn>
+        <BatchDelBtn
+          :disabled="batchDelDisabled"
+          @positive-click="() => emits('batchDel')"
+        />
         <ColumnsSettingBtn :is-dropdown-vertical="false"/>
       </div>
     </template>
