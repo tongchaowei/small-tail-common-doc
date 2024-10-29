@@ -118,6 +118,9 @@ const emits = defineEmits<{
         <EditorBtn
           btn-text="新增"
           :editor-title="addEditorTitle"
+          @dialog-close="() => emits('add-dialog-close')"
+          @negative-click="(ev) => emits('add-negative-click', ev)"
+          @positive-click="(ev) => emits('add-positive-click', ev)"
         >
           <template #icon>
             <st-icon-iconify :icon="Plus"/>

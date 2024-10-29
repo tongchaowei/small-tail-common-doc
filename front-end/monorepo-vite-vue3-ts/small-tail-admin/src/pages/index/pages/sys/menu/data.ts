@@ -1,31 +1,9 @@
+import {DataTableColumns} from "@/components/table-template/types/table.ts"
 import {h} from 'vue'
 import EditorDelBtnGroup from "@/components/table-template/components/editor-del-btn-group.vue"
-import EditorFrom from "@/pages/index/pages/sys/menu/components/editor-from.vue"
-import {DataTableColumns} from "@/components/table-template/types/table.ts"
+import EditorForm from "@/pages/index/pages/sys/menu/components/editor-form.vue"
 
-const renderAction = (row: any) => {
-  return [
-    h(
-      EditorDelBtnGroup,
-      {
-
-      },
-      {
-        editor: () => h(
-          EditorFrom,
-          {
-            isEditor: true,
-            form: row,
-            'update:form': (newValue: any) => {
-              row = newValue
-            }
-          }
-        )
-      }
-    ),
-  ]
-}
-
+// 表格列配置
 export const columnsOrigin: DataTableColumns = [
   {
     title: 'No',
@@ -46,10 +24,28 @@ export const columnsOrigin: DataTableColumns = [
     title: 'Action',
     key: 'actions',
     draggable: true,
-    render: renderAction
+    render: (row) => {
+      return h(
+        EditorDelBtnGroup,
+        {},
+        {
+          editor: () => h(
+            EditorForm,
+            {
+              isEdit: true,
+              form: row,
+              'update:form'(newVal: any) {
+                row = newVal
+              }
+            }
+          )
+        }
+      )
+    }
   }
 ]
 
+// 表格数据
 export const dataOrigin = [
   {no: 3, title: 'Wonderwall', length: '4:18'},
   {
