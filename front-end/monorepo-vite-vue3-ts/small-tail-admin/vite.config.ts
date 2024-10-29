@@ -24,6 +24,8 @@ export default defineConfig({
           'naive-ui': ['useDialog', 'useMessage', 'useNotification', 'useLoadingBar'],
         },
       ],
+      // 不需要自动引入的 API
+      ignore: ['h']
     }),
     // 按需自动加载组件的插件
     Components({
