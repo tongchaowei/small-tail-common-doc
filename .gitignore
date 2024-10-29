@@ -2,6 +2,8 @@ node_modules
 dist
 dist-ssr
 *.local
+es
+lib
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
