@@ -1,4 +1,4 @@
 packages:
   - 'small-tail-common/*'
   - 'small-tail-admin'
-  - 'doc'
+  - 'docs/*'

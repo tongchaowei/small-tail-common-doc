@@ -1,9 +1,6 @@
 {
-  "name": "@st-common/ui-styles",
-  "version": "1.0.0",
-  "publishConfig": {
-    "access": "public"
-  },
+  "name": "st-common-ui-styles",
+  "version": "0.0.0",
   "description": "小尾巴通用 UI 样式库",
   "main": "index.js",
   "scripts": {

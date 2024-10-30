@@ -1,6 +1,6 @@
 {
-  "name": "@st-common/ui-vue3",
-  "version": "1.0.0",
+  "name": "st-common-ui-vue3",
+  "version": "0.1.0",
   "publishConfig": {
     "access": "public"
   },
@@ -10,12 +10,14 @@
   "types": "es/index.d.ts",
   "files": [
     "lib",
-    "es"
+    "es",
+    "dist",
+    "README.md"
   ],
   "scripts": {
     "build": "vue-tsc --noEmit && vite build"
   },
-  "keywords": [],
+  "keywords": ["vue3", "ui", "common", "component", "library", "小尾巴"],
   "author": "ST",
   "license": "ISC",
   "dependencies": {

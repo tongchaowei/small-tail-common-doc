@@ -1,12 +1,19 @@
 {
   "name": "monorepo-vite-vue3-ts",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "private": true,
   "description": "技术栈为 Monorepo + Vite + Vue3 + Typescript 的小尾巴后台管理系统前端项目",
   "keywords": [],
   "author": "ST",
   "license": "ISC",
+  "scripts": {
+    "cs:init": "changeset init",
+    "cs:add": "changeset add",
+    "cs:version": "changeset version",
+    "cs:publish": "changeset publish"
+  },
   "devDependencies": {
+    "@changesets/cli": "^2.27.9",
     "typescript": "^5.5.3",
     "vite": "^5.4.8"
   }
