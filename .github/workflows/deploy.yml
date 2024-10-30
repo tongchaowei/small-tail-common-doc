@@ -34,6 +34,8 @@ jobs:
         # 向 uses 指令中指定的工作流传递参数
         with:
           node-version: 18
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
       - name: 安装包管理工具 pnpm
         run: npm install -g pnpm
       - name: 安装依赖
