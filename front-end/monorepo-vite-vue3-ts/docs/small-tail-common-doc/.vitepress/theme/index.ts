@@ -2,7 +2,9 @@
 import { h } from 'vue'
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
+import 'st-common-ui-vue3/es/style.css'
 import './style.css'
+import {StCommonUiVue3} from 'st-common-ui-vue3'
 
 export default {
   extends: DefaultTheme,
@@ -11,7 +13,8 @@ export default {
       // https://vitepress.dev/guide/extending-default-theme#layout-slots
     })
   },
-  // enhanceApp({ app, router, siteData }) {
-  //   // ...
-  // }
+  enhanceApp({ app, router, siteData }) {
+    // ...
+    app.use(StCommonUiVue3)
+  }
 } satisfies Theme
