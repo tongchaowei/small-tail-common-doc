@@ -1,7 +1,7 @@
 {
   "name": "st-common-ui-utils",
   "version": "0.0.0",
-  "description": "小尾巴通用 UI 工具库",
+  "description": "小尾巴前端通用 UI 工具库",
   "main": "index",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

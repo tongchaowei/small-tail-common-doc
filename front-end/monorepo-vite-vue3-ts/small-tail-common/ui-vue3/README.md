@@ -1,4 +1,4 @@
-# 小尾巴通用 Vue3 UI 组件库
+# 小尾巴前端通用 Vue3 UI 组件库
 
 ## 安装
 
@@ -47,6 +47,6 @@ import '@st-common/ui-vue3/es/style.css' // 小尾巴 vue3 组件库样式
 </template>
 ```
 
-### 代码仓库地址
+## 代码仓库地址
 
 [https://gitee.com/tongchaowei/small-tail-admin/tree/dev/front-end/monorepo-vite-vue3-ts/small-tail-common/ui-vue3](https://gitee.com/tongchaowei/small-tail-admin/tree/dev/front-end/monorepo-vite-vue3-ts/small-tail-common/ui-vue3)

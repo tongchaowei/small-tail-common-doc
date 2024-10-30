@@ -4,7 +4,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "description": "小尾巴通用 Vue3 UI 组件库",
+  "description": "小尾巴前端通用 Vue3 UI 组件库",
   "main": "lib/index.js",
   "module": "es/index.js",
   "types": "es/index.d.ts",
@@ -17,12 +17,12 @@
   "scripts": {
     "build": "vue-tsc --noEmit && vite build"
   },
-  "keywords": ["vue3", "ui", "common", "component", "library", "小尾巴"],
+  "keywords": ["vue", "vue3", "ui", "common", "component", "library", "小尾巴"],
   "author": "ST",
   "license": "ISC",
   "dependencies": {
-    "@st-common/core": "workspace:^",
-    "@st-common/ui-utils": "workspace:^",
+    "st-common-core": "workspace:^",
+    "st-common-ui-utils": "workspace:^",
     "@vueuse/core": "^11.1.0",
     "vue": "^3.5.10"
   },

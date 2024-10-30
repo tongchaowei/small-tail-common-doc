@@ -39,8 +39,8 @@ export default defineConfig({
       external: [
         'vue',
         '@vueuse/core',
-        '@st-common/ui-utils',
-        '@st-common/core',
+        'st-common-ui-utils',
+        'st-common-core',
       ],
       // 打包入口
       input: 'src/index.ts',

@@ -1,7 +1,7 @@
 {
   "name": "st-common-ui-styles",
   "version": "0.0.0",
-  "description": "小尾巴通用 UI 样式库",
+  "description": "小尾巴前端通用 UI 样式库",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
