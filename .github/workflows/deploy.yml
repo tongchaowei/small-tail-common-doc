@@ -35,14 +35,13 @@ jobs:
           node-version: 18
       - name: 安装包管理工具 pnpm
         run: npm install -g pnpm
-      - run: cd ./front-end/monorepo-vite-vue3-ts/docs/small-tail-common-doc
       - name: 安装依赖
-        run: pwd && ls -al
-#      - name: 对文档项目进行打包构建
-#        run: npm run docs:build
-#      - name: 上传文档项目的构建结果到 GitHub Pages
-#        # 该 actions 的作用是将可以打包和上传部署到 GitHub Pages 的工件上传到 GitHub Pages
-#        uses: actions/upload-pages-artifact@v3
-#        # 向 uses 指令中指定的工作流传递参数
-#        with:
-#          path: .vitepress/dist
+        run: cd ./front-end/monorepo-vite-vue3-ts/docs/small-tail-common-doc && pnpm install
+      - name: 对文档项目进行打包构建
+        run: npm run docs:build
+      - name: 上传文档项目的构建结果到 GitHub Pages
+        # 该 actions 的作用是将可以打包和上传部署到 GitHub Pages 的工件上传到 GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        # 向 uses 指令中指定的工作流传递参数
+        with:
+          path: front-end/monorepo-vite-vue3-ts/docs/small-tail-common-doc/.vitepress/dist
