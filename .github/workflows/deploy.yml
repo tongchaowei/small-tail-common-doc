@@ -27,15 +27,14 @@ jobs:
       - name: 将代码复制到当前工作任务运行的操作系统环境中
         # 可以理解为使用 GitHub 提供的上已经写好的工作流，将代码复制到当前运行的操作系统环境中
         uses: actions/checkout@v4
-#      - name: 安装 Node.js 环境
-#        # 安装 Node.js 环境的工作流，为项目构建的搭建环境
-#        uses: actions/setup-node@v3
-#        # 向 uses 指令中指定的工作流传递参数
-#        with:
-#          node-version: 18
-#          cache: npm
-#      - name: 安装包管理工具 pnpm
-#        run: npm install -g pnpm
+      - name: 安装 Node.js 环境
+        # 安装 Node.js 环境的工作流，为项目构建的搭建环境
+        uses: actions/setup-node@v3
+        # 向 uses 指令中指定的工作流传递参数
+        with:
+          node-version: 18
+      - name: 安装包管理工具 pnpm
+        run: npm install -g pnpm
       - run: cd ./front-end/monorepo-vite-vue3-ts/docs/small-tail-common-doc
       - name: 安装依赖
         run: pnpm install && pwd && ls -al
