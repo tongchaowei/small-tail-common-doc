@@ -20,9 +20,6 @@ importers:
       '@st-common/ui-styles':
         specifier: workspace:^
         version: link:../small-tail-common/ui-styles
-      '@st-common/ui-vue3':
-        specifier: workspace:^
-        version: link:../small-tail-common/ui-vue3
       '@vueuse/core':
         specifier: ^11.1.0
         version: 11.1.0(vue@3.5.12(typescript@5.6.3))
@@ -48,6 +45,9 @@ importers:
       '@iconify/vue':
         specifier: ^4.1.2
         version: 4.1.2(vue@3.5.12(typescript@5.6.3))
+      '@st-common/ui-vue3':
+        specifier: workspace:^
+        version: link:../small-tail-common/ui-vue3
       '@types/node':
         specifier: ^22.7.9
         version: 22.7.9
@@ -106,6 +106,9 @@ importers:
       sass-embedded:
         specifier: ^1.80.3
         version: 1.80.3
+      unplugin-vue-components:
+        specifier: ^0.27.4
+        version: 0.27.4(@babel/parser@7.25.9)(rollup@4.24.0)(vue@3.5.12(typescript@5.6.3))
       vite-plugin-dts:
         specifier: ^4.3.0
         version: 4.3.0(@types/node@22.7.9)(rollup@4.24.0)(typescript@5.6.3)(vite@5.4.9(@types/node@22.7.9)(sass-embedded@1.80.3))

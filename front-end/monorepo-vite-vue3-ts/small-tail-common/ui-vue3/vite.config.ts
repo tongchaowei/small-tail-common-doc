@@ -18,8 +18,6 @@ export default defineConfig({
   ],
   // 打包配置
   build: {
-    // 清除之前的打包结果
-    emptyOutDir: true,
     // 由于要进行的是库的打包，所以这里要指定 lib 选项，使用 lib 模式(库模式)进行打包
     // 该配置并不会真正被使用，因为我们打包实际上使用的是 vite 中的 rollup 打包工具，此配置项只是为了告诉 vite 使用 lib 模式进行打包
     lib: {
@@ -29,6 +27,12 @@ export default defineConfig({
     // 打包结果对于浏览器的兼容性
     // modules：支持原生 ES 模块、原生 ESM 动态导入和 import.meta 的浏览器
     target: 'modules',
+    // 清除之前的打包结果
+    emptyOutDir: true,
+    // // 将组件中的样式代码拆分到单独的 css 文件中
+    // // 关于自定义打包的静态文件名称可以参考：https://blog.csdn.net/qq_32805013/article/details/134420142
+    // // 由于组件的写法使用的是单文件组件的形式，所以样式的打包等无法使用 https://juejin.cn/post/7138212982558818311#heading-7 中 gulp 编写工作流的方式
+    // cssCodeSplit: true,
     // rollup 相关配置
     rollupOptions: {
       // 排除不需要的依赖，

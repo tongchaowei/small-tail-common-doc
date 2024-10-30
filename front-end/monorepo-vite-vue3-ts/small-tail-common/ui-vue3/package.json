@@ -13,7 +13,7 @@
     "es"
   ],
   "scripts": {
-    "build": "vite build"
+    "build": "vue-tsc --noEmit && vite build"
   },
   "keywords": [],
   "author": "ST",
