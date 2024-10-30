@@ -1,0 +1,48 @@
+# 此文件中工作流的名称
+name: 部署小尾巴通用库的文档
+
+# 此工作流的执行时机，即什么时候执行此工作流
+# 当向 main 分支推送代码时，触发执行此工作流
+on:
+  push:
+    branches:
+      - main
+
+# 设置此工作流对于所在的 GitHub 仓库的操作权限，即允许此工作流对所在的仓库进行哪些操作
+# 文档：https://docs.github.com/zh/actions/writing-workflows/workflow-syntax-for-github-actions#permissions
+permissions:
+  # 允许此工作流读取仓库的源代码
+  contents: read
+  # 允许此工作流在 GitHub Packages 上上传和发布包
+  packages: write
+
+# 定义此工作流中的工作任务步骤
+jobs:
+  # 对项目中的小尾巴通用库文档项目进行打包构建
+  build:
+    # 指定此工作任务在什么操作系统环境上运行
+    runs-on: ubuntu-latest
+    # 此工作任务的步骤，即指定工作中每一步要做什么
+    steps:
+      - name: 将代码复制到当前工作任务运行的操作系统环境中
+        # 可以理解为使用 GitHub 提供的上已经写好的工作流，将代码复制到当前运行的操作系统环境中
+        uses: actions/checkout@v4
+      - name: 安装 Node.js 环境
+        # 安装 Node.js 环境的工作流，为项目构建的搭建环境
+        uses: actions/setup-node@v3
+        # 向 uses 指令中指定的工作流传递参数
+        with:
+          node-version: 18
+          cache: pnpm
+      - name: 安装包管理工具 pnpm
+        run: npm install -g pnpm
+      - name: 安装依赖
+        run: npm run install && pwd && ls -al
+#      - name: 对文档项目进行打包构建
+#        run: npm run docs:build
+#      - name: 上传文档项目的构建结果到 GitHub Pages
+#        # 该 actions 的作用是将可以打包和上传部署到 GitHub Pages 的工件上传到 GitHub Pages
+#        uses: actions/upload-pages-artifact@v3
+#        # 向 uses 指令中指定的工作流传递参数
+#        with:
+#          path: .vitepress/dist
