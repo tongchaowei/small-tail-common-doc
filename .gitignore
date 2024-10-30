@@ -4,6 +4,7 @@ dist-ssr
 *.local
 es
 lib
+cache
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
