@@ -37,7 +37,7 @@ jobs:
         run: npm install -g pnpm
       - run: cd ./front-end/monorepo-vite-vue3-ts/docs/small-tail-common-doc
       - name: 安装依赖
-        run: pnpm install && pwd && ls -al
+        run: pwd && ls -al
 #      - name: 对文档项目进行打包构建
 #        run: npm run docs:build
 #      - name: 上传文档项目的构建结果到 GitHub Pages
