@@ -33,11 +33,11 @@ jobs:
         # 向 uses 指令中指定的工作流传递参数
         with:
           node-version: 18
-          cache: pnpm
+          cache: npm
       - name: 安装包管理工具 pnpm
         run: npm install -g pnpm
       - name: 安装依赖
-        run: npm run install && pwd && ls -al
+        run: pnpm install && pwd && ls -al
 #      - name: 对文档项目进行打包构建
 #        run: npm run docs:build
 #      - name: 上传文档项目的构建结果到 GitHub Pages
