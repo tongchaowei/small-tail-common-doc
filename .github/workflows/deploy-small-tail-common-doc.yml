@@ -16,6 +16,7 @@ permissions:
   # 允许此工作流在 GitHub Packages 上上传和发布包
   packages: write
   id-token: write
+  pages: write
 
 # 定义此工作流中的工作任务步骤
 jobs:
