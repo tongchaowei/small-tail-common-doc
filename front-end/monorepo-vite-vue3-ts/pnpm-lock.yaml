@@ -44,6 +44,9 @@ importers:
       st-common-ui-styles:
         specifier: workspace:^
         version: link:../small-tail-common/ui-styles
+      st-common-ui-utils:
+        specifier: workspace:^
+        version: link:../small-tail-common/ui-utils
       st-common-ui-vue3:
         specifier: workspace:^
         version: link:../small-tail-common/ui-vue3
@@ -108,6 +111,9 @@ importers:
       st-common-ui-utils:
         specifier: workspace:^
         version: link:../ui-utils
+      unplugin-vue-components:
+        specifier: ^0.27.4
+        version: 0.27.4(@babel/parser@7.25.9)(rollup@4.24.0)(vue@3.5.12(typescript@5.6.3))
       vue:
         specifier: ^3.5.10
         version: 3.5.12(typescript@5.6.3)

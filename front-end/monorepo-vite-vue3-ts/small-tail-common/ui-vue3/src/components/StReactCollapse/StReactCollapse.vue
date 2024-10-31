@@ -8,8 +8,8 @@ import {ref, watch, nextTick} from 'vue'
 import {useElementSize, useParentElement} from '@vueuse/core'
 import useElementContactPrevious from "../../hooks/use-element-contact-previous"
 import useElementParentChildrenWidth from "../../hooks/use-element-parent-children-width"
-import StPopover from "../st-popover/st-popover.vue"
-import StIconIconify from "../st-icon/st-icon-iconify.vue"
+import StPopover from "../StPopover/StPopover.vue"
+import StIconIconify from "../StIconIconify/StIconIconify.vue"
 import AlignRight from '@iconify-icons/tabler/align-right'
 
 /**

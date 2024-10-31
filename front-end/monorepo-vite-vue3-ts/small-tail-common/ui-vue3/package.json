@@ -17,13 +17,22 @@
   "scripts": {
     "build": "vue-tsc --noEmit && vite build"
   },
-  "keywords": ["vue", "vue3", "ui", "common", "component", "library", "小尾巴"],
+  "keywords": [
+    "vue",
+    "vue3",
+    "ui",
+    "common",
+    "component",
+    "library",
+    "小尾巴"
+  ],
   "author": "ST",
   "license": "ISC",
   "dependencies": {
+    "@vueuse/core": "^11.1.0",
     "st-common-core": "workspace:^",
     "st-common-ui-utils": "workspace:^",
-    "@vueuse/core": "^11.1.0",
+    "unplugin-vue-components": "^0.27.4",
     "vue": "^3.5.10"
   },
   "devDependencies": {
