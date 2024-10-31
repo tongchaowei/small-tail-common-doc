@@ -35,6 +35,13 @@ export const StPopoverSubContPosEnum = StPopoverSubContPos.StPopoverSubContPosEn
 export const StPopoverSubContPosConst = StPopoverSubContPos.StPopoverSubContPosConst
 // -------------------------------------------------------------------------------------------------- 气泡弹出框组件 ------
 
+// --------------------------------------------------------------------------------------------- 可调整宽高的容器组件 ------
+import _StAdjustableContainer from "./components/st-adjustable-container/st-adjustable-container.vue"
+
+stCommonUiVue3Components.StAdjustableContainer = _StAdjustableContainer
+export const StAdjustableContainer = componentWithInstall(_StAdjustableContainer)
+// --------------------------------------------------------------------------------------------- 可调整宽高的容器组件 ------
+
 /**
  * 全局注册小尾巴通用 UI Vue3 组件库中的所有组件
  *
