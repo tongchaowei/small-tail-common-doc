@@ -12,21 +12,21 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: 'Home', link: '/' },
-      { text: 'Examples', link: '/markdown-examples' }
+      { text: 'Small Tail Common UI Vue3', link: '/ui-vue3/' }
     ],
 
     sidebar: [
       {
-        text: 'Examples',
+        text: 'Small Tail Common UI Vue3',
         items: [
-          { text: 'Markdown Examples', link: '/markdown-examples' },
-          { text: 'Runtime API Examples', link: '/api-examples' }
+          { text: '开始使用', link: '/ui-vue3/start' },
+          { text: '登录页面 1', link: '/ui-vue3/login-page-1' },
         ]
       }
     ],
 
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/vuejs/vitepress' }
+      { icon: 'github', link: 'https://gitee.com/tongchaowei/small-tail-admin/tree/dev/front-end/monorepo-vite-vue3-ts/small-tail-common/ui-vue3' }
     ]
   },
 })
