@@ -5,6 +5,7 @@ import AutoImport from 'unplugin-auto-import/vite' // 自动引入 API 的插件
 import Components from 'unplugin-vue-components/vite' // 按需自动加载组件的插件
 import {NaiveUiResolver} from 'unplugin-vue-components/resolvers' // 按需自动加载 Naive UI 组件的解析器，用于帮助按需自动加载组件的插件自动按需加载 Navie UI 组件
 import UnoCSS from 'unocss/vite' // UnoCSS
+import {StCommonUIVue3Resolver} from 'st-common-ui-vue3' // 按需自动加载 st-common-ui-vue3 组件的解析器，用于帮助按需自动加载组件的插件自动按需加载 st-common-ui-vue3 组件
 
 // 项目中 src 目录的绝对路径
 // __dirname 表示当前文件所在目录的绝对路径
@@ -29,7 +30,10 @@ export default defineConfig({
     }),
     // 按需自动加载组件的插件
     Components({
-      resolvers: [NaiveUiResolver()],
+      resolvers: [
+        NaiveUiResolver(),
+        StCommonUIVue3Resolver(),
+      ],
     })
   ],
   // vite 构建工具中的解析器配置

@@ -29,18 +29,18 @@ export default defineConfig({
     target: 'modules',
     // 清除之前的打包结果
     emptyOutDir: true,
-    // // 将组件中的样式代码拆分到单独的 css 文件中
-    // // 关于自定义打包的静态文件名称可以参考：https://blog.csdn.net/qq_32805013/article/details/134420142
-    // // 由于组件的写法使用的是单文件组件的形式，所以样式的打包等无法使用 https://juejin.cn/post/7138212982558818311#heading-7 中 gulp 编写工作流的方式
-    // cssCodeSplit: true,
+    // 将组件中的样式代码拆分到单独的 css 文件中
+    // 关于自定义打包的静态文件名称可以参考：https://blog.csdn.net/qq_32805013/article/details/134420142
+    // 由于组件的写法使用的是单文件组件的形式，所以样式的打包等无法使用 https://juejin.cn/post/7138212982558818311#heading-7 中 gulp 编写工作流的方式
+    cssCodeSplit: true,
     // rollup 相关配置
     rollupOptions: {
       // 排除不需要的依赖，
       external: [
         'vue',
-        '@vueuse/core',
-        'st-common-ui-utils',
-        'st-common-core',
+        // '@vueuse/core',
+        // 'st-common-ui-utils',
+        // 'st-common-core',
       ],
       // 打包入口
       input: 'src/index.ts',

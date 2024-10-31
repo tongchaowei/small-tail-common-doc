@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import {StLoginPage1} from 'st-common-ui-vue3'
 import LoginFormByPwd from "@/pages/login/components/login-form-by-pwd.vue" // 用户名密码登录表单
 import LoginFormByEmail from "@/pages/login/components/login-form-by-email.vue" // 邮箱登录表单
 import LoginFormToggle from "@/pages/login/components/login-form-toggle.vue" // 登录表单切换组件

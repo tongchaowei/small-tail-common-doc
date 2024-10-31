@@ -63,3 +63,11 @@ import _useElementParentChildrenWidth from "./hooks/use-element-parent-children-
 export const useElementContactPrevious = _useElementContactPrevious
 export const useElementParentChildrenWidth = _useElementParentChildrenWidth
 // ********************************************************************************************************* Hook ******
+
+// ******************************************************************************************************* Plugin ******
+// ----------------------------------------------------------------------------------------------------- Resolver ------
+import {StCommonUIVue3Resolver as _StCommonUIVue3Resolver} from "./plugins/resolver/index.ts"
+
+export const StCommonUIVue3Resolver = _StCommonUIVue3Resolver
+// ----------------------------------------------------------------------------------------------------- Resolver ------
+// ******************************************************************************************************* Plugin ******

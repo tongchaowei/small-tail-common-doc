@@ -57,5 +57,7 @@ onBeforeMount(() => {
 </template>
 
 <style scoped>
+.st-icon-iconify {
 
+}
 </style>

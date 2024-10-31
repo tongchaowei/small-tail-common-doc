@@ -2,7 +2,6 @@
 import EditorBtn from "@/components/table-template/components/editor-btn.vue"
 import CollapsePopoverBtn from "@/components/collapse-popover-btn/collapse-popover-btn.vue"
 import PopconfirmBtn from '@/components/popconfirm-btn/popconfirm-btn.vue'
-import {StIconIconify} from "st-common-ui-vue3"
 import Trash from "@iconify-icons/tabler/trash"
 
 /**
