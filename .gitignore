@@ -5,6 +5,8 @@ dist-ssr
 es
 lib
 cache
+**/auto-imports.d.ts
+**/components.d.ts
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
