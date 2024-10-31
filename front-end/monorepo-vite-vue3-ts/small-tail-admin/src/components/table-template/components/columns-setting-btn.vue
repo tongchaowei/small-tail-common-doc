@@ -2,7 +2,7 @@
 import {
   StPopover, // 气泡弹框组件
   StIconIconify, // 基于 Iconify 提供的 Vue 图标组件封装的图标组件
-} from '@st-common/ui-vue3'
+} from 'st-common-ui-vue3'
 // 基于 Navie 的按钮组件和 Popover 组件封装的折叠气泡按钮组件
 import CollapsePopoverBtn from "@/components/collapse-popover-btn/collapse-popover-btn.vue"
 // Iconify 图标库中 Tabler Icons 图标集图标

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CollapsePopoverBtn from "@/components/collapse-popover-btn/collapse-popover-btn.vue"
-import {StIconIconify} from "@st-common/ui-vue3"
+import {StIconIconify} from "st-common-ui-vue3"
 import Edit from '@iconify-icons/tabler/edit'
 import Dialog from "@/components/dialog/dialog.vue"
 import {ref, VNodeChild} from "vue"

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CollapsePopoverBtn from "@/components/collapse-popover-btn/collapse-popover-btn.vue"
-import {StIconIconify} from "@st-common/ui-vue3"
+import {StIconIconify} from "st-common-ui-vue3"
 import Search from "@iconify-icons/tabler/search"
 import Reload from '@iconify-icons/tabler/reload'
 
