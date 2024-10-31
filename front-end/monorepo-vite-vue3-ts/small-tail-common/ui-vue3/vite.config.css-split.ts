@@ -1,3 +1,7 @@
+/**
+ * 该 Vite 配置文件用于将组件库中每个组件的样式代码打包到单独的 css 文件中
+ */
+
 import {defineConfig} from 'vite'
 import vue from '@vitejs/plugin-vue'
 import dts from 'vite-plugin-dts'
