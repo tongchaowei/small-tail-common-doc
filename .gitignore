@@ -5,6 +5,7 @@ dist-ssr
 es
 lib
 cache
+.temp
 **/auto-imports.d.ts
 **/components.d.ts
 
