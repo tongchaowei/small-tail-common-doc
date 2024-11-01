@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {ref, onMounted, watch} from 'vue'
-import {elSizeUtil} from 'st-common-ui-utils'
+import {elSizeUtil} from 'st-common-ui-utils/src'
 import {useWindowSize} from '@vueuse/core'
 
 /**

@@ -18,8 +18,9 @@ export default defineConfig({
     sidebar: [
       {
         text: 'Small Tail Common UI Vue3',
+        link: '/ui-vue3/',
         items: [
-          { text: '开始使用', link: '/ui-vue3/start' },
+          { text: '开始使用', link: '/ui-vue3/start/' },
           { text: '登录页面 1', link: '/ui-vue3/login-page-1' },
         ]
       }

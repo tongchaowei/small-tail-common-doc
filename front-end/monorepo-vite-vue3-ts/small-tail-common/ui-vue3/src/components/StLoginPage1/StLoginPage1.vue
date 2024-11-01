@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import {elSizeUtil} from 'st-common-ui-utils'
-import {strUtil} from 'st-common-core'
+import {elSizeUtil} from 'st-common-ui-utils/src'
+import {strUtil} from 'st-common-core/src'
 
 /**
  * 组件配置选项
