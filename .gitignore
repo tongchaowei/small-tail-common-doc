@@ -8,6 +8,8 @@ cache
 .temp
 **/auto-imports.d.ts
 **/components.d.ts
+**/slow-trees-warn.md
+**/CHANGELOG.md
 
 target/
 !.mvn/wrapper/maven-wrapper.jar
