@@ -1,0 +1,12 @@
+{
+  "extends": "../../tsconfig.app.json",
+  "include": [
+    ".vitepress/theme/**/*.ts",
+    ".vitepress/theme/**/*.tsx",
+    ".vitepress/theme/**/*.vue",
+    ".vitepress/types/**/*.d.ts",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue"
+  ]
+}

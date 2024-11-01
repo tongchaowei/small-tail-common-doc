@@ -4,6 +4,10 @@ title: Small Tail Common UI Vue3
 
 # Small Tail Common UI Vue3
 
+## npm 地址
+
+[https://www.npmjs.com/package/st-common-ui-vue3](https://www.npmjs.com/package/st-common-ui-vue3)
+
 ## 代码仓库地址
 
 ### Gitee
