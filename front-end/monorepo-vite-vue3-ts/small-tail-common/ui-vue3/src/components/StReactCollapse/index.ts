@@ -1,4 +1,5 @@
 import StReactCollapse from "./StReactCollapse.vue"
-import { componentWithInstall } from '../../utils/component-with-install'
+import { genCompGlobalRegisterPlugin } from '../../utils/gen-comp-global-register-plugin'
 
-export default componentWithInstall(StReactCollapse)
+export default StReactCollapse
+export const StReactCollapseRegister = genCompGlobalRegisterPlugin(StReactCollapse)

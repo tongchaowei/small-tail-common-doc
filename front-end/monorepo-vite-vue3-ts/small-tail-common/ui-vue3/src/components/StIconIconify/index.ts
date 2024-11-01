@@ -1,4 +1,5 @@
 import StIconIconify from './StIconIconify.vue'
-import { componentWithInstall } from '../../utils/component-with-install'
+import { genCompGlobalRegisterPlugin } from '../../utils/gen-comp-global-register-plugin'
 
-export default componentWithInstall(StIconIconify)
+export default StIconIconify
+export const StIconIconifyRegister = genCompGlobalRegisterPlugin(StIconIconify)

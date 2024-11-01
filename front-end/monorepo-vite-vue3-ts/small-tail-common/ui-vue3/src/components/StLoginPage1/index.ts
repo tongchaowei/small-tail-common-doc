@@ -1,6 +1,6 @@
-import _StLoginPage1 from "./StLoginPage1.vue"
-import { componentWithInstall } from '../../utils/component-with-install'
+import StLoginPage1 from "./StLoginPage1.vue"
+import { genCompGlobalRegisterPlugin } from '../../utils/gen-comp-global-register-plugin'
 
-const StLoginPage1 = componentWithInstall(_StLoginPage1)
 
 export default StLoginPage1
+export const StLoginPage1Register = genCompGlobalRegisterPlugin(StLoginPage1)
