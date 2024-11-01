@@ -1,5 +1,6 @@
 ---
-title: 开始使用 Small Tail Common UI Vue3 组件库
+title: Small Tail Common UI Vue3
+titleTemplate: 开始使用
 ---
 
 # 开始使用

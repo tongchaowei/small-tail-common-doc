@@ -5,7 +5,7 @@
 // https://zhuanlan.zhihu.com/p/582101763
 
 import {onBeforeMount} from "vue"
-import {strUtil} from 'st-common-core/src'
+import {strUtil} from 'st-common-core'
 import {Icon as IconifyIconOnline, IconifyIcon} from '@iconify/vue'
 import {Icon as IconifyIconOffline, addIcon} from "@iconify/vue/offline"
 
