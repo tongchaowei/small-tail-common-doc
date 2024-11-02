@@ -1,4 +1,5 @@
 import { defineConfig } from 'vitepress'
+import path from 'path'
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -21,7 +22,13 @@ export default defineConfig({
         link: '/ui-vue3/',
         items: [
           { text: '开始使用', link: '/ui-vue3/start/' },
-          { text: '登录页面 1', link: '/ui-vue3/login-page-1' },
+          {
+            text: '登录页面 1',
+            link: '/ui-vue3/login-page-1/',
+            items: [
+              { text: '示例', link: '/ui-vue3/login-page-1/example/' }
+            ]
+          },
         ]
       }
     ],
@@ -30,4 +37,14 @@ export default defineConfig({
       { icon: 'github', link: 'https://gitee.com/tongchaowei/small-tail-admin/tree/dev/front-end/monorepo-vite-vue3-ts/small-tail-common/ui-vue3' }
     ]
   },
+  vite: {
+    // vite 构建工具中的解析器配置
+    resolve: {
+      // 配置别名解析
+      alias: {
+        // 将项目文件中使用的 `@` 解析为 `theme` 目录的绝对路径
+        '@': path.resolve(__dirname, './theme')
+      },
+    },
+  }
 })
