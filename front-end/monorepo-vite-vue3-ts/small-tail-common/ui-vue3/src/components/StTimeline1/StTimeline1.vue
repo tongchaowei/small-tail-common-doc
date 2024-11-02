@@ -222,7 +222,7 @@ const displaySwiperSlideChangeTransitionStartHandler = (swiper: SwiperType) => {
               class="st-timeline1__timeline-swipe__slide__content"
               :style="{'--timeline-text-max-line': timelineTextMaxLine}"
             >
-              {{ item.label }}
+              {{ item.label ? item.label : item.title }}
             </div>
           </swiper-slide>
         </swiper>

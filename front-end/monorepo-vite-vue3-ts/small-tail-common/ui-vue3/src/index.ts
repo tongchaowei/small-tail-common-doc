@@ -52,11 +52,15 @@ export const StAdjustableContainerRegister = _StAdjustableContainerRegister
 // --------------------------------------------------------------------------------------------- 可调整宽高的容器组件 ------
 
 // ----------------------------------------------------------------------------------------------------- 时间线组件 ------
-import _StTimeline1, {StTimeline1Register as _StTimeline1Register} from "./components/StTimeline1"
+import _StTimeline1, {
+  StTimeline1Register as _StTimeline1Register,
+  StTimelineDataItem as _StTimelineDataItem
+} from "./components/StTimeline1"
 
 StCommonUiVue3Components.StTimeline1 = _StTimeline1
 export const StTimeline1 = _StTimeline1
 export const StTimeline1Register = _StTimeline1Register
+export type StTimelineDataItem = _StTimelineDataItem
 // ----------------------------------------------------------------------------------------------------- 时间线组件 ------
 
 /**
