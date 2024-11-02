@@ -1,6 +1,6 @@
 export interface StTimelineDataItem {
-  label: string;
+  label?: string;
   title: string;
-  desc: string;
-  bgImgSrc: string;
+  desc?: string;
+  bgImgSrc?: string;
 }
