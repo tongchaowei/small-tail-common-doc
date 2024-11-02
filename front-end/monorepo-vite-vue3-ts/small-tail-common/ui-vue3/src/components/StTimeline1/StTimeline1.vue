@@ -4,7 +4,7 @@ import type {Swiper as SwiperType} from "swiper/types"
 import {Controller} from "swiper/modules"
 import 'swiper/css'
 import 'swiper/css/bundle'
-import {onMounted, ref, watch} from 'vue'
+import {onBeforeMount, ref, watch} from 'vue'
 import {StTimelineDataItem} from "./types.ts"
 import {useWindowSize} from "@vueuse/core"
 import {elSizeUtil} from 'st-common-ui-utils'
@@ -42,6 +42,8 @@ const props = withDefaults(
     displayDescMaxLine?: number;
     // 时间线可选项展示个数
     timelinePerView?: number;
+    // 时间线开头的偏移量，用以实现当前激活时间线项居中效果
+    timelineOffsetBefore?: number;
     // 时间线未激活项颜色
     timelineColor?: string;
     // 时间线激活项颜色
@@ -76,10 +78,17 @@ const props = withDefaults(
 const isInitial = ref(true)
 // 初始显示的时间线数据项索引
 const initialIdx = ref(props.initialIndex)
-onMounted(() => {
+// 时间线开头的偏移量
+const timelineSlidesOffsetBefore = ref(props.timelineOffsetBefore)
+onBeforeMount(() => {
   // 判断是否越界，如果越界，则默认显示第一项
   const dataLen = props.data.length
   if (initialIdx.value >= dataLen || initialIdx.value < 0) initialIdx.value = 0
+  // 时间线开头的偏移量预处理
+  if (timelineSlidesOffsetBefore.value === undefined) {
+    const timelineSlidePerHeight = useWindowSize().height.value / 2 / props.timelinePerView
+    timelineSlidesOffsetBefore.value = timelineSlidePerHeight * (props.timelinePerView / 2 - 0.5)
+  }
 })
 
 // 是否需要响应式变化，以适应小屏幕
@@ -147,7 +156,7 @@ const displaySwiperSlideChangeTransitionStartHandler = (swiper: SwiperType) => {
     <swiper
       class="st-timeline1__display-swiper"
       direction="vertical"
-      :initial-slide="initialIndex"
+      :initial-slide="initialIdx"
       :modules="swiperModules"
       :controller="{ control: timelineSwiperRef }"
       :speed="speed"
@@ -201,7 +210,8 @@ const displaySwiperSlideChangeTransitionStartHandler = (swiper: SwiperType) => {
         <swiper
           class="st-timeline1__timeline-swiper"
           direction="vertical"
-          :initial-slide="initialIndex"
+          :slides-offset-before="timelineSlidesOffsetBefore"
+          :initial-slide="initialIdx"
           :modules="swiperModules"
           :slides-per-view="timelinePerView"
           :controller="{ control: displaySwiperRef }"
@@ -222,7 +232,9 @@ const displaySwiperSlideChangeTransitionStartHandler = (swiper: SwiperType) => {
               class="st-timeline1__timeline-swipe__slide__content"
               :style="{'--timeline-text-max-line': timelineTextMaxLine}"
             >
-              {{ item.label ? item.label : item.title }}
+              <div class="st-timeline1__timeline-swipe__slide__content__label">
+                {{ item.label ? item.label : item.title }}
+              </div>
             </div>
           </swiper-slide>
         </swiper>
@@ -428,13 +440,17 @@ const displaySwiperSlideChangeTransitionStartHandler = (swiper: SwiperType) => {
 
           .st-timeline1__timeline-swipe__slide__content {
             width: 100%;
-            color: var(--timeline-color-active);
-            display: -webkit-box;
-            overflow: hidden;
-            -webkit-box-orient: vertical;
-            text-overflow: ellipsis;
-            line-clamp: var(--timeline-text-max-line);
-            -webkit-line-clamp: var(--timeline-text-max-line);
+
+            .st-timeline1__timeline-swipe__slide__content__label {
+              width: 100%;
+              color: var(--timeline-color-active);
+              display: -webkit-box;
+              overflow: hidden;
+              -webkit-box-orient: vertical;
+              text-overflow: ellipsis;
+              line-clamp: var(--timeline-text-max-line);
+              -webkit-line-clamp: var(--timeline-text-max-line);
+            }
           }
         }
       }
