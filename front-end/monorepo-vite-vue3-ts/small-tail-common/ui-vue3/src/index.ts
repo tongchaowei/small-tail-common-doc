@@ -51,6 +51,14 @@ export const StAdjustableContainer = _StAdjustableContainer
 export const StAdjustableContainerRegister = _StAdjustableContainerRegister
 // --------------------------------------------------------------------------------------------- 可调整宽高的容器组件 ------
 
+// ----------------------------------------------------------------------------------------------------- 时间线组件 ------
+import _StTimeline1, {StTimeline1Register as _StTimeline1Register} from "./components/StTimeline1"
+
+StCommonUiVue3Components.StTimeline1 = _StTimeline1
+export const StTimeline1 = _StTimeline1
+export const StTimeline1Register = _StTimeline1Register
+// ----------------------------------------------------------------------------------------------------- 时间线组件 ------
+
 /**
  * 全局注册小尾巴通用 UI Vue3 组件库中的所有组件
  *
