@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {Swiper, SwiperSlide} from 'swiper/vue'
 import type {Swiper as SwiperType} from "swiper/types"
-import {Controller} from "swiper/modules"
+import {Controller, Mousewheel} from "swiper/modules"
 import 'swiper/css'
 import 'swiper/css/bundle'
 import {onBeforeMount, ref, watch} from 'vue'
@@ -104,7 +104,7 @@ watch(
 )
 
 // swiper 模块
-const swiperModules = ref([Controller])
+const swiperModules = ref([Controller, Mousewheel])
 
 // swiper 引用对象
 const displaySwiperRef = ref<SwiperType | null>(null)
@@ -117,12 +117,16 @@ const setTimelineSwiper = (swiper: SwiperType) => {
   timelineSwiperRef.value = swiper
 }
 
+// 当前激活时间线项索引
+const activeIndex = ref(initialIdx.value)
+
 /**
  * 时间线 swiper 点击事件处理函数
  *
  * @param {Swiper} swiper 时间线 swiper 对象
  */
 const timelineSwiperClickHandler = (swiper: SwiperType) => {
+  activeIndex.value = swiper.clickedIndex
   displaySwiperRef.value?.slideTo(swiper.clickedIndex)
 }
 
@@ -140,6 +144,14 @@ const displaySwiperSlideChangeTransitionStartHandler = (swiper: SwiperType) => {
   displaySwiperCurrentSlideIndex.value = swiper.previousIndex
   displaySwiperNextSlideIndex.value = swiper.activeIndex
   isDisplaySwiperChangeSlide.value = true
+  activeIndex.value = swiper.activeIndex
+}
+/**
+ * display swiper 鼠标滚轮滚动事件处理函数
+ */
+const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
+  activeIndex.value = swiper.activeIndex
+  timelineSwiperRef.value?.slideTo(swiper.activeIndex)
 }
 </script>
 
@@ -160,6 +172,8 @@ const displaySwiperSlideChangeTransitionStartHandler = (swiper: SwiperType) => {
       :modules="swiperModules"
       :controller="{ control: timelineSwiperRef }"
       :speed="speed"
+      :mousewheel="{enabled: true}"
+      @scroll="displaySwiperMousewheelHandler"
       @swiper="setDisplaySwiper"
       @slide-change-transition-start="displaySwiperSlideChangeTransitionStartHandler"
     >
@@ -220,7 +234,7 @@ const displaySwiperSlideChangeTransitionStartHandler = (swiper: SwiperType) => {
         >
           <swiper-slide
             class="st-timeline1__timeline-swipe__slide"
-            :class="[displaySwiperRef?.activeIndex === idx ? 'st-timeline1__timeline-swipe__slide--active' : '']"
+            :class="[activeIndex === idx ? 'st-timeline1__timeline-swipe__slide--active' : '']"
             :style="{
               '--timeline-color': timelineColor,
               '--timeline-color-active': timelineColorActive
@@ -418,6 +432,15 @@ const displaySwiperSlideChangeTransitionStartHandler = (swiper: SwiperType) => {
             display: flex;
             align-items: center;
             color: var(--timeline-color);
+
+            .st-timeline1__timeline-swipe__slide__content__label {
+              display: -webkit-box;
+              overflow: hidden;
+              -webkit-box-orient: vertical;
+              text-overflow: ellipsis;
+              line-clamp: var(--timeline-text-max-line);
+              -webkit-line-clamp: var(--timeline-text-max-line);
+            }
           }
         }
 
@@ -442,14 +465,7 @@ const displaySwiperSlideChangeTransitionStartHandler = (swiper: SwiperType) => {
             width: 100%;
 
             .st-timeline1__timeline-swipe__slide__content__label {
-              width: 100%;
               color: var(--timeline-color-active);
-              display: -webkit-box;
-              overflow: hidden;
-              -webkit-box-orient: vertical;
-              text-overflow: ellipsis;
-              line-clamp: var(--timeline-text-max-line);
-              -webkit-line-clamp: var(--timeline-text-max-line);
             }
           }
         }
