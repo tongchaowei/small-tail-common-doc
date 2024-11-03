@@ -126,7 +126,6 @@ const activeIndex = ref(initialIdx.value)
  * @param {Swiper} swiper 时间线 swiper 对象
  */
 const timelineSwiperClickHandler = (swiper: SwiperType) => {
-  activeIndex.value = swiper.clickedIndex
   displaySwiperRef.value?.slideTo(swiper.clickedIndex)
 }
 
@@ -150,7 +149,6 @@ const displaySwiperSlideChangeTransitionStartHandler = (swiper: SwiperType) => {
  * display swiper 鼠标滚轮滚动事件处理函数
  */
 const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
-  activeIndex.value = swiper.activeIndex
   timelineSwiperRef.value?.slideTo(swiper.activeIndex)
 }
 </script>
@@ -411,7 +409,7 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
       box-sizing: border-box;
       width: 100%;
       height: 100%;
-      border: 2px solid #cecece33;
+      border-left: 2px solid #cecece33;
       display: grid;
       grid-template-rows: 1fr;
       grid-template-columns: 1fr;
