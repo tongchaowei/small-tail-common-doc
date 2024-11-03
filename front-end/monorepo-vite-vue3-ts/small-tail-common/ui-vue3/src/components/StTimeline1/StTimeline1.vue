@@ -44,6 +44,8 @@ const props = withDefaults(
     enableMousewheelSwitch?: boolean;
     // 时间线可选项展示个数
     timelinePerView?: number;
+    // 时间线可选项在需要响应式变换的小屏幕宽度下，展示的个数
+    timelinePerViewReactScreen?: number;
     // 时间线开头的偏移量，用以实现当前激活时间线项居中效果
     timelineOffsetBefore?: number;
     // 时间线未激活项颜色
@@ -68,6 +70,7 @@ const props = withDefaults(
     displayDescMaxLine: 5,
     enableMousewheelSwitch: true,
     timelinePerView: 10,
+    timelinePerViewReactScreen: 2,
     timelineColor: '#9c9c9c9f',
     timelineColorActive: '#efefef',
     timelineTextMaxLine: 1,
@@ -272,7 +275,7 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
           :slides-offset-after="timelineSlidesOffset"
           :initial-slide="initialIdx"
           :modules="swiperModules"
-          :slides-per-view="timelinePerView"
+          :slides-per-view="isNeedReact ? timelinePerViewReactScreen : timelinePerView"
           :controller="{ control: displaySwiperRef }"
           @swiper="setTimelineSwiper"
           @click="timelineSwiperClickHandler"

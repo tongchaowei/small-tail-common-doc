@@ -22,7 +22,7 @@ const router = useRouter()
     <div v-if="data.frontmatter.value.layout === 'custom-home'">
       <st-timeline1
         :data="homeDataRef"
-        :timelinePerView="2"
+        :timelinePerView="10"
       >
         <template v-slot:display-content-suffix="{ item, idx, nextIdx, currentIdx, isInitial }">
           <div
