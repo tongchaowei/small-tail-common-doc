@@ -40,6 +40,8 @@ const props = withDefaults(
     displayTitleMaxLine?: number;
     // 展示区域中描述文本最多显示行数
     displayDescMaxLine?: number;
+    // 是否开启鼠标滚轮切换时间线项
+    enableMousewheelSwitch?: boolean;
     // 时间线可选项展示个数
     timelinePerView?: number;
     // 时间线开头的偏移量，用以实现当前激活时间线项居中效果
@@ -64,6 +66,7 @@ const props = withDefaults(
     displayDescEnterDelay: 2200,
     displayTitleMaxLine: 1,
     displayDescMaxLine: 5,
+    enableMousewheelSwitch: true,
     timelinePerView: 10,
     timelineColor: '#9c9c9c9f',
     timelineColorActive: '#efefef',
@@ -204,7 +207,7 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
       :modules="swiperModules"
       :controller="{ control: timelineSwiperRef }"
       :speed="speed"
-      :mousewheel="{enabled: true}"
+      :mousewheel="{enabled: enableMousewheelSwitch}"
       @scroll="displaySwiperMousewheelHandler"
       @swiper="setDisplaySwiper"
       @slide-change-transition-start="displaySwiperSlideChangeTransitionStartHandler"
