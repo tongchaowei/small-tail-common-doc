@@ -46,8 +46,8 @@ const props = withDefaults(
     timelinePerView?: number;
     // 时间线可选项在需要响应式变换的小屏幕宽度下，展示的个数
     timelinePerViewReactScreen?: number;
-    // 时间线开头的偏移量，用以实现当前激活时间线项居中效果
-    timelineOffsetBefore?: number;
+    // 时间线开头和末尾的偏移量，用以实现当前激活时间线项居中效果
+    timelineOffset?: number;
     // 时间线未激活项颜色
     timelineColor?: string;
     // 时间线激活项颜色
@@ -84,8 +84,8 @@ const props = withDefaults(
 const isInitial = ref(true)
 // 初始显示的时间线数据项索引
 const initialIdx = ref(props.initialIndex)
-// 时间线开头的偏移量
-const timelineSlidesOffset = ref(props.timelineOffsetBefore)
+// 时间线开头和结尾的偏移量
+const timelineSlidesOffset = ref(props.timelineOffset)
 onBeforeMount(() => {
   // 判断是否越界，如果越界，则默认显示第一项
   const dataLen = props.data.length
