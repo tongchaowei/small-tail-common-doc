@@ -2,8 +2,7 @@
 import type { Theme } from 'vitepress'
 import DefaultTheme from 'vitepress/theme'
 import Layout from "@/components/layout/index.vue"
-import 'st-common-ui-vue3/es/style.css'
-import './style.css'
+import '@/styles/index'
 
 export default {
   extends: DefaultTheme,

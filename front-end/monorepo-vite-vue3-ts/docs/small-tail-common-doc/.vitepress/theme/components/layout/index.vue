@@ -47,6 +47,7 @@ const router = useRouter()
         </template>
       </st-timeline1>
     </div>
+    <div v-else-if="data.frontmatter.value.layout === 'none'"></div>
     <Layout v-else></Layout>
   </div>
 </template>
