@@ -146,6 +146,12 @@ const displaySwiperSlideChangeTransitionStartHandler = (swiper: SwiperType) => {
   activeIndex.value = swiper.activeIndex
 }
 /**
+ * display swiper 切换幻灯片结束事件处理函数
+ */
+const displaySwiperSlideChangeTransitionEndHandler = () => {
+  isDisplaySwiperChangeSlide.value = false
+}
+/**
  * display swiper 鼠标滚轮滚动事件处理函数
  */
 const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
@@ -174,6 +180,7 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
       @scroll="displaySwiperMousewheelHandler"
       @swiper="setDisplaySwiper"
       @slide-change-transition-start="displaySwiperSlideChangeTransitionStartHandler"
+      @slide-change-transition-end="displaySwiperSlideChangeTransitionEndHandler"
     >
       <swiper-slide
         class="st-timeline1__display-swipe__slide"
@@ -188,8 +195,8 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
             class="st-timeline1__display-swipe__slide__content"
             :class="[
               isInitial && initialIdx === idx ?'st-timeline1__display-swipe__slide__content--initial' : '',
-              isDisplaySwiperChangeSlide && displaySwiperCurrentSlideIndex === idx ? 'st-timeline1__display-swipe__slide__content--leave' : '',
-              isDisplaySwiperChangeSlide && displaySwiperNextSlideIndex === idx ? 'st-timeline1__display-swipe__slide__content--enter' : ''
+              displaySwiperCurrentSlideIndex === idx ? 'st-timeline1__display-swipe__slide__content--leave' : '',
+              displaySwiperNextSlideIndex === idx ? 'st-timeline1__display-swipe__slide__content--enter' : ''
             ]"
             :style="{
               '--display-text-animation-speed': elSizeUtil.elSizePreHandler(displayTextAnimationSpeed, 'ms'),
@@ -212,7 +219,14 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
               }"
             >{{ item.desc }}
             </div>
-            <slot name="display-content-suffix" :item="item" :idx="idx"></slot>
+            <slot
+              name="display-content-suffix"
+              :item="item"
+              :idx="idx"
+              :isChange="isDisplaySwiperChangeSlide"
+              :currentIdx="displaySwiperCurrentSlideIndex"
+              :nextIdx="displaySwiperNextSlideIndex"
+            ></slot>
           </div>
         </div>
       </swiper-slide>
