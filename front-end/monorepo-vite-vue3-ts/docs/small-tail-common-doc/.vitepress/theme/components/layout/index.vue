@@ -24,13 +24,14 @@ const router = useRouter()
         :data="homeDataRef"
         :timelinePerView="2"
       >
-        <template v-slot:display-content-suffix="{ item, idx, nextIdx, currentIdx }">
+        <template v-slot:display-content-suffix="{ item, idx, nextIdx, currentIdx, isInitial }">
           <div
             class="btn"
             :class="[
-            idx === currentIdx ? 'leave' : '',
-            idx === nextIdx? 'enter' : ''
-          ]"
+              isInitial? 'initial' : '',
+              idx === currentIdx ? 'leave' : '',
+              idx === nextIdx? 'enter' : ''
+            ]"
           >
             <button @click="router.go(item?.url)">
               <div class="svg-wrapper-1">
@@ -87,6 +88,11 @@ const router = useRouter()
 .btn {
   transform: translateX(100%);
   padding: 1rem 2rem;
+}
+
+.initial {
+  transform: translateX(0);
+  animation-duration: 0s;
 }
 
 /* From Uiverse.io by eirikvold */

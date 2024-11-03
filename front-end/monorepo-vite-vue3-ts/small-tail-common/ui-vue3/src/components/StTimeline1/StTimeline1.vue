@@ -254,6 +254,7 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
               :isChange="isDisplaySwiperChangeSlide"
               :currentIdx="displaySwiperCurrentSlideIndex"
               :nextIdx="displaySwiperNextSlideIndex"
+              :isInitial="isInitial"
             ></slot>
           </div>
         </div>
@@ -380,14 +381,6 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
           }
         }
 
-        .st-timeline1__display-swipe__slide__content--initial {
-
-          .st-timeline1__display-swipe__slide__content__title,
-          .st-timeline1__display-swipe__slide__content__desc {
-            transform: translateX(0);
-          }
-        }
-
         @keyframes leave {
           0% {
             transform: translateX(0);
@@ -428,6 +421,15 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
           .st-timeline1__display-swipe__slide__content__desc {
             animation: enter var(--display-text-animation-speed) ease-in-out forwards;
             animation-delay: var(--display-desc-enter-delay);
+          }
+        }
+
+        .st-timeline1__display-swipe__slide__content--initial {
+
+          .st-timeline1__display-swipe__slide__content__title,
+          .st-timeline1__display-swipe__slide__content__desc {
+            transform: translateX(0);
+            animation-duration: 0s;
           }
         }
       }
