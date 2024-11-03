@@ -15,10 +15,10 @@
   "dependencies": {
     "st-common-ui-vue3": "workspace:^",
     "@vueuse/core": "^11.1.0",
+    "naive-ui": "^2.40.1",
     "element-plus": "^2.8.7"
   },
   "devDependencies": {
-    "naive-ui": "^2.40.1",
     "unplugin-auto-import": "^0.18.3",
     "unplugin-vue-components": "^0.27.4",
     "vitepress": "^1.4.2",
