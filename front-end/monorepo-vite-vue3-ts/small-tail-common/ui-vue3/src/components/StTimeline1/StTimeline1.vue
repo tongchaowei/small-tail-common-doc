@@ -308,6 +308,7 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
 <style lang="scss" scoped>
 .st-timeline1 {
   position: relative;
+  overflow: hidden;
 
   :deep(.swiper) {
     overflow: initial;
