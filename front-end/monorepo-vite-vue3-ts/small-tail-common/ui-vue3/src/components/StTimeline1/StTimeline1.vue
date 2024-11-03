@@ -4,7 +4,7 @@ import type {Swiper as SwiperType} from "swiper/types"
 import {Controller, Mousewheel} from "swiper/modules"
 import 'swiper/css'
 import 'swiper/css/bundle'
-import {onBeforeMount, ref, watch} from 'vue'
+import {onBeforeMount, ref, watch, onMounted} from 'vue'
 import {StTimelineDataItem} from "./types.ts"
 import {useWindowSize} from "@vueuse/core"
 import {elSizeUtil} from 'st-common-ui-utils'
@@ -79,27 +79,55 @@ const isInitial = ref(true)
 // 初始显示的时间线数据项索引
 const initialIdx = ref(props.initialIndex)
 // 时间线开头的偏移量
-const timelineSlidesOffsetBefore = ref(props.timelineOffsetBefore)
+const timelineSlidesOffset = ref(props.timelineOffsetBefore)
 onBeforeMount(() => {
   // 判断是否越界，如果越界，则默认显示第一项
   const dataLen = props.data.length
   if (initialIdx.value >= dataLen || initialIdx.value < 0) initialIdx.value = 0
   // 时间线开头的偏移量预处理
-  if (timelineSlidesOffsetBefore.value === undefined) {
+  if (timelineSlidesOffset.value === undefined) {
     const timelineSlidePerHeight = useWindowSize().height.value / 2 / props.timelinePerView
-    timelineSlidesOffsetBefore.value = timelineSlidePerHeight * (props.timelinePerView / 2 - 0.5)
+    timelineSlidesOffset.value = timelineSlidePerHeight * (props.timelinePerView / 2 - 0.5)
   }
 })
 
 // 是否需要响应式变化，以适应小屏幕
 const isNeedReact = ref(false)
+// swiper 是否需要更改方向处理函数
+const swiperIsChangeDirectionHandler = (currentWindowWidth: number) => {
+  const isNeed = currentWindowWidth <= props.needReactScreenWidth
+  if (isNeed && !isNeedReact.value) {
+    isNeedReact.value = true
+    displaySwiperRef.value?.changeDirection('horizontal');
+    timelineSwiperRef.value?.changeDirection('horizontal');
+    displaySwiperRef.value?.update();
+    timelineSwiperRef.value?.update();
+    displaySwiperCurrentSlideIndex.value = -1
+    displaySwiperNextSlideIndex.value = 0
+    isDisplaySwiperChangeSlide.value = true
+    activeIndex.value = 0
+  } else if (!isNeed && isNeedReact.value) {
+    isNeedReact.value = false
+    displaySwiperRef.value?.changeDirection('vertical');
+    timelineSwiperRef.value?.changeDirection('vertical');
+    displaySwiperRef.value?.update();
+    timelineSwiperRef.value?.update();
+    displaySwiperCurrentSlideIndex.value = -1
+    displaySwiperNextSlideIndex.value = 0
+    isDisplaySwiperChangeSlide.value = true
+    activeIndex.value = 0
+  }
+}
+onMounted(() => {
+  swiperIsChangeDirectionHandler(useWindowSize().width.value)
+})
 /**
  * 监听屏幕宽度变化，判断是否需要响应式变化，以适应小屏幕
  */
 watch(
   () => useWindowSize().width.value,
   (newVal) => {
-    isNeedReact.value = newVal <= props.needReactScreenWidth
+    swiperIsChangeDirectionHandler(newVal)
   }
 )
 
@@ -171,7 +199,7 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
   >
     <swiper
       class="st-timeline1__display-swiper"
-      direction="vertical"
+      :direction="'vertical'"
       :initial-slide="initialIdx"
       :modules="swiperModules"
       :controller="{ control: timelineSwiperRef }"
@@ -235,8 +263,9 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
       <div class="st-timeline1__timeline-swiper-box">
         <swiper
           class="st-timeline1__timeline-swiper"
-          direction="vertical"
-          :slides-offset-before="timelineSlidesOffsetBefore"
+          :direction="'vertical'"
+          :slides-offset-before="timelineSlidesOffset"
+          :slides-offset-after="timelineSlidesOffset"
           :initial-slide="initialIdx"
           :modules="swiperModules"
           :slides-per-view="timelinePerView"
@@ -314,6 +343,7 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
 
         .st-timeline1__display-swipe__slide__content {
           z-index: 1;
+          grid-row: 1 / 2;
           grid-column: 2 / 3;
           width: 100%;
           height: 100%;
@@ -417,6 +447,7 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
     align-items: center;
 
     .st-timeline1__timeline-swiper-box {
+      grid-row: 1 / 2;
       grid-column: 2 / 3;
       position: relative;
       z-index: 1;
@@ -424,6 +455,7 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
       width: 100%;
       height: 100%;
       border-left: 2px solid #cecece33;
+      border-top: none;
       display: grid;
       grid-template-rows: 1fr;
       grid-template-columns: 1fr;
@@ -436,12 +468,14 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
         .st-timeline1__timeline-swipe__slide {
           box-sizing: border-box;
           padding-left: 1rem;
+          padding-top: 0;
           cursor: pointer;
 
           .st-timeline1__timeline-swipe__slide__content {
             width: 100%;
             height: 100%;
             display: flex;
+            justify-content: start;
             align-items: center;
             color: var(--timeline-color);
 
@@ -493,14 +527,23 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
     .st-timeline1__display-swipe__slide {
 
       .st-timeline1__display-swipe__slide__content-container {
-        grid-template-columns: 7fr 3fr;
+        grid-template-rows: 5fr 1fr;
+        grid-template-columns: 1fr;
+        justify-items: start;
+        align-items: end;
 
         &::after {
-          background: radial-gradient(circle at 100% 50%, #000000 0%, #0000009f 37.5%, transparent 100%);
+          top: 35%;
+          transform: translate(0, -50%);
+          width: 100%;
+          height: 165%;
+          background: radial-gradient(circle at 50% 100%, #000000 0%, #0000009f 37.5%, transparent 65%, transparent 100%);
         }
 
         .st-timeline1__display-swipe__slide__content {
+          grid-row: 1 / 2;
           grid-column: 1 / 2;
+          justify-content: end;
 
           .st-timeline1__display-swipe__slide__content__title {
             font-size: 1.75rem;
@@ -516,7 +559,41 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
   }
 
   .st-timeline1__timeline-swiper-container {
-    grid-template-columns: 7fr 3fr;
+    grid-template-rows: 5fr 1fr;
+    grid-template-columns: 1fr;
+    justify-items: center;
+    align-items: start;
+    overflow: hidden;
+
+    .st-timeline1__timeline-swiper-box {
+      grid-row: 2 / 3;
+      grid-column: 1 / 2;
+      border-top: 2px solid #cecece33;
+      border-left: none;
+      align-items: start;
+
+      .st-timeline1__timeline-swiper {
+        height: auto;
+
+        .st-timeline1__timeline-swipe__slide {
+          padding-left: 0;
+          padding-top: 1rem;
+
+          .st-timeline1__timeline-swipe__slide__content {
+            justify-content: center;
+          }
+        }
+
+        .st-timeline1__timeline-swipe__slide--active {
+
+          &::before {
+            top: -1px;
+            left: 50%;
+            transform: translate(-50%, -50%);
+          }
+        }
+      }
+    }
   }
 }
 </style>
