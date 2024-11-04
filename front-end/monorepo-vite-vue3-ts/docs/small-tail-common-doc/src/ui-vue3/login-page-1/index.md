@@ -1,6 +1,18 @@
-# StLoginPage1
+# StLoginPage1 组件
 
 登录页面组件 1
+
+::: info 组件样式来源
+
+[https://www.bilibili.com/video/BV1XA4y1D7DC/](https://www.bilibili.com/video/BV1XA4y1D7DC/)
+
+:::
+
+::: tip 组件源码地址
+
+[https://gitee.com/tongchaowei/small-tail-admin/tree/dev/front-end/monorepo-vite-vue3-ts/small-tail-common/ui-vue3/src/components/StLoginPage1](https://gitee.com/tongchaowei/small-tail-admin/tree/dev/front-end/monorepo-vite-vue3-ts/small-tail-common/ui-vue3/src/components/StLoginPage1)
+
+:::
 
 ## 组件参数
 
