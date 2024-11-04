@@ -13,7 +13,7 @@ withDefaults(
   }>(),
   {
     title: "登录",
-    labelWidth: 60,
+    labelWidth: 'auto',
     btnText: "登录",
   }
 )
@@ -25,16 +25,12 @@ withDefaults(
       {{ title }}
     </h1>
     <div class="login-form__form">
-      <n-form
-        :label-width="labelWidth"
-        label-placement="left"
-        label-align="left"
-      >
+      <el-form :label-width="labelWidth" label-position="left">
         <slot></slot>
-        <n-form-item>
+        <el-form-item>
           <n-button type="primary" block round attr-type="submit">{{ btnText }}</n-button>
-        </n-form-item>
-      </n-form>
+        </el-form-item>
+      </el-form>
     </div>
   </div>
 </template>
