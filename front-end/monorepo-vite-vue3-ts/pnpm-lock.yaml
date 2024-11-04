@@ -161,6 +161,12 @@ importers:
 
   tests/st-common-ui-vue3-test:
     dependencies:
+      st-common-ui-styles:
+        specifier: workspace:^
+        version: link:../../small-tail-common/ui-styles
+      st-common-ui-vue3:
+        specifier: workspace:^
+        version: link:../../small-tail-common/ui-vue3
       vue:
         specifier: ^3.5.12
         version: 3.5.12(typescript@5.6.3)
@@ -174,6 +180,9 @@ importers:
       typescript:
         specifier: ^5.5.3
         version: 5.6.3
+      unocss:
+        specifier: ^0.63.6
+        version: 0.63.6(postcss@8.4.47)(rollup@4.24.0)(typescript@5.6.3)(vite@5.4.10(@types/node@22.8.6)(sass-embedded@1.80.3))
       vite:
         specifier: ^5.4.8
         version: 5.4.10(@types/node@22.8.6)(sass-embedded@1.80.3)

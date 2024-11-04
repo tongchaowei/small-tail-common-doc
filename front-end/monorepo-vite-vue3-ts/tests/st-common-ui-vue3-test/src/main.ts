@@ -1,3 +1,4 @@
+import '@/styles'
 import { createApp } from 'vue'
 import App from './App.vue'
 // 路由

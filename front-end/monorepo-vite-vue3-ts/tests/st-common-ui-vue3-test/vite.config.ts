@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 // 路由配置文件自动生成插件
 import Pages from 'vite-plugin-pages'
 import path from 'path'
+import UnoCSS from 'unocss/vite'
 
 // 项目中 src 目录的绝对路径
 // __dirname 表示当前文件所在目录的绝对路径
@@ -12,6 +13,7 @@ const srcAbsolutePath: string = path.resolve(__dirname, './src')
 export default defineConfig({
   plugins: [
     vue(),
+    UnoCSS(),
     // 路由配置文件自动生成插件
     Pages({
       // 配置路由页面所在的目录

@@ -1,8 +1,5 @@
 <script setup lang="ts">
-// 导入 vite-plugin-pages 插件自动生成的路由配置
-import routes from '~pages'
 
-console.log(routes)
 </script>
 
 <template>

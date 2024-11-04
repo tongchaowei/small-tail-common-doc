@@ -63,6 +63,15 @@ export const StTimeline1Register = _StTimeline1Register
 export type StTimelineDataItem = _StTimelineDataItem
 // ----------------------------------------------------------------------------------------------------- 时间线组件 ------
 
+// ---------------------------------------------------------------------------------------------------- 渐变背景组件 ------
+import _StGradientBg1 from './components/StGradientBg1'
+import {StGradientBg1Register as _StGradientBg1Register} from './components/StGradientBg1'
+
+StCommonUiVue3Components.StGradientBg1 = _StGradientBg1
+export const StGradientBg1 = _StGradientBg1
+export const StGradientBg1Register = _StGradientBg1Register
+// ---------------------------------------------------------------------------------------------------- 渐变背景组件 ------
+
 /**
  * 全局注册小尾巴通用 UI Vue3 组件库中的所有组件
  *
