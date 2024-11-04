@@ -35,18 +35,6 @@ watch(colorsInput, (val) => {
 }, {deep: true})
 </script>
 
-<n-form :label-width="60" label-placement="left" label-align="left">
-  <n-form-item label="size">
-    <n-input v-model:value="colorsInput" clearable/>
-  </n-form-item>
-  <n-form-item label="size">
-    <n-input v-model:value="size" clearable/>
-  </n-form-item>
-  <n-form-item label="speed">
-    <n-input-number v-model:value="speed" clearable />
-  </n-form-item>
-</n-form>
-
 <div style="height: 300px; border-radius: 1rem; overflow: hidden;">
   <StGradientBg1
     :colors="colors" 
@@ -60,6 +48,18 @@ watch(colorsInput, (val) => {
     </div>
   </StGradientBg1>
 </div>
+
+<el-form label-width="auto" style="margin-top: 20px">
+  <el-form-item label="size">
+    <el-input v-model="colorsInput" clearable/>
+  </el-form-item>
+  <el-form-item label="size">
+    <el-input v-model="size" clearable/>
+  </el-form-item>
+  <el-form-item label="speed">
+    <el-input-number v-model="speed" clearable />
+  </el-form-item>
+</el-form>
 
 ::: details 示例代码
 
