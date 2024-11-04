@@ -10,7 +10,16 @@
     "cs:init": "changeset init",
     "cs:add": "changeset add",
     "cs:version": "changeset version",
-    "cs:publish": "changeset publish"
+    "cs:publish": "changeset publish",
+    "core:build": "pnpm --filter \"st-common-core\" build",
+    "ui:utils:build": "pnpm --filter \"st-common-ui-utils\" build",
+    "ui:vue3:build": "pnpm --filter \"st-common-ui-vue3\" build",
+    "admin:dev:only": "pnpm --filter \"small-tail-admin\" dev",
+    "admin:dev": "pnpm ui:vue3:build && pnpm admin:dev:only",
+    "doc:common:dev:only": "pnpm --filter \"small-tail-common-doc\" docs:dev",
+    "doc:common:dev": "pnpm ui:vue3:build && pnpm doc:common:dev:only",
+    "test:ui:vue3:dev:only": "pnpm --filter \"st-common-ui-vue3-test\" dev",
+    "test:ui:vue3:dev": "pnpm ui:vue3:build && pnpm test:ui:vue3:dev:only"
   },
   "devDependencies": {
     "@changesets/cli": "^2.27.9",
