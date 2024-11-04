@@ -61,7 +61,7 @@ const props = withDefaults(
     speed: 1500,
     transitionFun: 'cubic-bezier(.68, -0.55, .26, 1.55)',
     transitionDelay: 300,
-    bgImg: 'linear-gradient(135deg, #43CBFF 15%, #9708CC 100%)',
+    bgImg: 'transparent',
     displayTextColor: '#efefef',
     displayTextAnimationSpeed: 500,
     displayTitleEnterDelay: 2000,
