@@ -4,8 +4,8 @@ import LoginFormByPwd from "./login-form-by-pwd.vue" // 用户名密码登录表
 import LoginFormByEmail from "./login-form-by-email.vue" // 邮箱登录表单
 import LoginFormToggle from "./login-form-toggle.vue" // 登录表单切换组件
 import {ref} from 'vue'
-import {panel1Img} from "../images/panel-1.ts"
-import {panel2Img} from "../images/panel-2.ts"
+import {panel1Img} from "../images/panel-1.ts" // 面板1中的图片
+import {panel2Img} from "../images/panel-2.ts" // 面板2中的图片
 
 // 是否切换表单
 const isToggleForm = ref(false)
@@ -17,11 +17,13 @@ const toggleForm = () => isToggleForm.value = !isToggleForm.value
 
 <template>
   <div class="login-page">
+    <!-- 登录页面1组件 -->
     <st-login-page1
       v-model="isToggleForm"
       circle-mask-color="#18A058"
       :panel-img-src="[panel1Img, panel2Img]"
     >
+      <!-- 面板1顶部 -->
       <template #panel-1-top>
         <LoginFormToggle
           title="使用邮箱登录"
@@ -30,9 +32,11 @@ const toggleForm = () => isToggleForm.value = !isToggleForm.value
           :toggle-handler="toggleForm"
         />
       </template>
+      <!-- 表单1 -->
       <template #form-1>
         <LoginFormByPwd/>
       </template>
+      <!-- 面板2顶部 -->
       <template #panel-2-top>
         <LoginFormToggle
           title="无法邮箱登录"
@@ -41,6 +45,7 @@ const toggleForm = () => isToggleForm.value = !isToggleForm.value
           :toggle-handler="toggleForm"
         />
       </template>
+      <!-- 表单2 -->
       <template #form-2>
         <LoginFormByEmail/>
       </template>
