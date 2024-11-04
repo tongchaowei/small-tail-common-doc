@@ -1,13 +1,13 @@
 <script setup lang="ts">
 // 导入 vite-plugin-pages 插件自动生成的路由配置
 import routes from '~pages'
-
-console.log(routes)
 </script>
 
 <template>
-  <div class="app">
-    <router-view />
+  <div class="index-page">
+    <div class="router-link" v-for="route in routes">
+      <router-link :to="route.path">{{ route.name }}</router-link>
+    </div>
   </div>
 </template>
 
