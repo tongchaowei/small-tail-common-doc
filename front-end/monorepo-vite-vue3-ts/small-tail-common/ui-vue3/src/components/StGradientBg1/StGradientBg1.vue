@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import {elSizeUtil} from "st-common-ui-utils"
-import {onBeforeMount, ref} from "vue"
+import {onBeforeMount, ref, watch} from "vue"
 
 /**
  * 组件配置选项
@@ -31,13 +31,25 @@ const props = withDefaults(
 const bgColors = ref(props.colors)
 
 /**
+ * 背景颜色预处理函数
+ */
+const colorsPreHandler = () => {
+  if (!props.colors || !Array.isArray(props.colors) || props.colors.length < 2) {
+    bgColors.value = ['#2c3e50', '#27ae60', '#2980b9', '#e74c3c', '#8e44ad']
+  } else {
+    bgColors.value = props.colors
+  }
+}
+
+/**
  * 对组件参数进行预处理
  */
 onBeforeMount(() => {
-  if (!props.colors || !Array.isArray(props.colors) || props.colors.length < 2) {
-    bgColors.value = ['#2c3e50', '#27ae60', '#2980b9', '#e74c3c', '#8e44ad']
-  }
+  colorsPreHandler()
 })
+
+// 监听传入的背景颜色组件参数的变化
+watch(() => props.colors, () => colorsPreHandler(), {deep: true})
 </script>
 
 <template>
@@ -70,6 +82,7 @@ onBeforeMount(() => {
 .st-gradient-bg-1 {
   width: 100%;
   height: 100%;
+  background-repeat: no-repeat;
   animation-name: st-gradient-bg-1-bg-gradient-animation;
   animation-timing-function: linear;
   animation-iteration-count: infinite;

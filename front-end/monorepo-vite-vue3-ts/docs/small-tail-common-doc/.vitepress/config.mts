@@ -21,25 +21,26 @@ export default defineConfig({
       {
         text: 'Small Tail Common UI Vue3',
         link: '/ui-vue3/',
+        collapsed: false,
         items: [
           {text: '开始使用', link: '/ui-vue3/start/'},
           {
             text: '登录页面 1',
             link: '/ui-vue3/login-page-1/',
+            collapsed: true,
             items: [
               {text: '辅助展示的组件', link: '/ui-vue3/login-page-1/prepare'},
               {text: '示例', link: '/ui-vue3/login-page-1/demo'},
               {text: '示例源码', link: '/ui-vue3/login-page-1/demo-code'},
             ]
           },
+          {text: '渐变背景 1', link: '/ui-vue3/gradient-bg-1/'}
         ]
       },
       {
         text: '错误记录与解决',
         link: '/error/',
-        items: [
-
-        ]
+        items: []
       },
     ],
 
