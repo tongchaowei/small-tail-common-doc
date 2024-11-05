@@ -79,6 +79,13 @@ import {StInfoCard1Register as _StInfoCard1Register} from './components/StInfoCa
 StCommonUiVue3Components.StInfoCard1 = _StInfoCard1
 export const StInfoCard1 = _StInfoCard1
 export const StInfoCard1Register = _StInfoCard1Register
+
+import _StInfoCard2 from './components/StInfoCard2'
+import {StInfoCard2Register as _StInfoCard2Register} from './components/StInfoCard2'
+
+StCommonUiVue3Components.StInfoCard2 = _StInfoCard2
+export const StInfoCard2 = _StInfoCard2
+export const StInfoCard2Register = _StInfoCard2Register
 // ---------------------------------------------------------------------------------------------------- 信息卡片组件 ------
 
 /**

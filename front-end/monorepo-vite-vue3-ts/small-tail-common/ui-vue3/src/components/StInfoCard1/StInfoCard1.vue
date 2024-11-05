@@ -111,9 +111,9 @@ onMounted(() => {
           <img
             class="st-info-card-1__img-box__img"
             :style="{
-            objectFit: imgFillMode,
-            objectPosition: imgPosition,
-          }"
+              objectFit: imgFillMode,
+              objectPosition: imgPosition,
+            }"
             :src="imgSrc" alt="img"
           />
         </slot>
@@ -123,8 +123,8 @@ onMounted(() => {
           <div
             class="st-info-card-1__title-box__title"
             :style="{
-            fontSize: elSizeUtil.elSizePreHandler(titleFontSize),
-          }"
+              fontSize: elSizeUtil.elSizePreHandler(titleFontSize),
+            }"
           >{{ title }}
           </div>
         </slot>
@@ -210,7 +210,6 @@ onMounted(() => {
         text-align: center;
         clip-path: circle(0 at 50% 0);
         transition-property: clip-path;
-
       }
     }
   }
