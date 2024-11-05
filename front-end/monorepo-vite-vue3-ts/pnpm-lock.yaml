@@ -36,8 +36,8 @@ importers:
         specifier: ^2.40.1
         version: 2.40.1(vue@3.5.12(typescript@5.6.3))
       st-common-ui-vue3:
-        specifier: workspace:^
-        version: link:../../small-tail-common/ui-vue3
+        specifier: ^0.5.0
+        version: 0.5.0(@babel/parser@7.25.9)(rollup@4.24.0)(typescript@5.6.3)
     devDependencies:
       unplugin-auto-import:
         specifier: ^0.18.3
@@ -2084,6 +2084,9 @@ packages:
 
   st-common-ui-utils@0.1.0:
     resolution: {integrity: sha512-hjsJ2OhP+a946OhWG1zXV/prrVo7I34kTkqvMHBkv/s/h7hvlhkTuTD4EnOh+AGDCh9GSHrqht1ZK6z8E4I0YA==}
+
+  st-common-ui-vue3@0.5.0:
+    resolution: {integrity: sha512-wyd9cvsjQJWjuNxznud+i0lk0zjDHalm3QGwKl70pekBIVbAWRT69rzWExUnui+0/kDhRAOmXC8Z1n6KsaZqjw==}
 
   string-argv@0.3.2:
     resolution: {integrity: sha512-aqD2Q0144Z+/RqG52NeHEkZauTAUWJO8c6yTftGJKO3Tja5tUgIfmIl6kExvhtxSDP7fXB6DvzkfMpCd/F3G+Q==}
@@ -4442,6 +4445,23 @@ snapshots:
   st-common-core@0.1.0: {}
 
   st-common-ui-utils@0.1.0: {}
+
+  st-common-ui-vue3@0.5.0(@babel/parser@7.25.9)(rollup@4.24.0)(typescript@5.6.3):
+    dependencies:
+      '@vueuse/core': 11.1.0(vue@3.5.12(typescript@5.6.3))
+      st-common-core: 0.1.0
+      st-common-ui-utils: 0.1.0
+      swiper: 11.1.14
+      unplugin-vue-components: 0.27.4(@babel/parser@7.25.9)(rollup@4.24.0)(vue@3.5.12(typescript@5.6.3))
+      vue: 3.5.12(typescript@5.6.3)
+    transitivePeerDependencies:
+      - '@babel/parser'
+      - '@nuxt/kit'
+      - '@vue/composition-api'
+      - rollup
+      - supports-color
+      - typescript
+      - webpack-sources
 
   string-argv@0.3.2: {}
 

@@ -13,10 +13,10 @@
     "docs:preview": "vitepress preview"
   },
   "dependencies": {
-    "st-common-ui-vue3": "workspace:^",
     "@vueuse/core": "^11.1.0",
+    "element-plus": "^2.8.7",
     "naive-ui": "^2.40.1",
-    "element-plus": "^2.8.7"
+    "st-common-ui-vue3": "^0.5.0"
   },
   "devDependencies": {
     "unplugin-auto-import": "^0.18.3",
