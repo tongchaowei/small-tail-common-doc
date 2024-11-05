@@ -16,7 +16,7 @@
     "@vueuse/core": "^11.1.0",
     "element-plus": "^2.8.7",
     "naive-ui": "^2.40.1",
-    "st-common-ui-vue3": "^0.5.0"
+    "st-common-ui-vue3": "workspace:^"
   },
   "devDependencies": {
     "unplugin-auto-import": "^0.18.3",
