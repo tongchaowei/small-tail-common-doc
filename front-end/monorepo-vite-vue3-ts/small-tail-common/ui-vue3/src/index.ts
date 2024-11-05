@@ -72,6 +72,15 @@ export const StGradientBg1 = _StGradientBg1
 export const StGradientBg1Register = _StGradientBg1Register
 // ---------------------------------------------------------------------------------------------------- 渐变背景组件 ------
 
+// ---------------------------------------------------------------------------------------------------- 信息卡片组件 ------
+import _StInfoCard1 from './components/StInfoCard1'
+import {StInfoCard1Register as _StInfoCard1Register} from './components/StInfoCard1'
+
+StCommonUiVue3Components.StInfoCard1 = _StInfoCard1
+export const StInfoCard1 = _StInfoCard1
+export const StInfoCard1Register = _StInfoCard1Register
+// ---------------------------------------------------------------------------------------------------- 信息卡片组件 ------
+
 /**
  * 全局注册小尾巴通用 UI Vue3 组件库中的所有组件
  *

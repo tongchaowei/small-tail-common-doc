@@ -4,7 +4,7 @@ import routes from '~pages'
 </script>
 
 <template>
-  <div class="index-page">
+  <div class="index-page min-h-screen flex flex-col items-center justify-center gap-4">
     <div class="router-link" v-for="route in routes">
       <router-link :to="route.path">{{ route.name }}</router-link>
     </div>
