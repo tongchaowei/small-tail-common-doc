@@ -18,6 +18,8 @@
     "admin:dev": "pnpm ui:vue3:build && pnpm admin:dev:only",
     "doc:common:dev:only": "pnpm --filter \"small-tail-common-doc\" docs:dev",
     "doc:common:dev": "pnpm ui:vue3:build && pnpm doc:common:dev:only",
+    "doc:common:build:only": "pnpm --filter \"small-tail-common-doc\" docs:build",
+    "doc:common:build": "pnpm ui:vue3:build && pnpm doc:common:build:only",
     "test:ui:vue3:dev:only": "pnpm --filter \"st-common-ui-vue3-test\" dev",
     "test:ui:vue3:dev": "pnpm ui:vue3:build && pnpm test:ui:vue3:dev:only"
   },
