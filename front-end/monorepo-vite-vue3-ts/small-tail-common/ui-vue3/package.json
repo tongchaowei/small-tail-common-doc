@@ -5,9 +5,7 @@
     "access": "public"
   },
   "description": "小尾巴前端通用 Vue3 UI 组件库",
-  "main": "lib/index.js",
-  "module": "es/index.js",
-  "types": "es/index.d.ts",
+  "main": "src/index",
   "files": [
     "lib",
     "es",
@@ -30,7 +28,7 @@
   "license": "ISC",
   "dependencies": {
     "@vueuse/core": "^11.1.0",
-    "st-common-core": "^0.1.0",
+    "st-common-core": "workspace:^",
     "st-common-ui-utils": "^0.1.0",
     "swiper": "^11.1.14",
     "unplugin-vue-components": "^0.27.4",
