@@ -8,7 +8,7 @@ export default defineConfig({
   // 文档源码根目录
   srcDir: 'src',
   // 站点部署到的 base URL
-  base: '/small-tail-common-doc/',
+  // base: '/small-tail-common-doc/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     nav: [
