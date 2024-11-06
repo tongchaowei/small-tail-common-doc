@@ -5,7 +5,9 @@
     "access": "public"
   },
   "description": "小尾巴前端通用 Vue3 UI 组件库",
-  "main": "src/index",
+  "main": "lib/index.js",
+  "module": "es/index.js",
+  "types": "lib/index.d.ts",
   "files": [
     "lib",
     "es",

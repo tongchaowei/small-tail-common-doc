@@ -96,40 +96,47 @@ const gradientColorsPreHandled = computed(() => {
       animationDuration: elSizeUtil.elSizePreHandler(speed, 'ms')
     }"
   >
-    <slot></slot>
+    <div class="st-gradient-bg-2__content">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
-.st-gradient-bg-2 {
-  @keyframes st-gradient-bg-2-bg-transition {
-    0% {
-      background-size: var(--size0);
-      background-position: var(--p0);
-    }
-    50% {
-      background-size: var(--size50);
-      background-position: var(--p50);
-    }
-    100% {
-      background-size: var(--size100);
-      background-position: var(--p100);
-    }
+@keyframes st-gradient-bg-2-bg-transition {
+  0% {
+    background-size: var(--size0);
+    background-position: var(--p0);
   }
+  50% {
+    background-size: var(--size50);
+    background-position: var(--p50);
+  }
+  100% {
+    background-size: var(--size100);
+    background-position: var(--p100);
+  }
+}
 
+.st-gradient-bg-2 {
   width: 100%;
   height: 100%;
   background-size: var(--size0);
   background-position: var(--p0);
   background-repeat: no-repeat;
-  filter: blur(10px);
-  -webkit-filter: blur(10px);
-  -moz-filter: blur(10px);
-  -o-filter: blur(10px);
-  -ms-filter: blur(10px);
   animation-name: st-gradient-bg-2-bg-transition;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate-reverse;
+
+  .st-gradient-bg-2__content {
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -moz-backdrop-filter: blur(10px);
+    -o-backdrop-filter: blur(10px);
+    -ms-backdrop-filter: blur(10px);
+  }
 }
 </style>
