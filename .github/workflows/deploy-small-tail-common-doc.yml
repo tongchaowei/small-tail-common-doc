@@ -19,7 +19,7 @@ on:
 # 文档：https://docs.github.com/zh/actions/writing-workflows/workflow-syntax-for-github-actions#permissions
 permissions:
   # 允许此工作流读取仓库的源代码和写入
-  contents: write
+  contents: read
   # 允许此工作流在 GitHub Packages 上上传和发布包
   packages: write
   # 允许此工作流获取 OpenID Connect (OIDC) 令牌,
@@ -64,24 +64,9 @@ jobs:
         # 由于 GitHub 提供的 ubuntu-latest 操作系统环境中并没有内置 pnpm，因此需要手动安装
       - name: 安装包管理工具 pnpm
         run: npm install -g pnpm
-        # 由于文档项目中依赖了本地的 st-common-ui-vue3 组件库, 所以需要先对其进行打包
-      - name: 打包构建文档项目所依赖的 st-common-ui-vue3 组件库
-        run: cd ./front-end/monorepo-vite-vue3-ts/small-tail-common/ui-vue3 && pnpm install && pnpm build
-        # 进入文档项目的根目录, 安装项目所需依赖, 打包构建文档项目
-      - name: 安装依赖并构建文档项目
-        run: cd ./front-end/monorepo-vite-vue3-ts/docs/small-tail-common-doc && pnpm install && pnpm docs:build
-      - name: 将文档项目的构建结果上传到 gh-pages 分支
-        # 该 action 的作用是可以将代码推送到任何我们想要的分支中，包括 gh-pages 和 docs
-        # 注意：该 action 需要 contents: write 权限，并且需要我们将 GITHUB_TOKEN 作为参数传递给该 action
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          # 代码上传到的目标分支
-          BRANCH: gh-pages
-          # 指定需要上传的代码目录
-          FOLDER: front-end/monorepo-vite-vue3-ts/docs/small-tail-common-doc/.vitepress/dist
-          # 清理之前的就代码文件
-          CLEAN: true
+        # 打包构建文档项目
+      - name: 构建文档项目
+        run: cd ./front-end/monorepo-vite-vue3-ts && pnpm i && pnpm doc:common:build
       - name: 上传文档项目的构建结果到 GitHub Pages
         # 该 actions 的作用是将可以打包和上传部署到 GitHub Pages 的工件上传到 GitHub Pages
         uses: actions/upload-pages-artifact@v3
