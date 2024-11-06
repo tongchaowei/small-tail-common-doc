@@ -70,6 +70,13 @@ import {StGradientBg1Register as _StGradientBg1Register} from './components/StGr
 StCommonUiVue3Components.StGradientBg1 = _StGradientBg1
 export const StGradientBg1 = _StGradientBg1
 export const StGradientBg1Register = _StGradientBg1Register
+
+import _StGradientBg2 from './components/StGradientBg2'
+import {StGradientBg2Register as _StGradientBg2Register} from './components/StGradientBg2'
+
+StCommonUiVue3Components.StGradientBg2 = _StGradientBg2
+export const StGradientBg2 = _StGradientBg2
+export const StGradientBg2Register = _StGradientBg2Register
 // ---------------------------------------------------------------------------------------------------- 渐变背景组件 ------
 
 // ---------------------------------------------------------------------------------------------------- 信息卡片组件 ------
