@@ -31,7 +31,7 @@
   "dependencies": {
     "@vueuse/core": "^11.1.0",
     "st-common-core": "workspace:^",
-    "st-common-ui-utils": "^0.1.0",
+    "st-common-ui-utils": "workspace:^",
     "swiper": "^11.1.14",
     "unplugin-vue-components": "^0.27.4",
     "vue": "^3.5.10"
