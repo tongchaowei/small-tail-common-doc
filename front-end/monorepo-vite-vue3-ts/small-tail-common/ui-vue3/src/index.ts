@@ -95,6 +95,15 @@ export const StInfoCard2 = _StInfoCard2
 export const StInfoCard2Register = _StInfoCard2Register
 // ---------------------------------------------------------------------------------------------------- 信息卡片组件 ------
 
+// ---------------------------------------------------------------------------------------------------- 动态边框组件 ------
+import _StDynamicBorder1 from './components/StDynamicBorder1'
+import {StDynamicBorder1Register as _StDynamicBorder1Register} from './components/StDynamicBorder1'
+
+StCommonUiVue3Components.StDynamicBorder1 = _StDynamicBorder1
+export const StDynamicBorder1 = _StDynamicBorder1
+export const StDynamicBorder1Register = _StDynamicBorder1Register
+// ---------------------------------------------------------------------------------------------------- 动态边框组件 ------
+
 /**
  * 全局注册小尾巴通用 UI Vue3 组件库中的所有组件
  *
