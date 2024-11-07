@@ -104,6 +104,22 @@ export const StDynamicBorder1 = _StDynamicBorder1
 export const StDynamicBorder1Register = _StDynamicBorder1Register
 // ---------------------------------------------------------------------------------------------------- 动态边框组件 ------
 
+// ------------------------------------------------------------------------------------------------------- 文本组件 ------
+import _StGhostText from "./components/StGhostText"
+import {StGhostTextRegister as _StGhostTextRegister} from "./components/StGhostText"
+
+StCommonUiVue3Components.StGhostText = _StGhostText
+export const StGhostText = _StGhostText
+export const StGhostTextRegister = _StGhostTextRegister
+
+import _StGhostTextHover from "./components/StGhostTextHover"
+import {StGhostTextHoverRegister as _StGhostTextHoverRegister} from "./components/StGhostTextHover"
+
+StCommonUiVue3Components.StGhostTextHover = _StGhostTextHover
+export const StGhostTextHover = _StGhostTextHover
+export const StGhostTextHoverRegister = _StGhostTextHoverRegister
+// ------------------------------------------------------------------------------------------------------- 文本组件 ------
+
 /**
  * 全局注册小尾巴通用 UI Vue3 组件库中的所有组件
  *
