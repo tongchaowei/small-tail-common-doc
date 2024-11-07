@@ -1,13 +1,16 @@
 <script setup lang="ts">
 import {Swiper, SwiperSlide} from 'swiper/vue'
 import type {Swiper as SwiperType} from "swiper/types"
-import {Controller, Mousewheel} from "swiper/modules"
+import {Controller, Mousewheel, Navigation} from "swiper/modules"
 import 'swiper/css'
 import 'swiper/css/bundle'
 import {onBeforeMount, ref, watch, onMounted} from 'vue'
 import {StTimelineDataItem} from "./types.ts"
 import {useWindowSize} from "@vueuse/core"
 import {elSizeUtil} from 'st-common-ui-utils'
+import StIconIconify from "../StIconIconify"
+import ChevronCompactUp from '@iconify-icons/tabler/chevron-compact-up'
+import ChevronCompactDown from '@iconify-icons/tabler/chevron-compact-down'
 
 /**
  * 组件配置选项
@@ -54,6 +57,12 @@ const props = withDefaults(
     timelineColorActive?: string;
     // 时间线每项文本最多显示行数
     timelineTextMaxLine?: number;
+    // 是否显示时间线导航按钮
+    enableTimelineNav?: boolean;
+    // 时间线导航按钮的颜色
+    timelineNavColor?: string;
+    // 时间线导航按钮禁用的颜色
+    timelineNavDisabledColor?: string;
   }>(),
   {
     needReactScreenWidth: 600,
@@ -74,6 +83,9 @@ const props = withDefaults(
     timelineColor: '#9c9c9c9f',
     timelineColorActive: '#efefef',
     timelineTextMaxLine: 1,
+    enableTimelineNav: true,
+    timelineNavColor: '#efefef',
+    timelineNavDisabledColor: '#9c9c9c9f'
   }
 )
 
@@ -138,7 +150,7 @@ watch(
 )
 
 // swiper 模块
-const swiperModules = ref([Controller, Mousewheel])
+const swiperModules = ref([Controller, Mousewheel, Navigation])
 
 // swiper 引用对象
 const displaySwiperRef = ref<SwiperType | null>(null)
@@ -277,6 +289,10 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
           :modules="swiperModules"
           :slides-per-view="isNeedReact ? timelinePerViewReactScreen : timelinePerView"
           :controller="{ control: displaySwiperRef }"
+          :navigation="{
+            prevEl: '.st-timeline1__timeline-swiper-prev',
+            nextEl: '.st-timeline1__timeline-swiper-next'
+          }"
           @swiper="setTimelineSwiper"
           @click="timelineSwiperClickHandler"
         >
@@ -300,6 +316,30 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
             </div>
           </swiper-slide>
         </swiper>
+        <div v-if="enableTimelineNav" class="st-timeline1__timeline-swiper-prev">
+          <slot>
+            <div
+              class="content"
+              :style="{
+                '--timeline-nav-color': activeIndex <= 0 ? timelineNavDisabledColor : timelineNavColor,
+              }"
+            >
+              <st-icon-iconify :icon="ChevronCompactUp"/>
+            </div>
+          </slot>
+        </div>
+        <div v-if="enableTimelineNav" class="st-timeline1__timeline-swiper-next">
+          <slot>
+            <div
+              class="content"
+              :style="{
+                '--timeline-nav-color': activeIndex >= data.length - 1 ? timelineNavDisabledColor : timelineNavColor,
+              }"
+            >
+              <st-icon-iconify :icon="ChevronCompactDown"/>
+            </div>
+          </slot>
+        </div>
       </div>
     </div>
   </div>
@@ -524,6 +564,28 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
             }
           }
         }
+      }
+
+      .st-timeline1__timeline-swiper-prev,
+      .st-timeline1__timeline-swiper-next {
+        position: absolute;
+        width: 100%;
+
+        .content {
+          padding: 1rem;
+          color: var(--timeline-nav-color);
+          font-size: 3rem;
+        }
+      }
+
+
+
+      .st-timeline1__timeline-swiper-prev {
+        top: 0;
+      }
+
+      .st-timeline1__timeline-swiper-next {
+        bottom: 0;
       }
     }
   }
