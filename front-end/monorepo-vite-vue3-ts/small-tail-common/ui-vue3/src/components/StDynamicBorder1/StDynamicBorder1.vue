@@ -40,6 +40,8 @@ const props = withDefaults(
     shineRange?: string | number;
     // 是否 hover 才显示动效
     hover?: boolean;
+    // 是否 hover 暂停动画
+    hoverPause?: boolean;
   }>(),
   {
     width: '100%',
@@ -54,6 +56,7 @@ const props = withDefaults(
     shine: false,
     shineRange: '10px',
     hover: false,
+    hoverPause: false,
   }
 )
 
@@ -76,6 +79,7 @@ const borderColors = computed(() => {
       hover && rotate ? 'st-dynamic-border-1--rotate--hover' : '',
       !hover && shine ? 'st-dynamic-border-1--shine' : '',
       hover && shine ? 'st-dynamic-border-1--shine--hover' : '',
+      !hover && hoverPause ? 'st-dynamic-border-1--hover-pause' : '',
       hover ?
         customBorderColor ? 'st-dynamic-border-1--border-color-custom--hover' : 'st-dynamic-border-1--border-color-default--hover' :
         customBorderColor ? 'st-dynamic-border-1--border-color-custom' : 'st-dynamic-border-1--border-color-default',
@@ -178,6 +182,14 @@ const borderColors = computed(() => {
   &::before,
   &::after {
     animation: st-dynamic-border-1-rotate var(--speed) linear infinite;
+  }
+}
+
+.st-dynamic-border-1--hover-pause:hover {
+
+  &::before,
+  &::after {
+    animation-play-state: paused;
   }
 }
 </style>
