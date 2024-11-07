@@ -21,10 +21,13 @@ const props = withDefaults(
     gradientColors?: string[];
     // 过渡动画执行速度，过渡动画执行一次所需的时间，如果传递的为数字，则其单位默认为 ms
     speed?: number | string;
+    // 是否开启模糊效果
+    blur: boolean;
   }>(),
   {
     bgColor: '#e493d0',
     speed: '15s',
+    blur: true,
   }
 )
 
@@ -96,9 +99,10 @@ const gradientColorsPreHandled = computed(() => {
       animationDuration: elSizeUtil.elSizePreHandler(speed, 'ms')
     }"
   >
-    <div class="st-gradient-bg-2__content">
+    <div v-if="blur" class="st-gradient-bg-2__content">
       <slot></slot>
     </div>
+    <slot v-else></slot>
   </div>
 </template>
 
