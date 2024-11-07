@@ -21,10 +21,13 @@ const props = withDefaults(
     gradientColors?: string[];
     // 过渡动画执行速度，过渡动画执行一次所需的时间，如果传递的为数字，则其单位默认为 ms
     speed?: number | string;
+    // 是否开启模糊效果
+    blur: boolean;
   }>(),
   {
     bgColor: '#e493d0',
     speed: '15s',
+    blur: true,
   }
 )
 
@@ -96,40 +99,48 @@ const gradientColorsPreHandled = computed(() => {
       animationDuration: elSizeUtil.elSizePreHandler(speed, 'ms')
     }"
   >
-    <slot></slot>
+    <div v-if="blur" class="st-gradient-bg-2__content">
+      <slot></slot>
+    </div>
+    <slot v-else></slot>
   </div>
 </template>
 
 <style scoped lang="scss">
-.st-gradient-bg-2 {
-  @keyframes st-gradient-bg-2-bg-transition {
-    0% {
-      background-size: var(--size0);
-      background-position: var(--p0);
-    }
-    50% {
-      background-size: var(--size50);
-      background-position: var(--p50);
-    }
-    100% {
-      background-size: var(--size100);
-      background-position: var(--p100);
-    }
+@keyframes st-gradient-bg-2-bg-transition {
+  0% {
+    background-size: var(--size0);
+    background-position: var(--p0);
   }
+  50% {
+    background-size: var(--size50);
+    background-position: var(--p50);
+  }
+  100% {
+    background-size: var(--size100);
+    background-position: var(--p100);
+  }
+}
 
+.st-gradient-bg-2 {
   width: 100%;
   height: 100%;
   background-size: var(--size0);
   background-position: var(--p0);
   background-repeat: no-repeat;
-  filter: blur(10px);
-  -webkit-filter: blur(10px);
-  -moz-filter: blur(10px);
-  -o-filter: blur(10px);
-  -ms-filter: blur(10px);
   animation-name: st-gradient-bg-2-bg-transition;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-direction: alternate-reverse;
+
+  .st-gradient-bg-2__content {
+    width: 100%;
+    height: 100%;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    -moz-backdrop-filter: blur(10px);
+    -o-backdrop-filter: blur(10px);
+    -ms-backdrop-filter: blur(10px);
+  }
 }
 </style>
