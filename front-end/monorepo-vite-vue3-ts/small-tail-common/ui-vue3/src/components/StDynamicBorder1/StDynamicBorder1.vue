@@ -20,8 +20,12 @@ const props = withDefaults(
     height?: string | number;
     // 背景颜色
     backgroundColor?: string;
-    // 边框颜色
+    // 边框颜色列表
     borderColorList?: Array<string>;
+    // 是否完全自定义边框颜色
+    customBorderColor?: boolean;
+    // 边框颜色
+    borderColor?: string;
     // 边框宽度
     borderWidth?: string | number;
     // 边框圆角
@@ -34,17 +38,22 @@ const props = withDefaults(
     shine?: boolean;
     // 发光范围
     shineRange?: string | number;
+    // 是否 hover 才显示动效
+    hover?: boolean;
   }>(),
   {
     width: '100%',
     height: '100%',
     backgroundColor: '#111',
+    customBorderColor: false,
+    borderColor: 'linear-gradient(135deg, #43CBFF 15%, #9708CC 100%)',
     borderWidth: '2px',
     borderRadius: '0.25rem',
     rotate: true,
     speed: '5s',
     shine: false,
     shineRange: '10px',
+    hover: false,
   }
 )
 
@@ -63,12 +72,18 @@ const borderColors = computed(() => {
   <div
     class="st-dynamic-border-1"
     :class="[
-      rotate ? 'st-dynamic-border-1--rotate' : '',
-      shine ? 'st-dynamic-border-1--shine' : '',
+      !hover && rotate ? 'st-dynamic-border-1--rotate' : '',
+      hover && rotate ? 'st-dynamic-border-1--rotate--hover' : '',
+      !hover && shine ? 'st-dynamic-border-1--shine' : '',
+      hover && shine ? 'st-dynamic-border-1--shine--hover' : '',
+      hover ?
+        customBorderColor ? 'st-dynamic-border-1--border-color-custom--hover' : 'st-dynamic-border-1--border-color-default--hover' :
+        customBorderColor ? 'st-dynamic-border-1--border-color-custom' : 'st-dynamic-border-1--border-color-default',
     ]"
     :style="{
       '--border-width': elSizeUtil.elSizePreHandler(borderWidth),
-      '--border-color': borderColors.join(', '),
+      '--border-color-list': borderColors.join(', '),
+      '--border-color': borderColor,
       '--border-radius': elSizeUtil.elSizePreHandler(borderRadius),
       '--speed': elSizeUtil.elSizePreHandler(speed, 'ms'),
       '--shine-range': elSizeUtil.elSizePreHandler(shineRange),
@@ -118,7 +133,6 @@ const borderColors = computed(() => {
     transform: translate(-50%, -50%);
     width: 100%;
     height: 100%;
-    background-image: conic-gradient(from var(--st-dynamic-border-1-angle), var(--border-color) 360deg, transparent 360deg);
     border-radius: var(--border-radius);
   }
 
@@ -131,19 +145,39 @@ const borderColors = computed(() => {
   }
 }
 
-.st-dynamic-border-1--rotate {
+.st-dynamic-border-1--border-color-default,
+.st-dynamic-border-1--border-color-default--hover:hover {
 
   &::before,
   &::after {
-    animation: st-dynamic-border-1-rotate var(--speed) linear infinite;
+    background-image: conic-gradient(from var(--st-dynamic-border-1-angle), var(--border-color-list) 360deg, transparent 360deg);
   }
 }
 
-.st-dynamic-border-1--shine {
+.st-dynamic-border-1--border-color-custom,
+.st-dynamic-border-1--border-color-custom--hover:hover {
+
+  &::before,
+  &::after {
+    background-image: var(--border-color);
+  }
+}
+
+.st-dynamic-border-1--shine,
+.st-dynamic-border-1--shine--hover:hover {
 
   &::after {
     filter: blur(var(--shine-range));
     opacity: 0.5;
+  }
+}
+
+.st-dynamic-border-1--rotate,
+.st-dynamic-border-1--rotate--hover:hover {
+
+  &::before,
+  &::after {
+    animation: st-dynamic-border-1-rotate var(--speed) linear infinite;
   }
 }
 </style>
