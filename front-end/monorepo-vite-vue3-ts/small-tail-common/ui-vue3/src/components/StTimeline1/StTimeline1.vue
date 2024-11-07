@@ -406,6 +406,7 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
           .st-timeline1__display-swipe__slide__content__desc {
             transform: translateX(100%);
             padding-right: 2rem;
+            padding-bottom: 0;
             display: -webkit-box;
             overflow: hidden;
             -webkit-box-orient: vertical;
@@ -616,11 +617,17 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
           grid-column: 1 / 2;
           justify-content: end;
 
+          .st-timeline1__display-swipe__slide__content__title,
+          .st-timeline1__display-swipe__slide__content__desc {
+            padding-right: 1rem;
+          }
+
           .st-timeline1__display-swipe__slide__content__title {
             font-size: 1.75rem;
           }
 
           .st-timeline1__display-swipe__slide__content__desc {
+            padding-bottom: 1rem;
             font-size: 0.95rem;
             line-height: 1.25;
           }
