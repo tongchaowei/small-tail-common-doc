@@ -11,12 +11,12 @@ export default defineConfig({
   // base: '/small-tail-common-doc/',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    outline: [2, 3],
     nav: [
       {text: 'Home', link: '/'},
       {text: 'Small Tail Common UI Vue3', link: '/ui-vue3/'},
       {text: '错误记录与解决', link: '/error/'}
     ],
-
     sidebar: [
       {
         text: 'Small Tail Common UI Vue3',
@@ -34,7 +34,8 @@ export default defineConfig({
               {text: '示例源码', link: '/ui-vue3/login-page-1/demo-code'},
             ]
           },
-          {text: '渐变背景 1', link: '/ui-vue3/gradient-bg-1/'}
+          {text: '动态边框 1', link: '/ui-vue3/dynamic-border-1/'},
+          {text: '渐变背景 1', link: '/ui-vue3/gradient-bg-1/'},
         ]
       },
       {
@@ -43,7 +44,6 @@ export default defineConfig({
         items: []
       },
     ],
-
     socialLinks: [
       {
         icon: 'github',

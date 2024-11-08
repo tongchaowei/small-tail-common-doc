@@ -1,7 +1,7 @@
 {
   "name": "st-common-ui-vue3-test",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "description": "st-common-ui-vue3 开发过程中的测试项目",
   "scripts": {

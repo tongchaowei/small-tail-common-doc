@@ -32,7 +32,6 @@ export const StCommonUIVue3Resolver = (): ComponentResolver => {
     // 解析器处理函数
     // 根据组件名称自动按需导入组件
     resolve: (name: string) => {
-      console.log("resolve", name, isSSR)
       // 判断解析的组件名称是不是当前组件库的
       if (name.startsWith("St")) {
         return {

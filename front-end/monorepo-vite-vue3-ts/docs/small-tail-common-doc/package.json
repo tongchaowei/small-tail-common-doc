@@ -1,6 +1,6 @@
 {
   "name": "small-tail-common-doc",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "private": true,
   "description": "小尾巴前端通用库文档",
   "main": "index.js",

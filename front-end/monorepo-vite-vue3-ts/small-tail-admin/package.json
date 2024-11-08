@@ -1,7 +1,7 @@
 {
   "name": "small-tail-admin",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "小尾巴后台管理系统前端项目",
   "type": "module",
   "scripts": {
