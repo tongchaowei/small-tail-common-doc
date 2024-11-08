@@ -50,7 +50,7 @@ watch(colorsInput, (val) => {
 </div>
 
 <el-form label-width="auto" style="margin-top: 20px">
-  <el-form-item label="size">
+  <el-form-item label="colors">
     <el-input v-model="colorsInput" clearable/>
   </el-form-item>
   <el-form-item label="size">

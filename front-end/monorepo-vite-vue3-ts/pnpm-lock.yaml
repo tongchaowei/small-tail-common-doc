@@ -125,8 +125,8 @@ importers:
         specifier: workspace:^
         version: link:../core
       st-common-ui-utils:
-        specifier: ^0.1.0
-        version: 0.1.0
+        specifier: workspace:^
+        version: link:../ui-utils
       swiper:
         specifier: ^11.1.14
         version: 11.1.14
@@ -2078,9 +2078,6 @@ packages:
 
   sprintf-js@1.0.3:
     resolution: {integrity: sha512-D9cPgkvLlV3t3IzL0D0YLvGA9Ahk4PcvVwUbN0dSGr1aP0Nrt4AEnTUbuGvquEC0mA64Gqt1fzirlRs5ibXx8g==}
-
-  st-common-ui-utils@0.1.0:
-    resolution: {integrity: sha512-hjsJ2OhP+a946OhWG1zXV/prrVo7I34kTkqvMHBkv/s/h7hvlhkTuTD4EnOh+AGDCh9GSHrqht1ZK6z8E4I0YA==}
 
   string-argv@0.3.2:
     resolution: {integrity: sha512-aqD2Q0144Z+/RqG52NeHEkZauTAUWJO8c6yTftGJKO3Tja5tUgIfmIl6kExvhtxSDP7fXB6DvzkfMpCd/F3G+Q==}
@@ -4435,8 +4432,6 @@ snapshots:
   speakingurl@14.0.1: {}
 
   sprintf-js@1.0.3: {}
-
-  st-common-ui-utils@0.1.0: {}
 
   string-argv@0.3.2: {}
 
