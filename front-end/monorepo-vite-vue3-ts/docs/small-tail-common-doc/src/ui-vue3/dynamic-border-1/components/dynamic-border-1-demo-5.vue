@@ -7,11 +7,10 @@ import {StDynamicBorder1} from 'st-common-ui-vue3'
     <StDynamicBorder1
       :width="150"
       :height="150"
-      :border-color-list="['transparent', 'red 50%', 'transparent 50%', 'orange']"
+      shine
+      :shine-range="20"
     >
-      <div class="st-dynamic-border-1__content box-bg">
-        自定义边框颜色
-      </div>
+      <div class="st-dynamic-border-1__content box-bg">荧光边框</div>
     </StDynamicBorder1>
   </div>
 </template>

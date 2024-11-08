@@ -8,12 +8,15 @@ import {StDynamicBorder1} from 'st-common-ui-vue3'
       :width="150"
       :height="150"
       :border-color-list="[
-        'transparent', 'red 25%',
-        'transparent 25%', 'blue 50%',
-        'transparent 50%', 'green 75%',
-        'transparent 75%', 'yellow 100%'
+        'red 0%', 'red 12.5%',
+        'transparent 12.5%', 'transparent 25%',
+        'green 25%', 'green 37.5%',
+        'transparent 37.5%', 'transparent 50%',
+        'yellow 50%', 'yellow 62.5%',
+        'transparent 62.5%', 'transparent 75%',
+        'blue 75%', 'blue 87.5%',
+        'transparent 87.5%', 'transparent 100%'
       ]"
-      hover-pause
     >
       <div class="st-dynamic-border-1__content box-bg">
         多段边框

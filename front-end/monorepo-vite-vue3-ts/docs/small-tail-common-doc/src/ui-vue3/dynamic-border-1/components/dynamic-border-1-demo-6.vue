@@ -4,14 +4,8 @@ import {StDynamicBorder1} from 'st-common-ui-vue3'
 
 <template>
   <div class="dynamic-border-1-demo-1">
-    <StDynamicBorder1
-      :width="150"
-      :height="150"
-      :border-color-list="['transparent', 'red 50%', 'transparent 50%', 'orange']"
-    >
-      <div class="st-dynamic-border-1__content box-bg">
-        自定义边框颜色
-      </div>
+    <StDynamicBorder1 :width="150" :height="150" hover>
+      <div class="st-dynamic-border-1__content box-bg">Hover 时显示边框动效</div>
     </StDynamicBorder1>
   </div>
 </template>
@@ -23,6 +17,7 @@ import {StDynamicBorder1} from 'st-common-ui-vue3'
   .st-dynamic-border-1__content {
     width: 100%;
     height: 100%;
+    padding: 1rem;
     display: flex;
     justify-content: center;
     align-items: center;

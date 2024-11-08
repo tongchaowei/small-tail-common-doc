@@ -27,6 +27,10 @@
 import DynamicBorder1Demo1 from './components/dynamic-border-1-demo-1.vue'
 import DynamicBorder1Demo2 from './components/dynamic-border-1-demo-2.vue'
 import DynamicBorder1Demo3 from './components/dynamic-border-1-demo-3.vue'
+import DynamicBorder1Demo4 from './components/dynamic-border-1-demo-4.vue'
+import DynamicBorder1Demo5 from './components/dynamic-border-1-demo-5.vue'
+import DynamicBorder1Demo6 from './components/dynamic-border-1-demo-6.vue'
+import DynamicBorder1Demo7 from './components/dynamic-border-1-demo-7.vue'
 </script>
 
 ### 简单使用
@@ -39,7 +43,7 @@ import DynamicBorder1Demo3 from './components/dynamic-border-1-demo-3.vue'
 
 :::
 
-### 荧光边框
+### 自定义边框颜色
 
 <DynamicBorder1Demo2 />
 
@@ -56,6 +60,46 @@ import DynamicBorder1Demo3 from './components/dynamic-border-1-demo-3.vue'
 ::: details 示例源码
 
 <<< ./components/dynamic-border-1-demo-3.vue
+
+:::
+
+### 完全自定义边框颜色
+
+<DynamicBorder1Demo4 />
+
+::: details 示例源码
+
+<<< ./components/dynamic-border-1-demo-4.vue
+
+:::
+
+### 荧光边框
+
+<DynamicBorder1Demo5 />
+
+::: details 示例源码
+
+<<< ./components/dynamic-border-1-demo-5.vue
+
+:::
+
+### Hover 时显示边框动效
+
+<DynamicBorder1Demo6 />
+
+::: details 示例源码
+
+<<< ./components/dynamic-border-1-demo-6.vue
+
+:::
+
+### Hover 时暂停边框动效
+
+<DynamicBorder1Demo7 />
+
+::: details 示例源码
+
+<<< ./components/dynamic-border-1-demo-7.vue
 
 :::
 

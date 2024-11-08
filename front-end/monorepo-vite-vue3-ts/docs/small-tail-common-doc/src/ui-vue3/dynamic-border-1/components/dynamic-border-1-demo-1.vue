@@ -4,14 +4,8 @@ import {StDynamicBorder1} from 'st-common-ui-vue3'
 
 <template>
   <div class="dynamic-border-1-demo-1">
-    <StDynamicBorder1
-      :width="150"
-      :height="150"
-      :border-color-list="['transparent 80%', 'red']"
-    >
-      <div class="st-dynamic-border-1__content box-bg">
-        简单使用
-      </div>
+    <StDynamicBorder1 :width="150" :height="150">
+      <div class="st-dynamic-border-1__content box-bg">简单使用</div>
     </StDynamicBorder1>
   </div>
 </template>
