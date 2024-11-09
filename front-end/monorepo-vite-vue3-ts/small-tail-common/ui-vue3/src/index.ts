@@ -129,6 +129,31 @@ export const St3DTiltContainer = _St3DTiltContainer
 export const St3DTiltContainerRegister = _St3DTiltContainerRegister
 // ---------------------------------------------------------------------------------------------------- 3D 容器组件 ------
 
+// ----------------------------------------------------------------------------------------------------- 轮播图组件 ------
+import _StSwiper from "./components/StSwiper"
+import {StSwiperRegister as _StSwiperRegister} from "./components/StSwiper"
+
+StCommonUiVue3Components.StSwiper = _StSwiper
+export const StSwiper = _StSwiper
+export const StSwiperRegister = _StSwiperRegister
+
+import _StSwiperSlide from "./components/StSwiperSlide"
+import {StSwiperSlideRegister as _StSwiperSlideRegister} from "./components/StSwiperSlide"
+
+StCommonUiVue3Components.StSwiperSlide = _StSwiperSlide
+export const StSwiperSlide = _StSwiperSlide
+export const StSwiperSlideRegister = _StSwiperSlideRegister
+// ----------------------------------------------------------------------------------------------------- 轮播图组件 ------
+
+// --------------------------------------------------------------------------------------------- 点击波浪效果容器组件 ------
+import _StClickWaveContainer from "./components/StClickWaveContainer"
+import {StClickWaveContainerRegister as _StClickWaveContainerRegister} from "./components/StClickWaveContainer"
+
+StCommonUiVue3Components.StClickWaveContainer = _StClickWaveContainer
+export const StClickWaveContainer = _StClickWaveContainer
+export const StClickWaveContainerRegister = _StClickWaveContainerRegister
+// --------------------------------------------------------------------------------------------- 点击波浪效果容器组件 ------
+
 /**
  * 全局注册小尾巴通用 UI Vue3 组件库中的所有组件
  *
