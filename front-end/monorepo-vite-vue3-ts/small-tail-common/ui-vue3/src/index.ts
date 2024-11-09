@@ -104,7 +104,7 @@ export const StDynamicBorder1 = _StDynamicBorder1
 export const StDynamicBorder1Register = _StDynamicBorder1Register
 // ---------------------------------------------------------------------------------------------------- 动态边框组件 ------
 
-// ------------------------------------------------------------------------------------------------------- 文本组件 ------
+// ------------------------------------------------------------------------------------------------ 幽灵特效文本组件 ------
 import _StGhostText from "./components/StGhostText"
 import {StGhostTextRegister as _StGhostTextRegister} from "./components/StGhostText"
 
@@ -118,7 +118,41 @@ import {StGhostTextHoverRegister as _StGhostTextHoverRegister} from "./component
 StCommonUiVue3Components.StGhostTextHover = _StGhostTextHover
 export const StGhostTextHover = _StGhostTextHover
 export const StGhostTextHoverRegister = _StGhostTextHoverRegister
-// ------------------------------------------------------------------------------------------------------- 文本组件 ------
+// ------------------------------------------------------------------------------------------------ 幽灵特效文本组件 ------
+
+// ---------------------------------------------------------------------------------------------------- 3D 容器组件 ------
+import _St3DTiltContainer from "./components/St3DTiltContainer"
+import {St3DTiltContainerRegister as _St3DTiltContainerRegister} from "./components/St3DTiltContainer"
+
+StCommonUiVue3Components.St3DTiltContainer = _St3DTiltContainer
+export const St3DTiltContainer = _St3DTiltContainer
+export const St3DTiltContainerRegister = _St3DTiltContainerRegister
+// ---------------------------------------------------------------------------------------------------- 3D 容器组件 ------
+
+// ----------------------------------------------------------------------------------------------------- 轮播图组件 ------
+import _StSwiper from "./components/StSwiper"
+import {StSwiperRegister as _StSwiperRegister} from "./components/StSwiper"
+
+StCommonUiVue3Components.StSwiper = _StSwiper
+export const StSwiper = _StSwiper
+export const StSwiperRegister = _StSwiperRegister
+
+import _StSwiperSlide from "./components/StSwiperSlide"
+import {StSwiperSlideRegister as _StSwiperSlideRegister} from "./components/StSwiperSlide"
+
+StCommonUiVue3Components.StSwiperSlide = _StSwiperSlide
+export const StSwiperSlide = _StSwiperSlide
+export const StSwiperSlideRegister = _StSwiperSlideRegister
+// ----------------------------------------------------------------------------------------------------- 轮播图组件 ------
+
+// --------------------------------------------------------------------------------------------- 点击波浪效果容器组件 ------
+import _StClickWaveContainer from "./components/StClickWaveContainer"
+import {StClickWaveContainerRegister as _StClickWaveContainerRegister} from "./components/StClickWaveContainer"
+
+StCommonUiVue3Components.StClickWaveContainer = _StClickWaveContainer
+export const StClickWaveContainer = _StClickWaveContainer
+export const StClickWaveContainerRegister = _StClickWaveContainerRegister
+// --------------------------------------------------------------------------------------------- 点击波浪效果容器组件 ------
 
 /**
  * 全局注册小尾巴通用 UI Vue3 组件库中的所有组件

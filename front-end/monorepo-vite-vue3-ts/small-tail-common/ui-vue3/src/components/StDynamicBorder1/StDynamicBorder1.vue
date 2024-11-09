@@ -38,6 +38,8 @@ const props = withDefaults(
     shine?: boolean;
     // 发光范围
     shineRange?: string | number;
+    // 发光的亮度
+    shineBrightness?: number;
     // 是否 hover 才显示动效
     hover?: boolean;
     // 是否 hover 暂停动画
@@ -55,6 +57,7 @@ const props = withDefaults(
     speed: '5s',
     shine: false,
     shineRange: '10px',
+    shineBrightness: 0.8,
     hover: false,
     hoverPause: false,
   }
@@ -91,6 +94,7 @@ const borderColors = computed(() => {
       '--border-radius': elSizeUtil.elSizePreHandler(borderRadius),
       '--speed': elSizeUtil.elSizePreHandler(speed, 'ms'),
       '--shine-range': elSizeUtil.elSizePreHandler(shineRange),
+      '--shine-brightness': shineBrightness,
       width: elSizeUtil.elSizePreHandler(width),
       height: elSizeUtil.elSizePreHandler(height),
     }"
@@ -172,7 +176,7 @@ const borderColors = computed(() => {
 
   &::after {
     filter: blur(var(--shine-range));
-    opacity: 0.5;
+    opacity: var(--shine-brightness);
   }
 }
 
