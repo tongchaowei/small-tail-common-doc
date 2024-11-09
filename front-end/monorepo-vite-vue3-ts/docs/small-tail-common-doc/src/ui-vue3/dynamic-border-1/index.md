@@ -119,6 +119,7 @@ import DynamicBorder1Demo7 from './components/dynamic-border-1-demo-7.vue'
 | speed             | 边框旋转动画的速度，即执行一次边框动画所需的时间，如果传递的参数值为数字类型，则其默认单位为 ms                        | `number \| string` |                         `'5s'`                         |
 | shine             | 是否开启边框的光晕效果                                                              |      boolean       |                         false                          |
 | shineRange        | 边框光晕的范围，如果传递的参数值为数字类型，则其默认单位为 px                                         | `number \| string` |                        `'10px'`                        |
+| shineBrightness   | 边框光晕的亮度，取值范围为 `0 - 1`                                                    |       number       |                          0.8                           |
 | hover             | 边框的效果是否在鼠标悬停时才生效                                                         |      boolean       |                         false                          |
 | hoverPause        | 是否在鼠标悬停时暂停边框旋转动画                                                         |      boolean       |                         false                          |
 
