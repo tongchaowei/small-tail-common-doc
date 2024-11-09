@@ -22,7 +22,7 @@ const props = withDefaults(
     // 过渡动画执行速度，过渡动画执行一次所需的时间，如果传递的为数字，则其单位默认为 ms
     speed?: number | string;
     // 是否开启模糊效果
-    blur: boolean;
+    blur?: boolean;
   }>(),
   {
     bgColor: '#e493d0',

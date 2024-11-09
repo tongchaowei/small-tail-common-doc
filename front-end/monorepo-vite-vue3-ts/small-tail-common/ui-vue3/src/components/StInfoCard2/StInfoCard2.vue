@@ -14,11 +14,11 @@ defineOptions({
 withDefaults(
   defineProps<{
     // 组件宽度
-    width: string | number;
+    width?: string | number;
     // 组件高度
-    height: string | number;
+    height?: string | number;
     // 组件内边距
-    padding: string | number;
+    padding?: string | number;
     // 图片地址
     imgSrc?: string;
     // 图片宽度
