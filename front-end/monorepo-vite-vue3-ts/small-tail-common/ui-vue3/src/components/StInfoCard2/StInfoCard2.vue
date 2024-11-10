@@ -146,6 +146,8 @@ withDefaults(
     transform: translateX(-50%);
     width: var(--img-width);
     height: var(--img-height);
+    border-radius: 0;
+    overflow: hidden;
 
     .st-info-card-2__img-box__img {
       width: 100%;
@@ -210,7 +212,6 @@ withDefaults(
       width: var(--img-size--hover);
       height: var(--img-size--hover);
       border-radius: 50%;
-      overflow: hidden;
     }
 
     .st-info-card-2__title-content-container {
