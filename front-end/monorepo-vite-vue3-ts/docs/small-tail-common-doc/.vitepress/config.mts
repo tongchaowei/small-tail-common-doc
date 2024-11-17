@@ -35,7 +35,10 @@ export default defineConfig({
             ]
           },
           {text: '动态边框 1', link: '/ui-vue3/dynamic-border-1/'},
+          {text: '幽灵文本(动画版)', link: '/ui-vue3/ghost-text/'},
+          {text: '幽灵文本(hover 版)', link: '/ui-vue3/ghost-text-hover/'},
           {text: '渐变背景 1', link: '/ui-vue3/gradient-bg-1/'},
+          {text: '渐变背景 2', link: '/ui-vue3/gradient-bg-2/'},
         ]
       },
       {
