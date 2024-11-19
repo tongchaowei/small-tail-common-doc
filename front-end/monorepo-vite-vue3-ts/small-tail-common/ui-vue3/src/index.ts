@@ -154,6 +154,15 @@ export const StClickWaveContainer = _StClickWaveContainer
 export const StClickWaveContainerRegister = _StClickWaveContainerRegister
 // --------------------------------------------------------------------------------------------- 点击波浪效果容器组件 ------
 
+// ---------------------------------------------------------------------------------------------------- 3D 文本组件 ------
+import _St3DText from "./components/St3DText"
+import {St3DTextRegister as _St3DTextRegister} from "./components/St3DText"
+
+StCommonUiVue3Components.St3DText = _St3DText
+export const St3DText = _St3DText
+export const St3DTextRegister = _St3DTextRegister
+// ---------------------------------------------------------------------------------------------------- 3D 文本组件 ------
+
 /**
  * 全局注册小尾巴通用 UI Vue3 组件库中的所有组件
  *
