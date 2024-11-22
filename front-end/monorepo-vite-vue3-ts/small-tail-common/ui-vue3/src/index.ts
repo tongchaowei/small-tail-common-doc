@@ -145,6 +145,15 @@ export const StSwiperSlide = _StSwiperSlide
 export const StSwiperSlideRegister = _StSwiperSlideRegister
 // ----------------------------------------------------------------------------------------------------- 轮播图组件 ------
 
+// ------------------------------------------------------------------------------------ 捕获组件内 pointer 事件的组件 ------
+import _StCapturePointerContainer from './components/StCapturePointerContainer'
+import {StCapturePointerContainerRegister as _StCapturePointerContainerRegister} from './components/StCapturePointerContainer'
+
+StCommonUiVue3Components.StCapturePointerContainer = _StCapturePointerContainer
+export const StCapturePointerContainer = _StCapturePointerContainer
+export const StCapturePointerContainerRegister = _StCapturePointerContainerRegister
+// ------------------------------------------------------------------------------------ 捕获组件内 pointer 事件的组件 ------
+
 // --------------------------------------------------------------------------------------------- 点击波浪效果容器组件 ------
 import _StClickWaveContainer from "./components/StClickWaveContainer"
 import {StClickWaveContainerRegister as _StClickWaveContainerRegister} from "./components/StClickWaveContainer"
