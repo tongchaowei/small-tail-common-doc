@@ -5,12 +5,7 @@ import {StClickBubbleParticleContainer} from'st-common-ui-vue3'
 <template>
   <div class="st-click-wave-container-test w-full h-screen flex justify-center items-center">
     <div class="w-md h-md bg-gray-200">
-      <StClickBubbleParticleContainer
-        :wave-color="'linear-gradient(to right, #ff0052, #ff7a00)'"
-        wave-color-random
-        enter
-        leave
-      >
+      <StClickBubbleParticleContainer particle-color-random>
         StClickBubbleParticleContainer
       </StClickBubbleParticleContainer>
     </div>

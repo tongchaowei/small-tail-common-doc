@@ -33,6 +33,8 @@ const props = withDefaults(
     offsetEnd?: number;
     // 粒子的颜色
     particleColor?: string;
+    // 是否开启粒子颜色随机
+    particleColorRandom?: boolean;
     // 是否开启偶数粒子为空心只具有边框颜色
     evenEmpty?: boolean;
     // 粒子层级
@@ -48,6 +50,7 @@ const props = withDefaults(
     offsetInitial: 20,
     offsetEnd: 200,
     particleColor: '#0a87ff',
+    particleColorRandom: false,
     evenEmpty: true,
     particleZIndex: 'initial',
   }
@@ -77,11 +80,14 @@ const genParticleHandler = (x: number, y: number, containerEl: HTMLDivElement) =
     particle.style.setProperty("--end-x", x + offsetEndX + 'px')
     particle.style.setProperty("--end-y", y + offsetEndY + 'px')
     particle.style.animationDuration = props.speed + "ms"
+    const particleColor = props.particleColorRandom ?
+      `rgb(${randomNumUtil.randomInt_0_n(255)}, ${randomNumUtil.randomInt_0_n(255)}, ${randomNumUtil.randomInt_0_n(255)})`:
+      props.particleColor
     if (props.evenEmpty) {
-      particle.style.background = i % 2 === 0 ? 'transparent' : props.particleColor
-      particle.style.border = i % 2 === 0 ? `1px solid ${props.particleColor}` : 'none'
+      particle.style.background = i % 2 === 0 ? 'transparent' : particleColor
+      particle.style.border = i % 2 === 0 ? `1px solid ${particleColor}` : 'none'
     } else {
-      particle.style.background = props.particleColor
+      particle.style.background = particleColor
     }
     particle.style.zIndex = props.particleZIndex + ''
     containerEl.appendChild(particle)
