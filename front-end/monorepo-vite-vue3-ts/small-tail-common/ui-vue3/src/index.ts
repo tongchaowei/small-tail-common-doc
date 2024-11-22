@@ -163,6 +163,15 @@ export const StClickWaveContainer = _StClickWaveContainer
 export const StClickWaveContainerRegister = _StClickWaveContainerRegister
 // --------------------------------------------------------------------------------------------- 点击波浪效果容器组件 ------
 
+// --------------------------------------------------------------------------------------------- 点击涟漪效果容器组件 ------
+import _StClickRippleContainer from './components/StClickRippleContainer'
+import {StClickRippleContainerRegister as _StClickRippleContainerRegister} from './components/StClickRippleContainer'
+
+StCommonUiVue3Components.StClickRippleContainer = _StClickRippleContainer
+export const StClickRippleContainer = _StClickRippleContainer
+export const StClickRippleContainerRegister = _StClickRippleContainerRegister
+// --------------------------------------------------------------------------------------------- 点击涟漪效果容器组件 ------
+
 // ---------------------------------------------------------------------------------------------------- 3D 文本组件 ------
 import _St3DText from "./components/St3DText"
 import {St3DTextRegister as _St3DTextRegister} from "./components/St3DText"
