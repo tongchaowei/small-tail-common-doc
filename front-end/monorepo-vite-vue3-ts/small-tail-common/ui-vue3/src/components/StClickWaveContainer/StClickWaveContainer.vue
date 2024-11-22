@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import {elSizeUtil} from "st-common-ui-utils"
 import StCapturePointerContainer from "../StCapturePointerContainer"
+import {randomNumUtil} from 'st-common-core'
 
 /**
  * 组件配置选项
@@ -22,6 +23,8 @@ const props = withDefaults(
     speed?: number;
     // 波浪的颜色
     waveColor?: string;
+    // 是否开启波浪颜色随机
+    waveColorRandom?: boolean;
     // 波浪的最大大小
     waveMaxSize?: number | string;
     // 波浪初始不透明度
@@ -40,6 +43,7 @@ const props = withDefaults(
     height: '100%',
     speed: 1000,
     waveColor: '#fff',
+    waveColorRandom: false,
     waveMaxSize: '100%',
     waveInitialOpacity: 0.5,
     waveZIndex: 'initial',
@@ -63,8 +67,11 @@ const addWaveAnimationHandler = (x: number, y: number, containerRootEl: HTMLDivE
   waveEl.style.left = x + 'px'
   waveEl.style.top = y + 'px'
   waveEl.style.zIndex = props.waveZIndex + ''
-  waveEl.style.background = props.waveColor
-  waveEl.style.animationDuration = props.speed +'ms'
+  waveEl.style.background =
+    props.waveColorRandom ?
+      `rgb(${randomNumUtil.randomInt_0_n(255)}, ${randomNumUtil.randomInt_0_n(255)}, ${randomNumUtil.randomInt_0_n(255)})` :
+      props.waveColor
+  waveEl.style.animationDuration = props.speed + 'ms'
   containerRootEl.appendChild(waveEl)
   // 动画结束后移除波纹元素
   setTimeout(() => {

@@ -7,6 +7,7 @@ import {StClickWaveContainer} from'st-common-ui-vue3'
     <div class="w-md h-md bg-gray-200">
       <StClickWaveContainer
         :wave-color="'linear-gradient(to right, #ff0052, #ff7a00)'"
+        wave-color-random
         enter
         leave
       />
