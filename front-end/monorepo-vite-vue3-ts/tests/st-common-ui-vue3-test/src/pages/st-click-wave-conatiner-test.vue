@@ -10,7 +10,7 @@ import {StClickWaveContainer} from'st-common-ui-vue3'
         wave-color-random
         enter
         leave
-      />
+      ></StClickWaveContainer>
     </div>
   </div>
 </template>

@@ -96,7 +96,7 @@ const addWaveAnimationHandler = (x: number, y: number, containerRootEl: HTMLDivE
       :capture-on-pointer-leave="leave"
       @handlePointerEvent="addWaveAnimationHandler"
     >
-      <template>
+      <template #default>
         <slot></slot>
       </template>
     </StCapturePointerContainer>
