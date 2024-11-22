@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import {elSizeUtil} from "st-common-ui-utils"
+import StCapturePointerContainer from "../StCapturePointerContainer"
 
 /**
  * 组件配置选项
@@ -26,6 +26,12 @@ const props = withDefaults(
     waveMaxSize?: number | string;
     // 波浪初始不透明度
     waveInitialOpacity?: number;
+    // 是否在 click 时执行波浪动画
+    click?: boolean;
+    // 是否在移入组件时执行波浪动画
+    enter?: boolean;
+    // 是否在移出组件时执行波浪动画
+    leave?: boolean;
   }>(),
   {
     width: '100%',
@@ -34,46 +40,55 @@ const props = withDefaults(
     waveColor: '#fff',
     waveMaxSize: '100%',
     waveInitialOpacity: 0.5,
+    click: true,
+    enter: false,
+    leave: false,
   }
 )
 
-// 组件根元素引用对象
-const stClickWaveContainerRef = ref<HTMLDivElement | null>(null)
-
 /**
- * 组件点下事件处理函数
+ * 添加波纹动画处理函数
+ *
+ * @param {number} x pointer 事件在组件中的 x 坐标
+ * @param {number} y pointer 事件在组件中的 y 坐标
+ * @param {HTMLDivElement} containerRootEl 捕获 pointer 事件的容器根元素
  */
-const pointerdownHandler = (event: PointerEvent) => {
-  // 获取组件根元素
-  const stClickWaveContainerEl = stClickWaveContainerRef.value as HTMLDivElement
-  // 创建一个波纹元素设置其出现位置并添加到组件根元素
+const addWaveAnimationHandler = (x: number, y: number, containerRootEl: HTMLDivElement) => {
+  // 创建一个波纹元素设置其出现位置并添加到组件中
   const waveEl = document.createElement('div')
   waveEl.classList.add('st-click-wave-container__wave')
-  waveEl.style.left = (event.clientX - stClickWaveContainerEl.offsetLeft) + 'px'
-  waveEl.style.top = (event.clientY - stClickWaveContainerEl.offsetTop) + 'px'
+  waveEl.style.left = x + 'px'
+  waveEl.style.top = y + 'px'
   waveEl.style.background = props.waveColor
   waveEl.style.animationDuration = props.speed +'ms'
-  stClickWaveContainerEl.appendChild(waveEl)
+  containerRootEl.appendChild(waveEl)
   // 动画结束后移除波纹元素
   setTimeout(() => {
-    stClickWaveContainerEl.removeChild(waveEl)
+    containerRootEl.removeChild(waveEl)
   }, props.speed)
 }
 </script>
 
 <template>
   <div
-    ref="stClickWaveContainerRef"
     class="st-click-wave-container"
     :style="{
-      '--wave-max-size': elSizeUtil.elSizePreHandler(waveMaxSize),
-      '--wave-initial-opacity': waveInitialOpacity,
-      width: elSizeUtil.elSizePreHandler(width),
-      height: elSizeUtil.elSizePreHandler(height),
+      '--wave-max-size': elSizeUtil.elSizePreHandler(props.waveMaxSize),
+      '--wave-initial-opacity': props.waveInitialOpacity,
+      width: elSizeUtil.elSizePreHandler(props.width),
+      height: elSizeUtil.elSizePreHandler(props.height),
     }"
-    @pointerdown="pointerdownHandler"
   >
-    <slot></slot>
+    <StCapturePointerContainer
+      :capture-on-pointer-down="click"
+      :capture-on-pointer-enter="enter"
+      :capture-on-pointer-leave="leave"
+      @handlePointerEvent="addWaveAnimationHandler"
+    >
+      <template>
+        <slot></slot>
+      </template>
+    </StCapturePointerContainer>
   </div>
 </template>
 
