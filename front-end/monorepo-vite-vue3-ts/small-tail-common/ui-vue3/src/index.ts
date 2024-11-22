@@ -190,6 +190,15 @@ export const StHoverShineContainer = _StHoverShineContainer
 export const StHoverShineContainerRegister = _StHoverShineContainerRegister
 // --------------------------------------------------------------------------------------------- 鼠标悬浮发光容器组件 ------
 
+// --------------------------------------------------------------------------------------------- 点击气泡粒子容器组件 ------
+import _StClickBubbleParticleContainer from './components/StClickBubbleParticleContainer'
+import {StClickBubbleParticleContainerRegister as _StClickBubbleParticleContainerRegister} from './components/StClickBubbleParticleContainer'
+
+StCommonUiVue3Components.StClickBubbleParticleContainer = _StClickBubbleParticleContainer
+export const StClickBubbleParticleContainer = _StClickBubbleParticleContainer
+export const StClickBubbleParticleContainerRegister = _StClickBubbleParticleContainerRegister
+// --------------------------------------------------------------------------------------------- 点击气泡粒子容器组件 ------
+
 /**
  * 全局注册小尾巴通用 UI Vue3 组件库中的所有组件
  *
