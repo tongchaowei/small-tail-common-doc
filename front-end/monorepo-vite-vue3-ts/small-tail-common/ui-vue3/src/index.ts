@@ -181,6 +181,15 @@ export const St3DText = _St3DText
 export const St3DTextRegister = _St3DTextRegister
 // ---------------------------------------------------------------------------------------------------- 3D 文本组件 ------
 
+// --------------------------------------------------------------------------------------------- 鼠标悬浮发光容器组件 ------
+import _StHoverShineContainer from "./components/StHoverShineContainer"
+import {StHoverShineContainerRegister as _StHoverShineContainerRegister} from "./components/StHoverShineContainer"
+
+StCommonUiVue3Components.StHoverShineContainer = _StHoverShineContainer
+export const StHoverShineContainer = _StHoverShineContainer
+export const StHoverShineContainerRegister = _StHoverShineContainerRegister
+// --------------------------------------------------------------------------------------------- 鼠标悬浮发光容器组件 ------
+
 /**
  * 全局注册小尾巴通用 UI Vue3 组件库中的所有组件
  *
