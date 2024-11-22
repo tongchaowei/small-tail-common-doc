@@ -145,6 +145,15 @@ export const StSwiperSlide = _StSwiperSlide
 export const StSwiperSlideRegister = _StSwiperSlideRegister
 // ----------------------------------------------------------------------------------------------------- 轮播图组件 ------
 
+// ------------------------------------------------------------------------------------ 捕获组件内 pointer 事件的组件 ------
+import _StCapturePointerContainer from './components/StCapturePointerContainer'
+import {StCapturePointerContainerRegister as _StCapturePointerContainerRegister} from './components/StCapturePointerContainer'
+
+StCommonUiVue3Components.StCapturePointerContainer = _StCapturePointerContainer
+export const StCapturePointerContainer = _StCapturePointerContainer
+export const StCapturePointerContainerRegister = _StCapturePointerContainerRegister
+// ------------------------------------------------------------------------------------ 捕获组件内 pointer 事件的组件 ------
+
 // --------------------------------------------------------------------------------------------- 点击波浪效果容器组件 ------
 import _StClickWaveContainer from "./components/StClickWaveContainer"
 import {StClickWaveContainerRegister as _StClickWaveContainerRegister} from "./components/StClickWaveContainer"
@@ -153,6 +162,15 @@ StCommonUiVue3Components.StClickWaveContainer = _StClickWaveContainer
 export const StClickWaveContainer = _StClickWaveContainer
 export const StClickWaveContainerRegister = _StClickWaveContainerRegister
 // --------------------------------------------------------------------------------------------- 点击波浪效果容器组件 ------
+
+// ---------------------------------------------------------------------------------------------------- 3D 文本组件 ------
+import _St3DText from "./components/St3DText"
+import {St3DTextRegister as _St3DTextRegister} from "./components/St3DText"
+
+StCommonUiVue3Components.St3DText = _St3DText
+export const St3DText = _St3DText
+export const St3DTextRegister = _St3DTextRegister
+// ---------------------------------------------------------------------------------------------------- 3D 文本组件 ------
 
 /**
  * 全局注册小尾巴通用 UI Vue3 组件库中的所有组件
