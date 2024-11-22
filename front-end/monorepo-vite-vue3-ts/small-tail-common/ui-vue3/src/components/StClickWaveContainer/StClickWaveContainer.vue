@@ -31,6 +31,8 @@ const props = withDefaults(
     waveInitialOpacity?: number;
     // 波浪的层级
     waveZIndex?: number | string;
+    // 是否开启波浪溢出隐藏
+    waveOverflowHidden?: boolean;
     // 是否在 click 时执行波浪动画
     click?: boolean;
     // 是否在移入组件时执行波浪动画
@@ -47,6 +49,7 @@ const props = withDefaults(
     waveMaxSize: '100%',
     waveInitialOpacity: 0.5,
     waveZIndex: 'initial',
+    waveOverflowHidden: true,
     click: true,
     enter: false,
     leave: false,
@@ -88,6 +91,7 @@ const addWaveAnimationHandler = (x: number, y: number, containerRootEl: HTMLDivE
       '--wave-initial-opacity': props.waveInitialOpacity,
       width: elSizeUtil.elSizePreHandler(props.width),
       height: elSizeUtil.elSizePreHandler(props.height),
+      overflow: waveOverflowHidden ? 'hidden' : 'initial',
     }"
   >
     <StCapturePointerContainer
@@ -106,7 +110,6 @@ const addWaveAnimationHandler = (x: number, y: number, containerRootEl: HTMLDivE
 <style lang="scss">
 .st-click-wave-container {
   position: relative;
-  overflow: hidden;
 
   .st-click-wave-container__wave {
     position: absolute;
