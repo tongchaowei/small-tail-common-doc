@@ -26,6 +26,8 @@ const props = withDefaults(
     waveMaxSize?: number | string;
     // 波浪初始不透明度
     waveInitialOpacity?: number;
+    // 波浪的层级
+    waveZIndex?: number | string;
     // 是否在 click 时执行波浪动画
     click?: boolean;
     // 是否在移入组件时执行波浪动画
@@ -40,6 +42,7 @@ const props = withDefaults(
     waveColor: '#fff',
     waveMaxSize: '100%',
     waveInitialOpacity: 0.5,
+    waveZIndex: 'initial',
     click: true,
     enter: false,
     leave: false,
@@ -59,6 +62,7 @@ const addWaveAnimationHandler = (x: number, y: number, containerRootEl: HTMLDivE
   waveEl.classList.add('st-click-wave-container__wave')
   waveEl.style.left = x + 'px'
   waveEl.style.top = y + 'px'
+  waveEl.style.zIndex = props.waveZIndex + ''
   waveEl.style.background = props.waveColor
   waveEl.style.animationDuration = props.speed +'ms'
   containerRootEl.appendChild(waveEl)
