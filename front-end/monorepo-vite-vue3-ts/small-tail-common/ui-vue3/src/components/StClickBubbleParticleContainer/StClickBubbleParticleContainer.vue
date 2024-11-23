@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import StCapturePointerContainer from "../StCapturePointerContainer"
+import StClickParticleBombContainer from "../StClickParticleBombContainer"
 import {elSizeUtil} from "st-common-ui-utils"
 import {randomNumUtil} from 'st-common-core'
 
@@ -19,8 +19,6 @@ const props = withDefaults(
     width?: string | number;
     // 组件高度
     height?: string | number;
-    // 动画执行速度
-    speed?: number;
     // 粒子个数
     particleCount?: number;
     // 粒子的最大大小
@@ -39,11 +37,12 @@ const props = withDefaults(
     evenEmpty?: boolean;
     // 粒子层级
     particleZIndex?: number | string;
+    // 动画执行速度
+    speed?: number;
   }>(),
   {
     width: "100%",
     height: "100%",
-    speed: 1000,
     particleCount: 50,
     particleMaxSize: 20,
     particleMinSize: 5,
@@ -53,89 +52,55 @@ const props = withDefaults(
     particleColorRandom: false,
     evenEmpty: true,
     particleZIndex: 'initial',
+    speed: 1000,
   }
 )
 
 /**
- * 生成粒子的处理函数
+ * 设置粒子样式的处理函数
  *
- * @param {number} x 点击时点击位置的 x 坐标
- * @param {number} y 点击时点击位置的 y 坐标
- * @param {HTMLDivElement} containerEl 捕获点击事件的容器元素
+ * @param {HTMLElement} particleEl 粒子元素
+ * @param {number} idx 粒子的索引
  */
-const genParticleHandler = (x: number, y: number, containerEl: HTMLDivElement) => {
-  // 创建粒子元素，并添加到捕获点击事件的容器元素中
-  for (let i = 0; i < props.particleCount; i++) {
-    const particle = document.createElement("i")
-    particle.classList.add("st-click-bubble-particle-container__particle")
-    const particleSize = randomNumUtil.randomInt_n_m(props.particleMinSize, props.particleMaxSize) + 'px'
-    particle.style.width = particleSize
-    particle.style.height = particleSize
-    const offsetInitialX = randomNumUtil.randomInt_n_m(-1 * props.offsetInitial, props.offsetInitial)
-    const offsetInitialY = randomNumUtil.randomInt_n_m(-1 * props.offsetInitial, props.offsetInitial)
-    particle.style.left = x + offsetInitialX + "px"
-    particle.style.top = y + offsetInitialY + "px"
-    const offsetEndX = randomNumUtil.randomInt_n_m(-1 * props.offsetEnd, props.offsetEnd)
-    const offsetEndY = randomNumUtil.randomInt_n_m(-1 * props.offsetEnd, props.offsetEnd)
-    particle.style.setProperty("--end-x", x + offsetEndX + 'px')
-    particle.style.setProperty("--end-y", y + offsetEndY + 'px')
-    particle.style.animationDuration = props.speed + "ms"
-    const particleColor = props.particleColorRandom ?
-      `rgb(${randomNumUtil.randomInt_0_n(255)}, ${randomNumUtil.randomInt_0_n(255)}, ${randomNumUtil.randomInt_0_n(255)})`:
-      props.particleColor
-    if (props.evenEmpty) {
-      particle.style.background = i % 2 === 0 ? 'transparent' : particleColor
-      particle.style.border = i % 2 === 0 ? `1px solid ${particleColor}` : 'none'
-    } else {
-      particle.style.background = particleColor
-    }
-    particle.style.zIndex = props.particleZIndex + ''
-    containerEl.appendChild(particle)
-    // 动画执行结束移除粒子元素
-    setTimeout(() => {
-      particle.remove()
-    }, props.speed)
+const setParticleStyleHandler = (particleEl: HTMLElement, idx: number) => {
+  // 设置粒子的大小
+  const particleSize = randomNumUtil.randomInt_n_m(props.particleMinSize, props.particleMaxSize) + 'px'
+  particleEl.style.width = particleSize
+  particleEl.style.height = particleSize
+  // 设置粒子的背景和边框
+  const particleColor = props.particleColorRandom ?
+    `rgb(${randomNumUtil.randomInt_0_n(255)}, ${randomNumUtil.randomInt_0_n(255)}, ${randomNumUtil.randomInt_0_n(255)})`:
+    props.particleColor
+  if (props.evenEmpty) {
+    particleEl.style.background = idx % 2 === 0 ? 'transparent' : particleColor
+    particleEl.style.border = idx % 2 === 0 ? `1px solid ${particleColor}` : 'none'
+  } else {
+    particleEl.style.background = particleColor
   }
 }
 </script>
 
 <template>
   <div
-    ref="stClickBubbleParticleContainerRef"
     class="st-click-bubble-particle-container"
     :style="{
       width: elSizeUtil.elSizePreHandler(width),
       height: elSizeUtil.elSizePreHandler(height),
     }"
   >
-    <StCapturePointerContainer
-      capture-on-pointer-down
-      @handlePointerEvent="genParticleHandler"
+    <StClickParticleBombContainer
+      :particle-count="particleCount"
+      :offset-initial="offsetInitial"
+      :offset-end="offsetEnd"
+      :set-particle-style-handler="setParticleStyleHandler"
+      :particle-z-index="particleZIndex"
+      :speed="speed"
     >
       <slot></slot>
-    </StCapturePointerContainer>
+    </StClickParticleBombContainer>
   </div>
 </template>
 
 <style lang="scss">
-.st-click-bubble-particle-container {
-  position: relative;
 
-  .st-click-bubble-particle-container__particle {
-    position: absolute;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    animation-name: st-click-bubble-particle-container__particle-animation;
-    animation-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
-  }
-}
-
-@keyframes st-click-bubble-particle-container__particle-animation {
-  100% {
-    opacity: 0;
-    left: var(--end-x);
-    top: var(--end-y);
-  }
-}
 </style>
