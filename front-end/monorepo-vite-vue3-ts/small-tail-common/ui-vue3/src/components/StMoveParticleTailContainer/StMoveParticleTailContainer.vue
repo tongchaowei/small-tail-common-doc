@@ -136,6 +136,7 @@ const genParticleHandler = (x: number, y: number, containerEl: HTMLDivElement, e
     animation-name: st-move-particle-tail-container__particle-animation;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
+    pointer-events: none;
   }
 }
 
