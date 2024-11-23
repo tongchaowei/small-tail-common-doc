@@ -217,6 +217,15 @@ export const StMoveParticleTailContainer = _StMoveParticleTailContainer
 export const StMoveParticleTailContainerRegister = _StMoveParticleTailContainerRegister
 // --------------------------------------------------------------------------------------- 鼠标移动粒子拖尾效果容器组件 ------
 
+// ------------------------------------------------------------------------------------ 鼠标移动实心粒子拖尾效果容器组件 ------
+import _StMoveSolidParticleContainer from './components/StMoveSolidParticleContainer'
+import {StMoveSolidParticleContainerRegister as _StMoveSolidParticleContainerRegister} from './components/StMoveSolidParticleContainer'
+
+StCommonUiVue3Components.StMoveSolidParticleContainer = _StMoveSolidParticleContainer
+export const StMoveSolidParticleContainer = _StMoveSolidParticleContainer
+export const StMoveSolidParticleContainerRegister = _StMoveSolidParticleContainerRegister
+// ------------------------------------------------------------------------------------ 鼠标移动实心粒子拖尾效果容器组件 ------
+
 /**
  * 全局注册小尾巴通用 UI Vue3 组件库中的所有组件
  *

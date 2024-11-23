@@ -23,9 +23,9 @@ const props = withDefaults(
     particleCount?: number;
     // 粒子的样式 class 类名
     particleClass?: string;
-    // 点击时，粒子初始位置相对于点击位置的偏移量，粒子的横纵坐标会在点击位置基础上偏移 [0, offset] 或者 [-offset, 0]（取决于 pointer 移动方向）
+    // 点击时，粒子初始位置相对于点击位置的偏移量，粒子的横纵坐标会在点击位置基础上偏移
     offsetInitial?: number;
-    // 动画结束时，粒子初始位置相对于点击位置的偏移量
+    // 动画结束时，粒子初始位置相对于点击位置的偏移量 [0, offset] 或者 [-offset, 0]（取决于 pointer 移动方向）
     offsetEnd?: number;
     /**
      * 设置粒子样式的处理函数
@@ -64,6 +64,7 @@ const props = withDefaults(
  * @param {number} x 事件触发时 pointer 位置的 x 坐标
  * @param {number} y 事件触发时 pointer 位置的 y 坐标
  * @param {HTMLDivElement} containerEl 捕获点击事件的容器元素
+ * @param {PointerEvent} event 事件对象
  */
 const genParticleHandler = (x: number, y: number, containerEl: HTMLDivElement, event: PointerEvent) => {
   // 创建粒子元素，并添加到捕获点击事件的容器元素中
