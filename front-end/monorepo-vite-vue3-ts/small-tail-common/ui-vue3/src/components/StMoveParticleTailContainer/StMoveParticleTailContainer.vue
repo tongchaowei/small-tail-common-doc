@@ -23,7 +23,7 @@ const props = withDefaults(
     particleCount?: number;
     // 粒子的样式 class 类名
     particleClass?: string;
-    // 点击时，粒子初始位置相对于点击位置的偏移量，粒子的横纵坐标会在点击位置基础上偏移 [0, offset]
+    // 点击时，粒子初始位置相对于点击位置的偏移量，粒子的横纵坐标会在点击位置基础上偏移 [0, offset] 或者 [-offset, 0]（取决于 pointer 移动方向）
     offsetInitial?: number;
     // 动画结束时，粒子初始位置相对于点击位置的偏移量
     offsetEnd?: number;
@@ -65,7 +65,7 @@ const props = withDefaults(
  * @param {number} y 事件触发时 pointer 位置的 y 坐标
  * @param {HTMLDivElement} containerEl 捕获点击事件的容器元素
  */
-const genParticleHandler = (x: number, y: number, containerEl: HTMLDivElement) => {
+const genParticleHandler = (x: number, y: number, containerEl: HTMLDivElement, event: PointerEvent) => {
   // 创建粒子元素，并添加到捕获点击事件的容器元素中
   for (let i = 0; i < props.particleCount; i++) {
     // 创建粒子元素
@@ -78,9 +78,16 @@ const genParticleHandler = (x: number, y: number, containerEl: HTMLDivElement) =
     const offsetInitialY = randomNumUtil.randomInt_0_n(props.offsetInitial)
     particle.style.left = x + offsetInitialX + "px"
     particle.style.top = y + offsetInitialY + "px"
+    // 获取鼠标移动方向
+    const pointerMoveX = event.movementX
+    const pointerMoveY = event.movementY
     // 设置粒子动画结束时的位置
-    const offsetEndX = randomNumUtil.randomInt_0_n(props.offsetEnd)
-    const offsetEndY = randomNumUtil.randomInt_0_n(props.offsetEnd)
+    const offsetEndX = pointerMoveX > 0 ?
+      randomNumUtil.randomInt_n_m(-1 * props.offsetEnd, 0) :
+      randomNumUtil.randomInt_0_n(props.offsetEnd)
+    const offsetEndY = pointerMoveY > 0 ?
+      randomNumUtil.randomInt_n_m(-1 * props.offsetEnd, 0) :
+      randomNumUtil.randomInt_0_n(props.offsetEnd)
     particle.style.setProperty("--end-x", x + offsetEndX + 'px')
     particle.style.setProperty("--end-y", y + offsetEndY + 'px')
     // 设置粒子样式
