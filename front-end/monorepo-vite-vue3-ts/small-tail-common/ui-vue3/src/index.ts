@@ -190,6 +190,15 @@ export const StHoverShineContainer = _StHoverShineContainer
 export const StHoverShineContainerRegister = _StHoverShineContainerRegister
 // --------------------------------------------------------------------------------------------- 鼠标悬浮发光容器组件 ------
 
+// ------------------------------------------------------------------------------------------ 点击粒子爆炸效果容器组件 ------
+import _StClickParticleBombContainer from './components/StClickParticleBombContainer'
+import {StClickParticleBombContainerRegister as _StClickParticleBombContainerRegister} from './components/StClickParticleBombContainer'
+
+StCommonUiVue3Components.StClickParticleBombContainer = _StClickParticleBombContainer
+export const StClickParticleBombContainer = _StClickParticleBombContainer
+export const StClickParticleBombContainerRegister = _StClickParticleBombContainerRegister
+// ------------------------------------------------------------------------------------------ 点击粒子爆炸效果容器组件 ------
+
 // --------------------------------------------------------------------------------------------- 点击气泡粒子容器组件 ------
 import _StClickBubbleParticleContainer from './components/StClickBubbleParticleContainer'
 import {StClickBubbleParticleContainerRegister as _StClickBubbleParticleContainerRegister} from './components/StClickBubbleParticleContainer'
