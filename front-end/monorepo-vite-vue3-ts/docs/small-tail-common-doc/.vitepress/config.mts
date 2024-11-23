@@ -39,6 +39,8 @@ export default defineConfig({
           {text: '渐变背景 2', link: '/ui-vue3/gradient-bg-2/'},
           {text: '幽灵文本(动画版)', link: '/ui-vue3/ghost-text/'},
           {text: '幽灵文本(hover 版)', link: '/ui-vue3/ghost-text-hover/'},
+          {text: '3D 文本', link: '/ui-vue3/3d-text/'},
+          {text: '具有跟随鼠标 3D 倾斜效果的容器', link: '/ui-vue3/3d-tilt-container/'},
           {text: '具有点击波纹动效的容器', link: '/ui-vue3/click-wave-container/'},
         ]
       },
