@@ -128,6 +128,7 @@ const genParticleHandler = (x: number, y: number, containerEl: HTMLDivElement) =
     animation-name: st-click-particle-bomb-container__particle-animation;
     animation-timing-function: ease-in-out;
     animation-fill-mode: forwards;
+    pointer-events: none;
   }
 }
 
