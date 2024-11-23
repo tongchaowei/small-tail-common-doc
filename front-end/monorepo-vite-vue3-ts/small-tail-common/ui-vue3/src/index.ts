@@ -163,6 +163,15 @@ export const StClickWaveContainer = _StClickWaveContainer
 export const StClickWaveContainerRegister = _StClickWaveContainerRegister
 // --------------------------------------------------------------------------------------------- 点击波浪效果容器组件 ------
 
+// --------------------------------------------------------------------------------------------- 点击涟漪效果容器组件 ------
+import _StClickRippleContainer from './components/StClickRippleContainer'
+import {StClickRippleContainerRegister as _StClickRippleContainerRegister} from './components/StClickRippleContainer'
+
+StCommonUiVue3Components.StClickRippleContainer = _StClickRippleContainer
+export const StClickRippleContainer = _StClickRippleContainer
+export const StClickRippleContainerRegister = _StClickRippleContainerRegister
+// --------------------------------------------------------------------------------------------- 点击涟漪效果容器组件 ------
+
 // ---------------------------------------------------------------------------------------------------- 3D 文本组件 ------
 import _St3DText from "./components/St3DText"
 import {St3DTextRegister as _St3DTextRegister} from "./components/St3DText"
@@ -171,6 +180,51 @@ StCommonUiVue3Components.St3DText = _St3DText
 export const St3DText = _St3DText
 export const St3DTextRegister = _St3DTextRegister
 // ---------------------------------------------------------------------------------------------------- 3D 文本组件 ------
+
+// --------------------------------------------------------------------------------------------- 鼠标悬浮发光容器组件 ------
+import _StHoverShineContainer from "./components/StHoverShineContainer"
+import {StHoverShineContainerRegister as _StHoverShineContainerRegister} from "./components/StHoverShineContainer"
+
+StCommonUiVue3Components.StHoverShineContainer = _StHoverShineContainer
+export const StHoverShineContainer = _StHoverShineContainer
+export const StHoverShineContainerRegister = _StHoverShineContainerRegister
+// --------------------------------------------------------------------------------------------- 鼠标悬浮发光容器组件 ------
+
+// ------------------------------------------------------------------------------------------ 点击粒子爆炸效果容器组件 ------
+import _StClickParticleBombContainer from './components/StClickParticleBombContainer'
+import {StClickParticleBombContainerRegister as _StClickParticleBombContainerRegister} from './components/StClickParticleBombContainer'
+
+StCommonUiVue3Components.StClickParticleBombContainer = _StClickParticleBombContainer
+export const StClickParticleBombContainer = _StClickParticleBombContainer
+export const StClickParticleBombContainerRegister = _StClickParticleBombContainerRegister
+// ------------------------------------------------------------------------------------------ 点击粒子爆炸效果容器组件 ------
+
+// --------------------------------------------------------------------------------------------- 点击气泡粒子容器组件 ------
+import _StClickBubbleParticleContainer from './components/StClickBubbleParticleContainer'
+import {StClickBubbleParticleContainerRegister as _StClickBubbleParticleContainerRegister} from './components/StClickBubbleParticleContainer'
+
+StCommonUiVue3Components.StClickBubbleParticleContainer = _StClickBubbleParticleContainer
+export const StClickBubbleParticleContainer = _StClickBubbleParticleContainer
+export const StClickBubbleParticleContainerRegister = _StClickBubbleParticleContainerRegister
+// --------------------------------------------------------------------------------------------- 点击气泡粒子容器组件 ------
+
+// --------------------------------------------------------------------------------------- 鼠标移动粒子拖尾效果容器组件 ------
+import _StMoveParticleTailContainer from './components/StMoveParticleTailContainer'
+import {StMoveParticleTailContainerRegister as _StMoveParticleTailContainerRegister} from './components/StMoveParticleTailContainer'
+
+StCommonUiVue3Components.StMoveParticleTailContainer = _StMoveParticleTailContainer
+export const StMoveParticleTailContainer = _StMoveParticleTailContainer
+export const StMoveParticleTailContainerRegister = _StMoveParticleTailContainerRegister
+// --------------------------------------------------------------------------------------- 鼠标移动粒子拖尾效果容器组件 ------
+
+// ------------------------------------------------------------------------------------ 鼠标移动实心粒子拖尾效果容器组件 ------
+import _StMoveSolidParticleContainer from './components/StMoveSolidParticleContainer'
+import {StMoveSolidParticleContainerRegister as _StMoveSolidParticleContainerRegister} from './components/StMoveSolidParticleContainer'
+
+StCommonUiVue3Components.StMoveSolidParticleContainer = _StMoveSolidParticleContainer
+export const StMoveSolidParticleContainer = _StMoveSolidParticleContainer
+export const StMoveSolidParticleContainerRegister = _StMoveSolidParticleContainerRegister
+// ------------------------------------------------------------------------------------ 鼠标移动实心粒子拖尾效果容器组件 ------
 
 /**
  * 全局注册小尾巴通用 UI Vue3 组件库中的所有组件
