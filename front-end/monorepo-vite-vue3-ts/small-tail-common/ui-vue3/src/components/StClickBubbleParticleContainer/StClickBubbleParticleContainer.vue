@@ -39,6 +39,10 @@ const props = withDefaults(
     particleZIndex?: number | string;
     // 动画执行速度
     speed?: number;
+    // 是否开启点击时执行气泡粒子动画
+    click?: boolean;
+    // 是否开启鼠标移动时执行气泡粒子动画
+    move?: boolean;
   }>(),
   {
     width: "100%",
@@ -53,6 +57,8 @@ const props = withDefaults(
     evenEmpty: true,
     particleZIndex: 'initial',
     speed: 1000,
+    click: true,
+    move: false,
   }
 )
 
@@ -95,6 +101,8 @@ const setParticleStyleHandler = (particleEl: HTMLElement, idx: number) => {
       :set-particle-style-handler="setParticleStyleHandler"
       :particle-z-index="particleZIndex"
       :speed="speed"
+      :click-particle-bomb="click"
+      :move-particle-bomb="move"
     >
       <slot></slot>
     </StClickParticleBombContainer>

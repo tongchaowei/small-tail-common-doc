@@ -38,6 +38,10 @@ const props = withDefaults(
     particleZIndex?: number | string;
     // 动画执行速度
     speed?: number;
+    // 是否开启点击时产生粒子效果
+    clickParticleBomb?: boolean;
+    // 是否开启鼠标移动时产生粒子效果
+    moveParticleBomb?: boolean;
   }>(),
   {
     width: "100%",
@@ -49,6 +53,8 @@ const props = withDefaults(
     setParticleStyleHandler: () => {},
     particleZIndex: 'initial',
     speed: 1000,
+    clickParticleBomb: true,
+    moveParticleBomb: false,
   }
 )
 
@@ -102,7 +108,8 @@ const genParticleHandler = (x: number, y: number, containerEl: HTMLDivElement) =
     }"
   >
     <StCapturePointerContainer
-      capture-on-pointer-down
+      :capture-on-pointer-down="clickParticleBomb"
+      :capture-on-pointer-move="moveParticleBomb"
       @handlePointerEvent="genParticleHandler"
     >
       <slot></slot>
