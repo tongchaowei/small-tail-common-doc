@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {StTimeline1} from "st-common-ui-vue3"
+import {StTimeline1, St3DTiltContainer, St3DText} from "st-common-ui-vue3"
 import {homeData} from "@/components/layout/home/data.ts"
 import {ref} from "vue"
 import {useRouter} from 'vitepress'
@@ -11,37 +11,62 @@ const router = useRouter()
 </script>
 
 <template>
-  <st-timeline1
-    :data="homeDataRef"
-    :timelinePerView="1"
-  >
-    <template v-slot:display-content-suffix="{ item, idx, nextIdx, currentIdx, isInitial }">
-      <div
-        class="btn"
-        :class="[
+  <div class="home-page">
+    <div class="home-page__logo">
+      <St3DTiltContainer full-page-listening>
+        <St3DText
+          content="Small Tail Common Doc"
+          font-size="5rem"
+          color="#fefefe"
+          base-color="#59B6EC"
+        />
+      </St3DTiltContainer>
+    </div>
+    <st-timeline1
+      :data="homeDataRef"
+      :timelinePerView="1"
+    >
+      <template v-slot:display-content-suffix="{ item, idx, nextIdx, currentIdx, isInitial }">
+        <div
+          class="btn"
+          :class="[
               isInitial? 'initial' : '',
               idx === currentIdx ? 'leave' : '',
               idx === nextIdx? 'enter' : ''
             ]"
-      >
-        <button @click="router.go(item?.url)">
-          <div class="svg-wrapper-1">
-            <div class="svg-wrapper">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-                <path fill="none" d="M0 0h24v24H0z"></path>
-                <path fill="currentColor"
-                      d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
-              </svg>
+        >
+          <button @click="router.go(item?.url)">
+            <div class="svg-wrapper-1">
+              <div class="svg-wrapper">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+                  <path fill="none" d="M0 0h24v24H0z"></path>
+                  <path fill="currentColor"
+                        d="M1.946 9.315c-.522-.174-.527-.455.01-.634l19.087-6.362c.529-.176.832.12.684.638l-5.454 19.086c-.15.529-.455.547-.679.045L12 14l6-8-8 6-8.054-2.685z"></path>
+                </svg>
+              </div>
             </div>
-          </div>
-          <span>{{ item ? item?.btnText : '' }}</span>
-        </button>
-      </div>
-    </template>
-  </st-timeline1>
+            <span>{{ item ? item?.btnText : '' }}</span>
+          </button>
+        </div>
+      </template>
+    </st-timeline1>
+  </div>
 </template>
 
-<style scoped>
+<style scoped lang="scss">
+.home-page {
+  position: relative;
+
+  .home-page__logo {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 2;
+    max-width: 600px;
+    padding: 3rem 2rem;
+  }
+}
+
 @keyframes leave {
   0% {
     transform: translateX(0);
