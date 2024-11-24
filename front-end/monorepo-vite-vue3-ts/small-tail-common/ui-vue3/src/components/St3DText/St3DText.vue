@@ -19,6 +19,8 @@ const props = withDefaults(
     color?: string;
     // 文字大小，如果传递的参数值为数字，则其单位为像素 px
     fontSize?: number | string;
+    // 文本的行高
+    lineHeight?: number | string;
     // 文本 layer 层数
     layerCnt?: number;
     // 文本 layer 之间的间距，其单位为像素 px
@@ -41,6 +43,7 @@ const props = withDefaults(
   {
     color: '#fff',
     fontSize: '3rem',
+    lineHeight: undefined,
     layerCnt: 20,
     layerGap: 1.5,
     shadow: true,
@@ -76,6 +79,7 @@ const layerTextStrokePreHandler = (i: number) => {
       '--perspective': elSizeUtil.elSizePreHandler(perspective),
       color,
       fontSize: elSizeUtil.elSizePreHandler(fontSize),
+      lineHeight: lineHeight ? elSizeUtil.elSizePreHandler(lineHeight) : elSizeUtil.elSizePreHandler(fontSize),
     }"
   >
     <div
