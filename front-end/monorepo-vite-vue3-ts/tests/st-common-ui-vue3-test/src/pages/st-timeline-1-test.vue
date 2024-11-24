@@ -8,6 +8,7 @@ import {timelineData} from './st-timeline-1-test-data'
     <st-timeline1
       :data="timelineData"
       :timelinePerView="1"
+      :timeline-per-view-react-screen="1"
     ></st-timeline1>
   </div>
 </template>

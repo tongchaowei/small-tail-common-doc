@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import {Swiper, SwiperSlide} from 'swiper/vue'
 import type {Swiper as SwiperType} from "swiper/types"
-import {Controller, Mousewheel, Navigation} from "swiper/modules"
+import {Controller, Mousewheel} from "swiper/modules"
 import 'swiper/css'
 import 'swiper/css/bundle'
 import {onBeforeMount, ref, watch, onMounted} from 'vue'
@@ -98,15 +98,20 @@ const isInitial = ref(true)
 const initialIdx = ref(props.initialIndex)
 // 时间线开头和结尾的偏移量
 const timelineSlidesOffset = ref(props.timelineOffset)
+// 时间线开头的偏移量处理
+const timelineSlidesOffsetHandler = (timelinePerView: number) => {
+  // 如果没有指定时间线开头的偏移量
+  if (timelineSlidesOffset.value === undefined) {
+    const timelineSlidePerHeight = useWindowSize().height.value / 2 / timelinePerView
+    timelineSlidesOffset.value = timelineSlidePerHeight * (timelinePerView / 2 - 0.5)
+  }
+}
 onBeforeMount(() => {
   // 判断是否越界，如果越界，则默认显示第一项
   const dataLen = props.data.length
   if (initialIdx.value >= dataLen || initialIdx.value < 0) initialIdx.value = 0
-  // 时间线开头的偏移量预处理
-  if (timelineSlidesOffset.value === undefined) {
-    const timelineSlidePerHeight = useWindowSize().height.value / 2 / props.timelinePerView
-    timelineSlidesOffset.value = timelineSlidePerHeight * (props.timelinePerView / 2 - 0.5)
-  }
+  // 预处理时间线开头的偏移量
+  timelineSlidesOffsetHandler(props.timelinePerView)
 })
 
 // 是否需要响应式变化，以适应小屏幕
@@ -118,22 +123,24 @@ const swiperIsChangeDirectionHandler = (currentWindowWidth: number) => {
     isNeedReact.value = true
     displaySwiperRef.value?.changeDirection('horizontal');
     timelineSwiperRef.value?.changeDirection('horizontal');
+    timelineSlidesOffsetHandler(props.timelinePerViewReactScreen)
     displaySwiperRef.value?.update();
     timelineSwiperRef.value?.update();
-    displaySwiperCurrentSlideIndex.value = -1
-    displaySwiperNextSlideIndex.value = 0
-    isDisplaySwiperChangeSlide.value = true
-    activeIndex.value = 0
+    // displaySwiperCurrentSlideIndex.value = -1
+    // displaySwiperNextSlideIndex.value = 0
+    // isDisplaySwiperChangeSlide.value = true
+    // activeIndex.value = 0
   } else if (!isNeed && isNeedReact.value) {
     isNeedReact.value = false
     displaySwiperRef.value?.changeDirection('vertical');
     timelineSwiperRef.value?.changeDirection('vertical');
+    timelineSlidesOffsetHandler(props.timelinePerView)
     displaySwiperRef.value?.update();
     timelineSwiperRef.value?.update();
-    displaySwiperCurrentSlideIndex.value = -1
-    displaySwiperNextSlideIndex.value = 0
-    isDisplaySwiperChangeSlide.value = true
-    activeIndex.value = 0
+    // displaySwiperCurrentSlideIndex.value = -1
+    // displaySwiperNextSlideIndex.value = 0
+    // isDisplaySwiperChangeSlide.value = true
+    // activeIndex.value = 0
   }
 }
 onMounted(() => {
@@ -150,7 +157,7 @@ watch(
 )
 
 // swiper 模块
-const swiperModules = ref([Controller, Mousewheel, Navigation])
+const swiperModules = ref([Controller, Mousewheel])
 
 // swiper 引用对象
 const displaySwiperRef = ref<SwiperType | null>(null)
@@ -173,6 +180,19 @@ const activeIndex = ref(initialIdx.value)
  */
 const timelineSwiperClickHandler = (swiper: SwiperType) => {
   displaySwiperRef.value?.slideTo(swiper.clickedIndex)
+}
+
+/**
+ * 下一张幻灯片处理函数
+ */
+const nextSwiperHandler = () => {
+  displaySwiperRef.value?.slideTo(activeIndex.value + 1)
+}
+/**
+ * 上一张幻灯片处理函数
+ */
+const preSwiperHandler = () => {
+  displaySwiperRef.value?.slideTo(activeIndex.value - 1)
 }
 
 // display swiper 是否要切换幻灯片
@@ -289,10 +309,6 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
           :modules="swiperModules"
           :slides-per-view="isNeedReact ? timelinePerViewReactScreen : timelinePerView"
           :controller="{ control: displaySwiperRef }"
-          :navigation="{
-            prevEl: '.st-timeline1__timeline-swiper-prev',
-            nextEl: '.st-timeline1__timeline-swiper-next'
-          }"
           @swiper="setTimelineSwiper"
           @click="timelineSwiperClickHandler"
         >
@@ -316,8 +332,13 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
             </div>
           </swiper-slide>
         </swiper>
-        <div v-if="enableTimelineNav" class="st-timeline1__timeline-swiper-prev">
-          <slot>
+        <div
+          v-if="enableTimelineNav"
+          class="st-timeline1__timeline-swiper-prev"
+          :style="{cursor: activeIndex <= 0 ? 'no-drop' : 'pointer'}"
+          @click="() => activeIndex > 0 && preSwiperHandler()"
+        >
+          <slot name="timeline-swiper-prev">
             <div
               class="content"
               :style="{
@@ -328,8 +349,13 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
             </div>
           </slot>
         </div>
-        <div v-if="enableTimelineNav" class="st-timeline1__timeline-swiper-next">
-          <slot>
+        <div
+          v-if="enableTimelineNav"
+          class="st-timeline1__timeline-swiper-next"
+          :style="{cursor: activeIndex >= data.length - 1 ? 'no-drop' : 'pointer'}"
+          @click="() => activeIndex < data.length - 1 && nextSwiperHandler()"
+        >
+          <slot name="timeline-swiper-next">
             <div
               class="content"
               :style="{
@@ -570,7 +596,7 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
       .st-timeline1__timeline-swiper-prev,
       .st-timeline1__timeline-swiper-next {
         position: absolute;
-        width: 100%;
+        z-index: 1;
 
         .content {
           padding: 1rem;
@@ -578,8 +604,6 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
           font-size: 3rem;
         }
       }
-
-
 
       .st-timeline1__timeline-swiper-prev {
         top: 0;
@@ -643,6 +667,8 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
     overflow: hidden;
 
     .st-timeline1__timeline-swiper-box {
+      width: 100vw;
+      height: 100%;
       grid-row: 2 / 3;
       grid-column: 1 / 2;
       border-top: 2px solid #cecece33;
@@ -650,6 +676,7 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
       align-items: start;
 
       .st-timeline1__timeline-swiper {
+        width: 100vw;
         height: auto;
 
         .st-timeline1__timeline-swipe__slide {
@@ -669,6 +696,12 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
             transform: translate(-50%, -50%);
           }
         }
+      }
+
+      .st-timeline1__timeline-swiper-prev,
+      .st-timeline1__timeline-swiper-next {
+        left: initial;
+        right: 0;
       }
     }
   }
