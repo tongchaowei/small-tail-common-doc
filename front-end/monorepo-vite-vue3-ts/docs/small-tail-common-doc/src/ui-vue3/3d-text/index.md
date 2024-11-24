@@ -43,7 +43,7 @@ const baseShadow = ref(true)
 const perspective = ref('1000px')
 </script>
 
-<div style="height: 300px; border-radius: 1rem; overflow: hidden;" :style="{background: bgColor, lineHeight: fontSize}">
+<div style="height: 200px; border-radius: 1rem; overflow: hidden;" :style="{background: bgColor, lineHeight: fontSize}">
   <St3DTiltContainer fullPageListening>
     <div style="width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; transform-style: preserve-3d">
       <St3DText
