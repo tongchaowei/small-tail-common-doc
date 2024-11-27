@@ -7,7 +7,7 @@ import {timelineData} from './st-timeline-1-test-data'
   <div class="st-timeline-1-test">
     <st-timeline1
       :timeline-data="[...timelineData, ...timelineData].map(item => item.title)"
-      :timeline-per-view="1"
+      :timeline-per-view="3"
       :timeline-text-max-line="2"
     >
       <StTimelineItem1
