@@ -34,6 +34,15 @@ export default defineConfig({
               {text: '示例源码', link: '/ui-vue3/login-page-1/demo-code'},
             ]
           },
+          {
+            text: '时间线 1',
+            link: '/ui-vue3/timeline-1/',
+            collapsed: true,
+            items: [
+              {text: '示例', link: '/ui-vue3/timeline-1/demo'},
+              {text: '示例源码', link: '/ui-vue3/timeline-1/demo-code'},
+            ]
+          },
           {text: '动态边框 1', link: '/ui-vue3/dynamic-border-1/'},
           {text: '渐变背景 1', link: '/ui-vue3/gradient-bg-1/'},
           {text: '渐变背景 2', link: '/ui-vue3/gradient-bg-2/'},
