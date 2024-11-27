@@ -5,7 +5,7 @@ import StSwiperSlide from 'st-common-ui-vue3/src/components/StSwiperSlide/StSwip
 
 <template>
   <div class="st-swiper-test">
-    <st-swiper>
+    <st-swiper navigation >
       <StSwiperSlide>Slide 1</StSwiperSlide>
       <StSwiperSlide>Slide 2</StSwiperSlide>
       <StSwiperSlide>Slide 3</StSwiperSlide>
@@ -13,6 +13,10 @@ import StSwiperSlide from 'st-common-ui-vue3/src/components/StSwiperSlide/StSwip
   </div>
 </template>
 
-<style scoped>
-
+<style lang="scss">
+//.swiper-slide {
+//  width: 100%;
+//  height: 100vh;
+//  background: #0c7a43;
+//}
 </style>

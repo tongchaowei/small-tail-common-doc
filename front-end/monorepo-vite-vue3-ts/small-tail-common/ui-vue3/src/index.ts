@@ -56,10 +56,15 @@ import _StTimeline1, {
   StTimeline1Register as _StTimeline1Register,
   StTimelineDataItem as _StTimelineDataItem
 } from "./components/StTimeline1"
+import _StTimelineItem1  from './components/StTimelineItem1'
+import {StTimelineItem1Register as _StTimelineItem1Register} from './components/StTimelineItem1'
 
 StCommonUiVue3Components.StTimeline1 = _StTimeline1
+StCommonUiVue3Components.StTimelineItem1 = _StTimelineItem1
 export const StTimeline1 = _StTimeline1
+export const StTimelineItem1 = _StTimelineItem1
 export const StTimeline1Register = _StTimeline1Register
+export const StTimelineItem1Register = _StTimelineItem1Register
 export type StTimelineDataItem = _StTimelineDataItem
 // ----------------------------------------------------------------------------------------------------- 时间线组件 ------
 
@@ -225,6 +230,15 @@ StCommonUiVue3Components.StMoveSolidParticleContainer = _StMoveSolidParticleCont
 export const StMoveSolidParticleContainer = _StMoveSolidParticleContainer
 export const StMoveSolidParticleContainerRegister = _StMoveSolidParticleContainerRegister
 // ------------------------------------------------------------------------------------ 鼠标移动实心粒子拖尾效果容器组件 ------
+
+// ------------------------------------------------------------------------------------------ 鼠标悬浮流光效果容器组件 ------
+import _StHoverFleetingContainer from './components/StHoverFleetingContainer'
+import {StHoverFleetingContainerRegister as _StHoverFleetingContainerRegister} from './components/StHoverFleetingContainer'
+
+StCommonUiVue3Components.StHoverFleetingContainer = _StHoverFleetingContainer
+export const StHoverFleetingContainer = _StHoverFleetingContainer
+export const StHoverFleetingContainerRegister = _StHoverFleetingContainerRegister
+// ------------------------------------------------------------------------------------------ 鼠标悬浮流光效果容器组件 ------
 
 /**
  * 全局注册小尾巴通用 UI Vue3 组件库中的所有组件
