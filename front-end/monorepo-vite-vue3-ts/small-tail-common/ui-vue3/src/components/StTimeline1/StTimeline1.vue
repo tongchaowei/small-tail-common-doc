@@ -60,7 +60,7 @@ const props = withDefaults(
     speed: 1500,
     transitionFun: 'cubic-bezier(.68, -0.55, .26, 1.55)',
     transitionDelay: 0,
-    bgImg: 'transparent',
+    background: 'transparent',
     timelinePerView: 1,
     timelinePerViewReactScreen: 1,
     timelineOffset: undefined,
