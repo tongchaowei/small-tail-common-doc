@@ -56,10 +56,15 @@ import _StTimeline1, {
   StTimeline1Register as _StTimeline1Register,
   StTimelineDataItem as _StTimelineDataItem
 } from "./components/StTimeline1"
+import _StTimelineItem1  from './components/StTimelineItem1'
+import {StTimelineItem1Register as _StTimelineItem1Register} from './components/StTimelineItem1'
 
 StCommonUiVue3Components.StTimeline1 = _StTimeline1
+StCommonUiVue3Components.StTimelineItem1 = _StTimelineItem1
 export const StTimeline1 = _StTimeline1
+export const StTimelineItem1 = _StTimelineItem1
 export const StTimeline1Register = _StTimeline1Register
+export const StTimelineItem1Register = _StTimelineItem1Register
 export type StTimelineDataItem = _StTimelineDataItem
 // ----------------------------------------------------------------------------------------------------- 时间线组件 ------
 

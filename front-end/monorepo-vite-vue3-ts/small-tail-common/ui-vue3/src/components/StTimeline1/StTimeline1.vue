@@ -1,55 +1,41 @@
 <script setup lang="ts">
-import {Swiper, SwiperSlide} from 'swiper/vue'
+import {onBeforeMount, onMounted, provide, ref, watch} from 'vue'
+import StSwiper from "../StSwiper"
+import StSwiperSlide from "../StSwiperSlide"
 import type {Swiper as SwiperType} from "swiper/types"
-import {Controller, Mousewheel, Navigation} from "swiper/modules"
-import 'swiper/css'
-import 'swiper/css/bundle'
-import {onBeforeMount, ref, watch, onMounted} from 'vue'
-import {StTimelineDataItem} from "./types.ts"
 import {useWindowSize} from "@vueuse/core"
-import {elSizeUtil} from 'st-common-ui-utils'
-import StIconIconify from "../StIconIconify"
-import ChevronCompactUp from '@iconify-icons/tabler/chevron-compact-up'
-import ChevronCompactDown from '@iconify-icons/tabler/chevron-compact-down'
 
 /**
  * 组件配置选项
  */
+defineOptions({
+  name: 'StTimeline1',
+})
+
+/**
+ * 组件参数
+ */
 const props = withDefaults(
   defineProps<{
-    // 时间线数据
-    data: StTimelineDataItem[];
-    // 需要响应式变化的小屏幕宽度界限
-    needReactScreenWidth?: number;
-    // 初始显示的时间线数据项索引
+    // 初始显示的项的索引
     initialIndex?: number;
+    // 是否开启鼠标滚轮切换时间线项
+    enableMousewheelSwitch?: boolean;
     // 切换过渡效果时长，单位为毫秒
     speed?: number;
     // 切换过渡效果
     transitionFun?: string;
     // 切换过渡效果执行延迟，如果传入的是数字，则单位默认为毫秒
     transitionDelay?: number | string;
-    // 背景图片
-    bgImg?: string;
-    // 展示区域中的文字颜色
-    displayTextColor?: string;
-    // 展示区域中文字动画效果时长，如果传入的是数字，则单位默认为毫秒
-    displayTextAnimationSpeed?: number | string;
-    // 展示区域中标题出现时动画执行延迟，如果传入的是数字，则单位默认为毫秒
-    displayTitleEnterDelay?: number | string;
-    // 展示区域中描述文本出现时动画执行延迟，如果传入的是数字，则单位默认为毫秒
-    displayDescEnterDelay?: number | string;
-    // 展示区域中标题文本最多显示行数
-    displayTitleMaxLine?: number;
-    // 展示区域中描述文本最多显示行数
-    displayDescMaxLine?: number;
-    // 是否开启鼠标滚轮切换时间线项
-    enableMousewheelSwitch?: boolean;
+    // 组件背景
+    background?: string;
+    // 时间线数据
+    timelineData: string[];
     // 时间线可选项展示个数
     timelinePerView?: number;
     // 时间线可选项在需要响应式变换的小屏幕宽度下，展示的个数
     timelinePerViewReactScreen?: number;
-    // 时间线开头和末尾的偏移量，用以实现当前激活时间线项居中效果
+    // 时间线开头和末尾的偏移量
     timelineOffset?: number;
     // 时间线未激活项颜色
     timelineColor?: string;
@@ -57,446 +43,194 @@ const props = withDefaults(
     timelineColorActive?: string;
     // 时间线每项文本最多显示行数
     timelineTextMaxLine?: number;
+    // 时间线切换过渡效果时长，单位为毫秒
+    timelineSpeed?: number;
+    // 时间线切换过渡效果
+    timelineTransitionFun?: string;
+    // 时间线切换过渡效果执行延迟，如果传入的是数字，则单位默认为毫秒
+    timelineTransitionDelay?: number | string;
     // 是否显示时间线导航按钮
     enableTimelineNav?: boolean;
-    // 时间线导航按钮的颜色
-    timelineNavColor?: string;
-    // 时间线导航按钮禁用的颜色
-    timelineNavDisabledColor?: string;
+    // 需要响应式变化的小屏幕宽度界限
+    needReactScreenWidth?: number;
   }>(),
   {
-    needReactScreenWidth: 600,
     initialIndex: 0,
+    enableMousewheelSwitch: true,
     speed: 1500,
     transitionFun: 'cubic-bezier(.68, -0.55, .26, 1.55)',
-    transitionDelay: 300,
+    transitionDelay: 0,
     bgImg: 'transparent',
-    displayTextColor: '#efefef',
-    displayTextAnimationSpeed: 500,
-    displayTitleEnterDelay: 2000,
-    displayDescEnterDelay: 2200,
-    displayTitleMaxLine: 1,
-    displayDescMaxLine: 5,
-    enableMousewheelSwitch: true,
-    timelinePerView: 10,
-    timelinePerViewReactScreen: 2,
+    timelinePerView: 1,
+    timelinePerViewReactScreen: 1,
+    timelineOffset: undefined,
     timelineColor: '#9c9c9c9f',
     timelineColorActive: '#efefef',
     timelineTextMaxLine: 1,
+    timelineSpeed: 1200,
+    timelineTransitionFun: 'cubic-bezier(.68, -0.55, .26, 1.55)',
+    timelineTransitionDelay: 300,
     enableTimelineNav: true,
-    timelineNavColor: '#efefef',
-    timelineNavDisabledColor: '#9c9c9c9f'
+    needReactScreenWidth: 600,
   }
 )
 
-/**
- * 初始处理
- */
-// 是否为初始状态
-const isInitial = ref(true)
-// 初始显示的时间线数据项索引
-const initialIdx = ref(props.initialIndex)
+// 幻灯片切换的方向
+const direction = ref<'horizontal' | 'vertical'>('vertical')
+
+// 展示区域 Swiper 引用对象
+const displaySwiperRef = ref()
+// 展示区域 Swiper 实例对象
+const displaySwiper = ref<SwiperType>()
+// 时间线 swiper 引用对象
+const timelineSwiperRef = ref()
+// 时间线 swiper 实例对象
+const timelineSwiper = ref<SwiperType>()
+onMounted(() => {
+  displaySwiper.value = displaySwiperRef.value.swiper
+  timelineSwiper.value = timelineSwiperRef.value.swiper
+})
+
 // 时间线开头和结尾的偏移量
 const timelineSlidesOffset = ref(props.timelineOffset)
-onBeforeMount(() => {
-  // 判断是否越界，如果越界，则默认显示第一项
-  const dataLen = props.data.length
-  if (initialIdx.value >= dataLen || initialIdx.value < 0) initialIdx.value = 0
-  // 时间线开头的偏移量预处理
+// 时间线开头的偏移量处理
+const timelineSlidesOffsetHandler = (timelinePerView: number) => {
+  // 如果没有指定时间线开头的偏移量，则默认偏移以实现当前激活的时间线项居中
   if (timelineSlidesOffset.value === undefined) {
-    const timelineSlidePerHeight = useWindowSize().height.value / 2 / props.timelinePerView
-    timelineSlidesOffset.value = timelineSlidePerHeight * (props.timelinePerView / 2 - 0.5)
+    const windowSize = isReact.value ? useWindowSize().width.value : useWindowSize().height.value
+    const timelineSlidePerHeight = windowSize / timelinePerView
+    timelineSlidesOffset.value = timelineSlidePerHeight * (timelinePerView / 2 - 0.5)
   }
+}
+onBeforeMount(() => {
+  // 预处理时间线开头的偏移量
+  timelineSlidesOffsetHandler(props.timelinePerView)
 })
 
-// 是否需要响应式变化，以适应小屏幕
-const isNeedReact = ref(false)
-// swiper 是否需要更改方向处理函数
-const swiperIsChangeDirectionHandler = (currentWindowWidth: number) => {
+// 当前展示的项的索引
+const activeIdx = ref(props.initialIndex)
+
+// 是否响应式变化，以适应小屏幕
+const isReact = ref(false)
+// Swiper 更改方向处理函数
+const changeSwiperDirectionHandler = (currentWindowWidth: number) => {
+  // 当前浏览器可视区域的宽度是否需要修改 Swiper 方向
   const isNeed = currentWindowWidth <= props.needReactScreenWidth
-  if (isNeed && !isNeedReact.value) {
-    isNeedReact.value = true
-    displaySwiperRef.value?.changeDirection('horizontal');
-    timelineSwiperRef.value?.changeDirection('horizontal');
-    displaySwiperRef.value?.update();
-    timelineSwiperRef.value?.update();
-    displaySwiperCurrentSlideIndex.value = -1
-    displaySwiperNextSlideIndex.value = 0
-    isDisplaySwiperChangeSlide.value = true
-    activeIndex.value = 0
-  } else if (!isNeed && isNeedReact.value) {
-    isNeedReact.value = false
-    displaySwiperRef.value?.changeDirection('vertical');
-    timelineSwiperRef.value?.changeDirection('vertical');
-    displaySwiperRef.value?.update();
-    timelineSwiperRef.value?.update();
-    displaySwiperCurrentSlideIndex.value = -1
-    displaySwiperNextSlideIndex.value = 0
-    isDisplaySwiperChangeSlide.value = true
-    activeIndex.value = 0
+  // 如果需要修改方向，且没响应式变化，则进行响应式变换
+  if (isNeed && !isReact.value) {
+    // 标记为响应式变化了
+    isReact.value = true
+    // 修改 Swiper 方向
+    displaySwiperRef.value.swiper?.changeDirection('horizontal')
+    timelineSwiperRef.value.swiper?.changeDirection('horizontal')
+    // 处理方向修改后的时间线开头和末尾的偏移量
+    timelineSlidesOffsetHandler(props.timelinePerViewReactScreen)
+    // 更新 Swiper
+    displaySwiperRef.value.swiper?.update();
+    timelineSwiperRef.value.swiper?.update();
+  }
+  // 如果不需要修改方向了，且响应式变化了，则恢复响应式变换之前的 Swiper 方向
+  else if (!isNeed && isReact.value) {
+    isReact.value = false
+    displaySwiperRef.value.swiper?.changeDirection('vertical');
+    timelineSwiperRef.value.swiper?.changeDirection('vertical');
+    timelineSlidesOffsetHandler(props.timelinePerView)
+    displaySwiperRef.value.swiper?.update();
+    timelineSwiperRef.value.swiper?.update();
   }
 }
+// 组件挂载完成后，判断是否需要响应式变换
 onMounted(() => {
-  swiperIsChangeDirectionHandler(useWindowSize().width.value)
+  changeSwiperDirectionHandler(useWindowSize().width.value)
 })
-/**
- * 监听屏幕宽度变化，判断是否需要响应式变化，以适应小屏幕
- */
-watch(
-  () => useWindowSize().width.value,
-  (newVal) => {
-    swiperIsChangeDirectionHandler(newVal)
-  }
-)
-
-// swiper 模块
-const swiperModules = ref([Controller, Mousewheel, Navigation])
-
-// swiper 引用对象
-const displaySwiperRef = ref<SwiperType | null>(null)
-const timelineSwiperRef = ref<SwiperType | null>(null)
-// 为 swiper 引用对象赋值
-const setDisplaySwiper = (swiper: SwiperType) => {
-  displaySwiperRef.value = swiper
-}
-const setTimelineSwiper = (swiper: SwiperType) => {
-  timelineSwiperRef.value = swiper
-}
-
-// 当前激活时间线项索引
-const activeIndex = ref(initialIdx.value)
-
-/**
- * 时间线 swiper 点击事件处理函数
- *
- * @param {Swiper} swiper 时间线 swiper 对象
- */
-const timelineSwiperClickHandler = (swiper: SwiperType) => {
-  displaySwiperRef.value?.slideTo(swiper.clickedIndex)
-}
-
-// display swiper 是否要切换幻灯片
-const isDisplaySwiperChangeSlide = ref(false)
-// display swiper 当前要切换走的幻灯片索引
-const displaySwiperCurrentSlideIndex = ref(-1)
-// display swiper 要切换到的下一张幻灯片索引
-const displaySwiperNextSlideIndex = ref(0)
-/**
- * display swiper 切换幻灯片开始事件处理函数
- */
-const displaySwiperSlideChangeTransitionStartHandler = (swiper: SwiperType) => {
-  isInitial.value = false
-  displaySwiperCurrentSlideIndex.value = swiper.previousIndex
-  displaySwiperNextSlideIndex.value = swiper.activeIndex
-  isDisplaySwiperChangeSlide.value = true
-  activeIndex.value = swiper.activeIndex
-}
-/**
- * display swiper 切换幻灯片结束事件处理函数
- */
-const displaySwiperSlideChangeTransitionEndHandler = () => {
-  isDisplaySwiperChangeSlide.value = false
-}
-/**
- * display swiper 鼠标滚轮滚动事件处理函数
- */
-const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
-  timelineSwiperRef.value?.slideTo(swiper.activeIndex)
-}
+// 监听屏幕宽度变化，判断是否需要响应式变化，以适应小屏幕
+watch(() => useWindowSize().width.value, (newVal) => {
+  changeSwiperDirectionHandler(newVal)
+})
+// 向子组件提供状态
+provide('isReact', isReact)
 </script>
 
 <template>
-  <div
-    class="st-timeline1"
-    :class="[isNeedReact ? 'st-timeline1--small-screen' : '']"
-    :style="{
-      '--transition-fun': transitionFun,
-      '--transition-delay': elSizeUtil.elSizePreHandler(transitionDelay, 'ms'),
-      backgroundImage: bgImg,
-    }"
-  >
-    <swiper
-      class="st-timeline1__display-swiper"
-      :direction="'vertical'"
-      :initial-slide="initialIdx"
-      :modules="swiperModules"
-      :controller="{ control: timelineSwiperRef }"
-      :speed="speed"
-      :mousewheel="{enabled: enableMousewheelSwitch}"
-      @scroll="displaySwiperMousewheelHandler"
-      @swiper="setDisplaySwiper"
-      @slide-change-transition-start="displaySwiperSlideChangeTransitionStartHandler"
-      @slide-change-transition-end="displaySwiperSlideChangeTransitionEndHandler"
-    >
-      <swiper-slide
-        class="st-timeline1__display-swipe__slide"
-        v-for="(item, idx) in data"
-        :key="idx"
+  <div class="st-timeline1" :class="[isReact ? 'st-timeline1--small-screen' : '']" :style="{background}">
+    <div class="st-timeline1__display">
+      <StSwiper
+        ref="displaySwiperRef"
+        v-model:active-slide-idx="activeIdx"
+        :initial-slide="initialIndex"
+        :direction="direction"
+        :mousewheel="enableMousewheelSwitch"
+        :control-swiper="timelineSwiper"
+        :transition-fun="transitionFun"
+        :transition-speed="speed"
+        :transition-delay="transitionDelay"
       >
-        <div
-          class="st-timeline1__display-swipe__slide__content-container"
-          :style="{backgroundImage: `url(${item.bgImgSrc})`}"
-        >
-          <div
-            class="st-timeline1__display-swipe__slide__content"
-            :class="[
-              isInitial && initialIdx === idx ?'st-timeline1__display-swipe__slide__content--initial' : '',
-              displaySwiperCurrentSlideIndex === idx ? 'st-timeline1__display-swipe__slide__content--leave' : '',
-              displaySwiperNextSlideIndex === idx ? 'st-timeline1__display-swipe__slide__content--enter' : ''
-            ]"
-            :style="{
-              '--display-text-animation-speed': elSizeUtil.elSizePreHandler(displayTextAnimationSpeed, 'ms'),
-              '--display-title-enter-delay': elSizeUtil.elSizePreHandler(displayTitleEnterDelay, 'ms'),
-              '--display-desc-enter-delay': elSizeUtil.elSizePreHandler(displayDescEnterDelay, 'ms'),
-              color: displayTextColor
-            }"
-          >
-            <div
-              class="st-timeline1__display-swipe__slide__content__title"
-              :style="{
-                '--display-title-max-line': displayTitleMaxLine,
-              }"
-            >{{ item.title }}
-            </div>
-            <div
-              class="st-timeline1__display-swipe__slide__content__desc"
-              :style="{
-                '--display-desc-max-line': displayDescMaxLine
-              }"
-            >{{ item.desc }}
-            </div>
-            <slot
-              name="display-content-suffix"
-              :item="item"
-              :idx="idx"
-              :isChange="isDisplaySwiperChangeSlide"
-              :currentIdx="displaySwiperCurrentSlideIndex"
-              :nextIdx="displaySwiperNextSlideIndex"
-              :isInitial="isInitial"
-            ></slot>
-          </div>
-        </div>
-      </swiper-slide>
-    </swiper>
-    <div class="st-timeline1__timeline-swiper-container">
-      <div class="st-timeline1__timeline-swiper-box">
-        <swiper
-          class="st-timeline1__timeline-swiper"
-          :direction="'vertical'"
-          :slides-offset-before="timelineSlidesOffset"
-          :slides-offset-after="timelineSlidesOffset"
-          :initial-slide="initialIdx"
-          :modules="swiperModules"
-          :slides-per-view="isNeedReact ? timelinePerViewReactScreen : timelinePerView"
-          :controller="{ control: displaySwiperRef }"
-          :navigation="{
-            prevEl: '.st-timeline1__timeline-swiper-prev',
-            nextEl: '.st-timeline1__timeline-swiper-next'
-          }"
-          @swiper="setTimelineSwiper"
-          @click="timelineSwiperClickHandler"
-        >
-          <swiper-slide
+        <slot></slot>
+      </StSwiper>
+    </div>
+    <div class="st-timeline1__timeline">
+      <StSwiper
+        ref="timelineSwiperRef"
+        class="st-timeline1__timeline-swiper"
+        :width="isReact ? '100vw' : '100%'"
+        :height="isReact ? '100%' : '100vh'"
+        v-model:active-slide-idx="activeIdx"
+        :initial-slide="initialIndex"
+        :direction="direction"
+        :slides-per-view="timelinePerView"
+        :slides-offset-before="timelineSlidesOffset"
+        :slides-offset-after="timelineSlidesOffset"
+        :mousewheel="enableMousewheelSwitch"
+        :navigation="enableTimelineNav"
+        nav-direction="vertical"
+        :nav-align="isReact ? 'end' : 'start'"
+        :control-swiper="displaySwiper"
+        swiper-overflow="initial"
+        :transition-fun="timelineTransitionFun"
+        :transition-speed="timelineSpeed"
+        :transition-delay="timelineTransitionDelay"
+      >
+        <template v-slot="{ activeSlideIdx }">
+          <StSwiperSlide
+            v-for="(item, idx) in timelineData"
+            :key="idx"
             class="st-timeline1__timeline-swipe__slide"
-            :class="[activeIndex === idx ? 'st-timeline1__timeline-swipe__slide--active' : '']"
+            :class="[activeSlideIdx === idx ? 'st-timeline1__timeline-swipe__slide--active' : '']"
             :style="{
               '--timeline-color': timelineColor,
               '--timeline-color-active': timelineColorActive
             }"
-            v-for="(item, idx) in data"
-            :key="idx"
           >
             <div
               class="st-timeline1__timeline-swipe__slide__content"
               :style="{'--timeline-text-max-line': timelineTextMaxLine}"
             >
-              <div class="st-timeline1__timeline-swipe__slide__content__label">
-                {{ item.label ? item.label : item.title }}
-              </div>
+              <div class="st-timeline1__timeline-swipe__slide__content__label">{{ item }}</div>
             </div>
-          </swiper-slide>
-        </swiper>
-        <div v-if="enableTimelineNav" class="st-timeline1__timeline-swiper-prev">
-          <slot>
-            <div
-              class="content"
-              :style="{
-                '--timeline-nav-color': activeIndex <= 0 ? timelineNavDisabledColor : timelineNavColor,
-              }"
-            >
-              <st-icon-iconify :icon="ChevronCompactUp"/>
-            </div>
-          </slot>
-        </div>
-        <div v-if="enableTimelineNav" class="st-timeline1__timeline-swiper-next">
-          <slot>
-            <div
-              class="content"
-              :style="{
-                '--timeline-nav-color': activeIndex >= data.length - 1 ? timelineNavDisabledColor : timelineNavColor,
-              }"
-            >
-              <st-icon-iconify :icon="ChevronCompactDown"/>
-            </div>
-          </slot>
-        </div>
-      </div>
+          </StSwiperSlide>
+        </template>
+      </StSwiper>
     </div>
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped lang="scss">
 .st-timeline1 {
   position: relative;
+  width: 100%;
+  height: 100vh;
   overflow: hidden;
 
-  :deep(.swiper) {
-    overflow: initial;
-  }
-
-  .st-timeline1__display-swiper {
-    width: 100%;
-    height: 100vh;
-    overflow: hidden;
-
-    :deep(.swiper-wrapper) {
-      transition-timing-function: var(--transition-fun);
-      transition-delay: var(--transition-delay) !important;
-    }
-
-    .st-timeline1__display-swipe__slide {
-
-      .st-timeline1__display-swipe__slide__content-container {
-        position: relative;
-        width: 100%;
-        height: 100vh;
-        background-size: cover;
-        background-position: center;
-        display: grid;
-        grid-template-rows: 1fr;
-        grid-template-columns: 2fr 2fr 1fr;
-        justify-items: end;
-        align-items: center;
-
-        &::after {
-          content: "";
-          position: absolute;
-          top: 50%;
-          right: 0;
-          transform: translate(20%, -50%);
-          width: 165%;
-          height: 100%;
-          background: radial-gradient(circle at 100% 50%, #000000 0%, #0000009f 37.5%, transparent 65%, transparent 100%);
-        }
-
-        .st-timeline1__display-swipe__slide__content {
-          z-index: 1;
-          grid-row: 1 / 2;
-          grid-column: 2 / 3;
-          width: 100%;
-          height: 100%;
-          display: flex;
-          flex-direction: column;
-          justify-content: center;
-          align-items: end;
-          overflow: hidden;
-          text-align: end;
-
-          .st-timeline1__display-swipe__slide__content__title,
-          .st-timeline1__display-swipe__slide__content__desc {
-            transform: translateX(100%);
-            padding-right: 2rem;
-            display: -webkit-box;
-            overflow: hidden;
-            -webkit-box-orient: vertical;
-            text-overflow: ellipsis;
-          }
-
-          .st-timeline1__display-swipe__slide__content__title {
-            margin-bottom: 0.5rem;
-            font-size: 2rem;
-            font-weight: bold;
-            line-clamp: var(--display-title-max-line);
-            -webkit-line-clamp: var(--display-title-max-line);
-          }
-
-          .st-timeline1__display-swipe__slide__content__desc {
-            padding-bottom: 1rem;
-            font-size: 0.95rem;
-            line-height: 1.25;
-            line-clamp: var(--display-desc-max-line);
-            -webkit-line-clamp: var(--display-desc-max-line);
-          }
-        }
-
-        @keyframes leave {
-          0% {
-            transform: translateX(0);
-            opacity: 1;
-          }
-          100% {
-            transform: translateX(100%);
-            opacity: 0;
-          }
-        }
-
-        .st-timeline1__display-swipe__slide__content--leave {
-
-          .st-timeline1__display-swipe__slide__content__title,
-          .st-timeline1__display-swipe__slide__content__desc {
-            animation: leave var(--display-text-animation-speed) ease-in-out forwards;
-          }
-        }
-
-        @keyframes enter {
-          0% {
-            transform: translateX(100%);
-            opacity: 0;
-          }
-          100% {
-            transform: translateX(0);
-            opacity: 1;
-          }
-        }
-
-        .st-timeline1__display-swipe__slide__content--enter {
-
-          .st-timeline1__display-swipe__slide__content__title {
-            animation: enter var(--display-text-animation-speed) ease-in-out forwards;
-            animation-delay: var(--display-title-enter-delay);
-          }
-
-          .st-timeline1__display-swipe__slide__content__desc {
-            animation: enter var(--display-text-animation-speed) ease-in-out forwards;
-            animation-delay: var(--display-desc-enter-delay);
-          }
-        }
-
-        .st-timeline1__display-swipe__slide__content--initial {
-
-          .st-timeline1__display-swipe__slide__content__title,
-          .st-timeline1__display-swipe__slide__content__desc {
-            transform: translateX(0);
-            animation-duration: 0s;
-          }
-        }
-      }
-    }
-  }
-
-  .st-timeline1__timeline-swiper-container {
+  .st-timeline1__timeline {
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
+    inset: 0;
     display: grid;
     grid-template-rows: 1fr;
     grid-template-columns: 4fr 1fr;
     justify-items: start;
     align-items: center;
 
-    .st-timeline1__timeline-swiper-box {
+    .st-timeline1__timeline-swiper {
       grid-row: 1 / 2;
       grid-column: 2 / 3;
       position: relative;
@@ -511,82 +245,55 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
       grid-template-columns: 1fr;
       align-items: center;
 
-      .st-timeline1__timeline-swiper {
-        width: 100%;
-        height: 50%;
+      .st-timeline1__timeline-swipe__slide {
+        box-sizing: border-box;
+        padding-left: 1rem;
+        padding-top: 0;
+        cursor: pointer;
 
-        .st-timeline1__timeline-swipe__slide {
-          box-sizing: border-box;
-          padding-left: 1rem;
-          padding-top: 0;
-          cursor: pointer;
+        .st-timeline1__timeline-swipe__slide__content {
+          width: 100%;
+          height: 100%;
+          display: flex;
+          justify-content: start;
+          align-items: center;
+          color: var(--timeline-color);
 
-          .st-timeline1__timeline-swipe__slide__content {
-            width: 100%;
-            height: 100%;
-            display: flex;
-            justify-content: start;
-            align-items: center;
-            color: var(--timeline-color);
-
-            .st-timeline1__timeline-swipe__slide__content__label {
-              display: -webkit-box;
-              overflow: hidden;
-              -webkit-box-orient: vertical;
-              text-overflow: ellipsis;
-              line-clamp: var(--timeline-text-max-line);
-              -webkit-line-clamp: var(--timeline-text-max-line);
-            }
+          .st-timeline1__timeline-swipe__slide__content__label {
+            display: -webkit-box;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            text-overflow: ellipsis;
+            line-clamp: var(--timeline-text-max-line);
+            -webkit-line-clamp: var(--timeline-text-max-line);
           }
         }
+      }
 
-        .st-timeline1__timeline-swipe__slide--active {
-          position: relative;
+      .st-timeline1__timeline-swipe__slide--active {
+        position: relative;
+        width: 100%;
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: -1px;
+          transform: translate(-50%, -50%);
+          z-index: 1;
+          width: 4px;
+          height: 4px;
+          background-color: var(--timeline-color-active);
+          border-radius: 50%;
+        }
+
+        .st-timeline1__timeline-swipe__slide__content {
           width: 100%;
 
-          &::before {
-            content: "";
-            position: absolute;
-            top: 50%;
-            left: -1px;
-            transform: translate(-50%, -50%);
-            z-index: 1;
-            width: 4px;
-            height: 4px;
-            background-color: var(--timeline-color-active);
-            border-radius: 50%;
-          }
-
-          .st-timeline1__timeline-swipe__slide__content {
-            width: 100%;
-
-            .st-timeline1__timeline-swipe__slide__content__label {
-              color: var(--timeline-color-active);
-            }
+          .st-timeline1__timeline-swipe__slide__content__label {
+            color: var(--timeline-color-active);
           }
         }
-      }
-
-      .st-timeline1__timeline-swiper-prev,
-      .st-timeline1__timeline-swiper-next {
-        position: absolute;
-        width: 100%;
-
-        .content {
-          padding: 1rem;
-          color: var(--timeline-nav-color);
-          font-size: 3rem;
-        }
-      }
-
-
-
-      .st-timeline1__timeline-swiper-prev {
-        top: 0;
-      }
-
-      .st-timeline1__timeline-swiper-next {
-        bottom: 0;
       }
     }
   }
@@ -594,80 +301,41 @@ const displaySwiperMousewheelHandler = (swiper: SwiperType) => {
 
 .st-timeline1--small-screen {
 
-  .st-timeline1__display-swiper {
-
-    .st-timeline1__display-swipe__slide {
-
-      .st-timeline1__display-swipe__slide__content-container {
-        grid-template-rows: 5fr 1fr;
-        grid-template-columns: 1fr;
-        justify-items: start;
-        align-items: end;
-
-        &::after {
-          top: 35%;
-          transform: translate(0, -50%);
-          width: 100%;
-          height: 165%;
-          background: radial-gradient(circle at 50% 100%, #000000 0%, #0000009f 37.5%, transparent 65%, transparent 100%);
-        }
-
-        .st-timeline1__display-swipe__slide__content {
-          grid-row: 1 / 2;
-          grid-column: 1 / 2;
-          justify-content: end;
-
-          .st-timeline1__display-swipe__slide__content__title,
-          .st-timeline1__display-swipe__slide__content__desc {
-            padding-right: 1rem;
-          }
-
-          .st-timeline1__display-swipe__slide__content__title {
-            font-size: 1.75rem;
-          }
-
-          .st-timeline1__display-swipe__slide__content__desc {
-            font-size: 0.95rem;
-            line-height: 1.25;
-          }
-        }
-      }
-    }
-  }
-
-  .st-timeline1__timeline-swiper-container {
+  .st-timeline1__timeline {
     grid-template-rows: 5fr 1fr;
     grid-template-columns: 1fr;
     justify-items: center;
     align-items: start;
     overflow: hidden;
 
-    .st-timeline1__timeline-swiper-box {
+    .st-timeline1__timeline-swiper {
       grid-row: 2 / 3;
       grid-column: 1 / 2;
+      width: 100vw;
+      height: 100%;
       border-top: 2px solid #cecece33;
       border-left: none;
       align-items: start;
 
-      .st-timeline1__timeline-swiper {
-        height: auto;
+      .st-timeline1__timeline-swipe__slide {
+        padding-left: 0;
+        padding-top: 1rem;
 
-        .st-timeline1__timeline-swipe__slide {
-          padding-left: 0;
-          padding-top: 1rem;
-
-          .st-timeline1__timeline-swipe__slide__content {
-            justify-content: center;
-          }
+        .st-timeline1__timeline-swipe__slide__content {
+          box-sizing: border-box;
+          padding-left: 1rem;
+          padding-right: 1rem;
+          justify-content: center;
+          align-items: start;
         }
+      }
 
-        .st-timeline1__timeline-swipe__slide--active {
+      .st-timeline1__timeline-swipe__slide--active {
 
-          &::before {
-            top: -1px;
-            left: 50%;
-            transform: translate(-50%, -50%);
-          }
+        &::before {
+          top: -1px;
+          left: 50%;
+          transform: translate(-50%, -50%);
         }
       }
     }
