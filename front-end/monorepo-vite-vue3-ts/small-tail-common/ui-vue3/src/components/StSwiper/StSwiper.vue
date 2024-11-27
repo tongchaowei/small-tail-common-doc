@@ -61,6 +61,10 @@ const props = withDefaults(
     controlSwiper?: SwiperType | SwiperType[];
     // swiper 溢出处理
     swiperOverflow?: string;
+    // 是否开启 Slide 点击事件
+    enableSlideClick?: boolean;
+    // Slide 点击事件处理函数
+    slideClickHandler?: (swiper: SwiperType) => void;
   }>(),
   {
     width: '100%',
@@ -79,6 +83,10 @@ const props = withDefaults(
     transitionSpeed: 500,
     transitionDelay: 0,
     swiperOverflow: 'hidden',
+    enableSlideClick: true,
+    slideClickHandler: (swiper: SwiperType) => {
+      swiper.slideTo(swiper.clickedIndex)
+    },
   }
 )
 
@@ -301,6 +309,7 @@ provide('nowSlideIdx',  activeSlideIdx.value === undefined ? currentSlideIdx : a
       @slide-change-transition-start="slideChangeTransitionStartHandler"
       @slide-change-transition-end="slideChangeTransitionEndHandler"
       @active-index-change="activeIndexChangeHandler"
+      @click="(swiper: SwiperType) => enableSlideClick && slideClickHandler(swiper)"
     >
       <template #wrapper-start>
         <slot

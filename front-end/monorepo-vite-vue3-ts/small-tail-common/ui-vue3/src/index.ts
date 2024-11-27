@@ -231,6 +231,15 @@ export const StMoveSolidParticleContainer = _StMoveSolidParticleContainer
 export const StMoveSolidParticleContainerRegister = _StMoveSolidParticleContainerRegister
 // ------------------------------------------------------------------------------------ 鼠标移动实心粒子拖尾效果容器组件 ------
 
+// ------------------------------------------------------------------------------------------ 鼠标悬浮流光效果容器组件 ------
+import _StHoverFleetingContainer from './components/StHoverFleetingContainer'
+import {StHoverFleetingContainerRegister as _StHoverFleetingContainerRegister} from './components/StHoverFleetingContainer'
+
+StCommonUiVue3Components.StHoverFleetingContainer = _StHoverFleetingContainer
+export const StHoverFleetingContainer = _StHoverFleetingContainer
+export const StHoverFleetingContainerRegister = _StHoverFleetingContainerRegister
+// ------------------------------------------------------------------------------------------ 鼠标悬浮流光效果容器组件 ------
+
 /**
  * 全局注册小尾巴通用 UI Vue3 组件库中的所有组件
  *
