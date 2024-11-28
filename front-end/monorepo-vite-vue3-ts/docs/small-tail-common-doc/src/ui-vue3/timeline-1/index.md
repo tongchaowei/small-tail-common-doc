@@ -2,6 +2,12 @@
 
 StTimeline1 为时间线组件 1，StTimelineItem1 为时间线组件 1 的子组件，即时间线数据项展示组件。
 
+::: danger 注意
+
+组件打包发布后，样式和布局存在问题，还没找到问题所在，后续会考虑使用其他方法重构，所以目前`请勿使用`。
+
+:::
+
 ::: info 组件样式来源
 
 [https://www.bilibili.com/video/BV12t4y1q74Z/](https://www.bilibili.com/video/BV12t4y1q74Z/)
