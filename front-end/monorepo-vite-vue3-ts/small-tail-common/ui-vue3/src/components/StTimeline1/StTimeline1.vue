@@ -221,6 +221,11 @@ provide('isReact', isReact)
   height: 100vh;
   overflow: hidden;
 
+  .st-timeline1__display {
+    position: relative;
+    z-index: 1;
+  }
+
   .st-timeline1__timeline {
     position: absolute;
     inset: 0;
@@ -234,7 +239,7 @@ provide('isReact', isReact)
       grid-row: 1 / 2;
       grid-column: 2 / 3;
       position: relative;
-      z-index: 1;
+      z-index: 2;
       box-sizing: border-box;
       width: 100%;
       height: 100%;
@@ -280,7 +285,7 @@ provide('isReact', isReact)
           top: 50%;
           left: -1px;
           transform: translate(-50%, -50%);
-          z-index: 1;
+          z-index: 2;
           width: 4px;
           height: 4px;
           background-color: var(--timeline-color-active);

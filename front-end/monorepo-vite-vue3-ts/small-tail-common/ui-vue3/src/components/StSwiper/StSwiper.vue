@@ -365,19 +365,19 @@ provide('nowSlideIdx',  activeSlideIdx.value === undefined ? currentSlideIdx : a
   </div>
 </template>
 
-<style scoped lang="scss">
+<style lang="scss">
 .st-swiper-container {
   position: relative;
 
-  :deep(.swiper) {
+  .swiper {
     overflow: initial;
   }
 
   .st-swiper {
     overflow: var(--swiper-overflow);
 
-    :deep(.swiper-wrapper) {
-      transition-timing-function: var(--transition-fun);
+    .swiper-wrapper {
+      transition-timing-function: var(--transition-fun) !important;
       transition-delay: var(--transition-delay) !important;
     }
   }
