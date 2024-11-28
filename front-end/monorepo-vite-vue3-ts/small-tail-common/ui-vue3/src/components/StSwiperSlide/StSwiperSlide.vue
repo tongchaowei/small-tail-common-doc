@@ -37,5 +37,10 @@ const currentSlideIdx = inject('nowSlideIdx')
 .st-swiper-slide {
   width: 100%;
   height: 100%;
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  justify-items: center;
+  align-items: center;
 }
 </style>
