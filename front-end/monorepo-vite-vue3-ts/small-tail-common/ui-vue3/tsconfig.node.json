@@ -1,8 +1,0 @@
-{
-  "extends": "../../tsconfig.node.json",
-  "include": [
-    "vite.config.ts",
-    "vite.config.css-split.ts",
-    "vite.config.css-all.ts"
-  ]
-}
